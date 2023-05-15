@@ -19,6 +19,7 @@ import BlogCard from "../BlogCard/BlogCard";
 import CategorySection from "../CategorySection/CategorySection";
 import FrontPageBanner from "../FrontPageBanner/FrontPageBanner";
 
+// hii this is simple comment
 const Home = () => {
   const card = [
     {
