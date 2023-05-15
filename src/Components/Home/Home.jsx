@@ -80,11 +80,11 @@ const Home = () => {
   return (
     <>
       {/* FrontPageBanner */}
-      <FrontPageBanner/>
+      <FrontPageBanner />
 
       {/* <!--- /CATEGORY--> */}
 
-      <CategorySection/>
+      <CategorySection />
 
       {/* About */}
 
@@ -124,8 +124,7 @@ const Home = () => {
         className="section blog has-bg-image1"
         id="blog"
         aria-label="blog"
-        style={{ backgroundImage: { blogbg }, marginTop: "-100px" }}
-      >
+        style={{ backgroundImage: { blogbg }, marginTop: "-100px" }}>
         <div className="container">
           {/* <!-- <p class="section-subtitle">Our Top Educators</p> --> */}
 
@@ -153,3 +152,5 @@ const Home = () => {
 };
 
 export default Home;
+
+// THis is a new Cmment for testing purpose
