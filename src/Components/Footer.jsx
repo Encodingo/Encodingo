@@ -138,7 +138,7 @@ const Footer = () => {
           <div className="footer-list">
             <p className="footer-list-title">Contacts</p>
 
-            <p className="footer-list-text">
+            <p className="footer-list-text" >
               Enter your email address to register to our newsletter
               subscription
             </p>

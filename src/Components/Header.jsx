@@ -1,20 +1,39 @@
 import React from "react";
 import "../assets/css/style.css";
+import "../assets/css/authentication_styles.css";
+import "./Auth/AuthContainer.css";
 import logo from "../assets/images/logonew.svg";
-import { Link } from "react-router-dom";
-//  import '../assets/js/script'
+import { NavLink , Link, useNavigate } from "react-router-dom";
+import AuthContainer from "./Auth/AuthContainer";
 import { IonIcon } from "@ionic/react";
-import {
-  // cartOutline,
-  // searchCircleOutline,
-  menuOutline,
-  closeOutline,
-} from "ionicons/icons";
+import { menuOutline, closeOutline } from "ionicons/icons";
 import { useState, useEffect } from "react";
 // import SearchBar from "./SearchBar/SearchBar";
 const Header = () => {
+  const navigate = useNavigate();
   const [isFixed, setIsFixed] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+
+  const handleModal = () => {
+    // console.log("clicked");
+    setShowModal(!showModal);
+    // if(!showModal){
+    //   navigate("/login");
+    // }
+    // else{
+    //   navigate("/");
+    // }
+  };
+
+  useEffect(() => {
+    const body = document.querySelector("body");
+    if (showModal) {
+      body.style.overflowX = "hidden";
+    } else {
+      body.style.overflowX = "auto";
+    }
+  }, [showModal]);
 
   function handleMenuClick() {
     setIsMenuOpen(!isMenuOpen);
@@ -34,7 +53,9 @@ const Header = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
+    
   }, []);
+
 
   return (
     <>
@@ -71,7 +92,8 @@ const Header = () => {
                 onClick={handleMenuClick}
                 className="header-action-btn"
                 aria-label="open menu"
-                data-nav-toggler>
+                data-nav-toggler
+              >
                 <IonIcon icon={menuOutline} aria-hidden="true" />
               </button>
             </div>
@@ -99,31 +121,34 @@ const Header = () => {
                 onClick={handleMenuClick}
                 className="nav-close-btn"
                 aria-label="close menu"
-                data-nav-toggler>
+                data-nav-toggler
+              >
                 <IonIcon icon={closeOutline} aria-hidden="true" />
               </button>
             </div>
 
             <ul className="navbar-list">
               <li className="navbar-item">
-                <Link
+                <NavLink
                   onClick={handleMenuClick}
                   to={"/"}
-                  className="navbar-link">
+                  className="navbar-link"
+                >
                   Explore
-                </Link>
+                </NavLink>
 
                 {/* <a href="/" className="navbar-link" data-nav-link>
                   Explore
                 </a> */}
               </li>
               <li className="navbar-item">
-                <Link
+                <NavLink
                   onClick={handleMenuClick}
                   to={"/courses"}
-                  className="navbar-link">
+                  className="navbar-link"
+                >
                   Courses
-                </Link>
+                </NavLink>
                 {/* <a href="courses" className="navbar-link" data-nav-link>
                   Courses
                 </a> */}
@@ -132,7 +157,8 @@ const Header = () => {
                 <Link
                   onClick={handleMenuClick}
                   to={"/bootcamp"}
-                  className="navbar-link">
+                  className="navbar-link"
+                >
                   Bootcamp
                 </Link>
                 {/* <a href="bootcamp" className="navbar-link" data-nav-link>
@@ -144,7 +170,8 @@ const Header = () => {
                 <Link
                   onClick={handleMenuClick}
                   to={"/"}
-                  className="navbar-link">
+                  className="navbar-link"
+                >
                   Blog
                 </Link>
                 {/* <a href="#blog" className="navbar-link" data-nav-link>
@@ -156,7 +183,8 @@ const Header = () => {
                 <Link
                   onClick={handleMenuClick}
                   to={"/about"}
-                  className="navbar-link">
+                  className="navbar-link"
+                >
                   About
                 </Link>
                 {/* <a href="about" className="navbar-link" data-nav-link>
@@ -165,14 +193,27 @@ const Header = () => {
               </li>
             </ul>
           </nav>
-          <a href="/" className="btn has-before">
+          <button className="btn has-before" onClick={handleModal}>
+            <Link to={"#"}>
+              <span className="span">Book A Session</span>
+            </Link>
+          </button>
+          {/* <a onClick={handleModal} href="/" className="btn has-before">
             <span className="span">Book A Session</span>
-
-            {/* <ion-icon name="arrow-forward-outline" aria-hidden="true"></ion-icon> */}
-          </a>
+            <ion-icon name="arrow-forward-outline" aria-hidden="true"></ion-icon>
+          </a> */}
           <div className="overlay" data-nav-toggler data-overlay></div>
         </div>
       </header>
+
+      {showModal && (
+        <div className="modal">
+          <button className="close-btn"  onClick={handleModal}>
+            <IonIcon icon={closeOutline} aria-hidden="true" />
+          </button>
+          <AuthContainer />
+        </div>
+      )}
     </>
   );
 };

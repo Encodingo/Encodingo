@@ -18,6 +18,9 @@ import StateSection from "../StateSection/StateSection";
 import BlogCard from "../BlogCard/BlogCard";
 import CategorySection from "../CategorySection/CategorySection";
 import FrontPageBanner from "../FrontPageBanner/FrontPageBanner";
+import BookSession from "../ButtonBook/BookSession";
+import Header from "../Header";
+import Footer from "../Footer";
 
 // hii this is simple comment
 const Home = () => {
@@ -80,6 +83,9 @@ const Home = () => {
 
   return (
     <>
+      {/* Header */}
+        <Header/>
+
       {/* FrontPageBanner */}
       <FrontPageBanner />
 
@@ -105,9 +111,11 @@ const Home = () => {
             {card && card.map((card) => <CourseCard card={card} />)}
           </ul>
 
-          <a href="course.html" className="btn has-before">
+          <BookSession/>
+
+          {/* <a href="course.html" className="btn has-before">
             <span className="span">Book A Demo Session</span>
-          </a>
+          </a> */}
         </div>
       </section>
 
@@ -148,6 +156,8 @@ const Home = () => {
           />
         </div>
       </section>
+
+      <Footer/>
     </>
   );
 };

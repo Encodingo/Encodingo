@@ -1,5 +1,12 @@
-import React from "react";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "../../assets/css/style.css";
+import "../../assets/css/authentication_styles.css";
+import "../Auth/AuthContainer.css";
+import { IonIcon } from "@ionic/react";
+import { closeOutline } from "ionicons/icons";
+
+import AuthContainer from "../Auth/AuthContainer";
 // import herobg from "../../assets/images/hero-bg.svg";
 import herobanner1 from "../../assets/images/hero-banner-1.jpg";
 import herobanner2 from "../../assets/images/hero-banner-2.jpg";
@@ -9,6 +16,20 @@ import heroshape2 from "../../assets/images/hero-shape-2.png";
 // import shubham from "../../assets/images/shubham.jpg";
 
 const FrontPageBanner = () => {
+  const [showModal, setShowModal] = useState(false);
+  const handleModal = () => {
+    // console.log("clicked");
+    setShowModal(!showModal);
+  };
+
+  useEffect(() => {
+    const body = document.querySelector("body");
+    if (showModal) {
+      body.style.overflowX = "hidden";
+    } else {
+      body.style.overflowX = "auto";
+    }
+  }, [showModal]);
   return (
     <>
       <section
@@ -34,9 +55,14 @@ const FrontPageBanner = () => {
               world of coding!
             </p>
 
-            <a href="/" className="btn has-before">
+            <button className="btn has-before" onClick={handleModal}>
+              <Link to={"/"}>
+                <span className="span">Book A Demo Session</span>
+              </Link>
+            </button>
+            {/* <a href="/" className="btn has-before">
               <span className="span">Book A Demo Session</span>
-            </a>
+            </a> */}
           </div>
           <figure className="hero-banner">
             <div
@@ -79,6 +105,15 @@ const FrontPageBanner = () => {
           </figure>
         </div>
       </section>
+
+      {showModal && (
+        <div className="modal">
+          <button className="close-btn" onClick={handleModal}>
+            <IonIcon icon={closeOutline} aria-hidden="true" />
+          </button>
+          <AuthContainer />
+        </div>
+      )}
     </>
   );
 };

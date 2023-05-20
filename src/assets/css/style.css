@@ -952,6 +952,12 @@ body {
 }
 
 .footer-brand-text {
+  color: aliceblue;
+  margin-block: 20px;
+}
+
+.footer-list-text{
+  color: aliceblue;
   margin-block: 20px;
 }
 
@@ -1016,6 +1022,7 @@ body {
 
 .copyright {
   text-align: center;
+  color: aliceblue;
 }
 
 .copyright-link {

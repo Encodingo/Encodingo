@@ -1,4 +1,4 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import "../../assets/css/style.css";
 import about from "../../assets/images/about.jpg";
 import course1 from "../../assets/images/course-1.jpg";
@@ -15,9 +15,32 @@ import CourseCard from "../CourseCard/CourseCard";
 import VideoSection from "../VideoSection/VideoSection";
 import StateSection from "../StateSection/StateSection";
 import BlogCard from "../BlogCard/BlogCard";
+import "../../assets/css/authentication_styles.css";
+import "../Auth/AuthContainer.css";
+import AuthContainer from "../Auth/AuthContainer";
+import { IonIcon } from "@ionic/react";
+import { closeOutline } from "ionicons/icons";
+import { Link } from "react-router-dom";
+import Header from "../Header";
+import Footer from "../Footer";
 
 const About = () => {
-  // tomparary data 
+  const [showModal, setShowModal] = useState(false);
+  const handleModal = () => {
+    console.log("clicked");
+    setShowModal(!showModal);
+  };
+
+  useEffect(() => {
+    const body = document.querySelector("body");
+    if (showModal) {
+      body.style.overflowX = "hidden";
+    } else {
+      body.style.overflowX = "auto";
+    }
+  }, [showModal]);
+
+  // tomparary data
   const card = [
     {
       img: course1,
@@ -56,33 +79,36 @@ const About = () => {
     startline: "Transforming your",
     midline: "childs future",
     endline: "through coding",
-    tagline: "At Encodingo, we are more than just a coding platform. We are a community of passionate educators and coders who are dedicated to making a positive impact on the lives of children. We believe that coding has the power to change the world, and we are excited to be a part of the journey.",
+    tagline:
+      "At Encodingo, we are more than just a coding platform. We are a community of passionate educators and coders who are dedicated to making a positive impact on the lives of children. We believe that coding has the power to change the world, and we are excited to be a part of the journey.",
   };
 
   const sureshblog = {
-     img : suresh,
-     title : 'Suresh Vidyarthi'
-  }
+    img: suresh,
+    title: "Suresh Vidyarthi",
+  };
 
   const shubhamblog = {
-    img : suresh,
-    title : 'Shubham Raj'
- }
+    img: suresh,
+    title: "Shubham Raj",
+  };
 
- const manishblog = {
-     img : suresh,
-     title : 'Manish Mandan'
- }
+  const manishblog = {
+    img: suresh,
+    title: "Manish Mandan",
+  };
 
   return (
     <>
+       <Header/>
+
       {/* About */}
 
       <AboutSection data={data} />
 
       {/* <!-- new section --> */}
       <NewSection />
-     
+
       {/* <!--- /COURSE --> */}
 
       <section className="section course" id="courses" aria-label="course">
@@ -93,19 +119,25 @@ const About = () => {
             {card && card.map((card) => <CourseCard card={card} />)}
           </ul>
 
-          <a href="course.html" className="btn has-before">
+          <button className="btn has-before" onClick={handleModal}>
+            <Link to={"/about"}>
+              <span className="span">Book A Demo Session</span>
+            </Link>
+          </button>
+
+          {/* <a href="course.html" className="btn has-before">
             <span className="span">Book A Demo Session</span>
-          </a>
+          </a> */}
         </div>
       </section>
 
       {/* <!--- /VIDEO--> */}
 
-      <VideoSection/>
+      <VideoSection />
 
       {/* <!--- /STATE--> */}
 
-      <StateSection/>
+      <StateSection />
 
       {/* <!--- /BLOG--> */}
 
@@ -121,9 +153,9 @@ const About = () => {
           <h2 className="h2 section-title">Top 1% of educators</h2>
           {/* <p className="section-subtitle"></p> */}
           <ul className="grid-list">
-               <BlogCard data = {sureshblog}/>
-               <BlogCard data = {shubhamblog}/>
-               <BlogCard data = {manishblog}/>
+            <BlogCard data={sureshblog} />
+            <BlogCard data={shubhamblog} />
+            <BlogCard data={manishblog} />
           </ul>
           <img
             src={blogshape}
@@ -135,6 +167,18 @@ const About = () => {
           />
         </div>
       </section>
+
+      {/* for book a demo session */}
+      {showModal && (
+        <div className="modal">
+          <button className="close-btn" onClick={handleModal}>
+            <IonIcon icon={closeOutline} aria-hidden="true" />
+          </button>
+          <AuthContainer />
+        </div>
+      )}
+
+      <Footer/>
     </>
   );
 };

@@ -1,4 +1,4 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import "../../assets/css/style.css";
 import course1 from "../../assets/images/course-1.jpg";
 import course2 from "../../assets/images/course-2.jpg";
@@ -12,8 +12,31 @@ import CourseCard from "../CourseCard/CourseCard";
 import VideoSection from "../VideoSection/VideoSection";
 import StateSection from "../StateSection/StateSection";
 import BlogCard from "../BlogCard/BlogCard";
+import "../../assets/css/authentication_styles.css";
+import "../Auth/AuthContainer.css";
+import AuthContainer from "../Auth/AuthContainer";
+import { IonIcon } from "@ionic/react";
+import { closeOutline } from "ionicons/icons";
+import { Link } from "react-router-dom";
+import Header from "../Header";
+import Footer from "../Footer";
 
 const Courses = () => {
+  const [showModal, setShowModal] = useState(false);
+  const handleModal = () => {
+    // console.log("clicked");
+    setShowModal(!showModal);
+  };
+
+  useEffect(() => {
+    const body = document.querySelector("body");
+    if (showModal) {
+      body.style.overflowX = "hidden";
+    } else {
+      body.style.overflowX = "auto";
+    }
+  }, [showModal]);
+
   const card = [
     {
       img: course1,
@@ -64,6 +87,8 @@ const Courses = () => {
 
   return (
     <>
+
+    <Header/>
       {/* <!--- /COURSE --> */}
 
       <section className="section course" id="courses" aria-label="course">
@@ -74,9 +99,15 @@ const Courses = () => {
             {card && card.map((card) => <CourseCard card={card} />)}
           </ul>
 
-          <a href="course.html" className="btn has-before">
+          <button className="btn has-before" onClick={handleModal}>
+            <Link to={"/courses"}>
+              <span className="span">Book A Demo Session</span>
+            </Link>
+          </button>
+
+          {/* <a href="/" className="btn has-before" onClick={handleModal}>
             <span className="span">Book A Demo Session</span>
-          </a>
+          </a> */}
         </div>
       </section>
 
@@ -118,6 +149,18 @@ const Courses = () => {
           />
         </div>
       </section>
+
+      {/* for book a demo session */}
+      {showModal && (
+        <div className="modal">
+          <button className="close-btn" onClick={handleModal}>
+            <IonIcon icon={closeOutline} aria-hidden="true" />
+          </button>
+          <AuthContainer />
+        </div>
+      )}
+
+      <Footer/>
     </>
   );
 };

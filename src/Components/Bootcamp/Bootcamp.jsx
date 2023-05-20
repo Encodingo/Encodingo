@@ -1,4 +1,4 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import "../../assets/css/style.css";
 import bootcamp from "../../assets/images/bootcamp.jpg";
 // import about from "../../assets/images/about.jpg";
@@ -16,8 +16,31 @@ import AboutSection from "../AboutSection/AboutSection";
 import BlogCard from "../BlogCard/BlogCard";
 import VideoSection from "../VideoSection/VideoSection";
 import StateSection from "../StateSection/StateSection";
+import "../../assets/css/authentication_styles.css";
+import "../Auth/AuthContainer.css";
+import AuthContainer from "../Auth/AuthContainer";
+import { IonIcon } from "@ionic/react";
+import { closeOutline } from "ionicons/icons";
+import { Link } from "react-router-dom";
+import Header from "../Header";
+import Footer from "../Footer";
 
 const Bootcamp = () => {
+  const [showModal, setShowModal] = useState(false);
+  const handleModal = () => {
+    console.log("clicked");
+    setShowModal(!showModal);
+  };
+
+  useEffect(() => {
+    const body = document.querySelector("body");
+    if (showModal) {
+      body.style.overflowX = "hidden";
+    } else {
+      body.style.overflowX = "auto";
+    }
+  }, [showModal]);
+
   const card = [
     {
       img: course1,
@@ -76,6 +99,7 @@ const Bootcamp = () => {
   };
   return (
     <>
+      <Header />
       {/* About */}
 
       <AboutSection data={data} />
@@ -94,9 +118,15 @@ const Bootcamp = () => {
             {card && card.map((card) => <CourseCard card={card} />)}
           </ul>
 
-          <a href="course.html" className="btn has-before">
+          <button className="btn has-before" onClick={handleModal}>
+            <Link to={"/bootcamp"}>
+              <span className="span">Book A Demo Session</span>
+            </Link>
+          </button>
+
+          {/* <a href="course.html" className="btn has-before">
             <span className="span">Book A Demo Session</span>
-          </a>
+          </a> */}
         </div>
       </section>
 
@@ -136,6 +166,18 @@ const Bootcamp = () => {
           />
         </div>
       </section>
+
+      {/* for book a demo session */}
+      {showModal && (
+        <div className="modal">
+          <button className="close-btn" onClick={handleModal}>
+            <IonIcon icon={closeOutline} aria-hidden="true" />
+          </button>
+          <AuthContainer />
+        </div>
+      )}
+
+      <Footer />
     </>
   );
 };

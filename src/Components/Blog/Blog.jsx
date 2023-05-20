@@ -8,6 +8,8 @@ import blogbg from "../../assets/images/blog-bg.svg";
 import VideoSection from "../VideoSection/VideoSection";
 import StateSection from "../StateSection/StateSection";
 import BlogCard from "../BlogCard/BlogCard";
+import Header from "../Header";
+import Footer from "../Footer";
 
 const Blog = () => {
   const sureshblog = {
@@ -27,6 +29,7 @@ const Blog = () => {
 
   return (
     <>
+      <Header />
       {/* <!--- /VIDEO--> */}
 
       <VideoSection />
@@ -63,6 +66,7 @@ const Blog = () => {
           />
         </div>
       </section>
+      <Footer />
     </>
   );
 };
