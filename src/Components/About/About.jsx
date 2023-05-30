@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import "../../assets/css/style.css";
+ import "../../assets/css/style.css";
 import about from "../../assets/images/about.jpg";
 import course1 from "../../assets/images/course-1.jpg";
 import course2 from "../../assets/images/course-2.jpg";

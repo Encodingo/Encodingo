@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import "../../assets/css/style.css";
+ import "../../assets/css/style.css";
 import bootcamp from "../../assets/images/bootcamp.jpg";
 // import about from "../../assets/images/about.jpg";
 import course1 from "../../assets/images/course-1.jpg";
@@ -24,8 +24,10 @@ import { closeOutline } from "ionicons/icons";
 import { Link } from "react-router-dom";
 import Header from "../Header";
 import Footer from "../Footer";
+import { useSelector } from "react-redux";
 
 const Bootcamp = () => {
+  const {isAuthenticated} = useSelector((state)=>state.user);
   const [showModal, setShowModal] = useState(false);
   const handleModal = () => {
     console.log("clicked");
@@ -118,11 +120,19 @@ const Bootcamp = () => {
             {card && card.map((card) => <CourseCard card={card} />)}
           </ul>
 
-          <button className="btn has-before" onClick={handleModal}>
-            <Link to={"/bootcamp"}>
-              <span className="span">Book A Demo Session</span>
-            </Link>
-          </button>
+          {isAuthenticated ? (
+            <button className="btn has-before" onClick={handleModal}>
+              <Link to={"/user_dashboard"}>
+                <span className="span">Dashboard</span>
+              </Link>
+            </button>
+          ) : (
+            <button className="btn has-before" onClick={handleModal}>
+              <Link to={"#"}>
+                <span className="span">Book A Session</span>
+              </Link>
+            </button>
+          )}
 
           {/* <a href="course.html" className="btn has-before">
             <span className="span">Book A Demo Session</span>

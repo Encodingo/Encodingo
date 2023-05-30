@@ -19,6 +19,11 @@ const schema = mongoose.Schema({
     unique: true,
     validate: validator.isEmail,
   },
+
+  phone:{
+      type: Number,
+      required: [true, "Please Enter Your Phone Number"],
+  },
   // Password type, required, minLength, select
   password: {
     type: String,

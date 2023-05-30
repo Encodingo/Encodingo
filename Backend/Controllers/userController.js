@@ -6,8 +6,8 @@ import { sendToken } from "../utils/sendToken.js";
 
 // Register User
 export const register = catchAsyncError(async (req, res, next) => {
-  const { name, email, password } = req.body;
-  if (!name || !email || !password)
+  const { name, email, phone , password } = req.body;
+  if (!name || !email || !password || !phone)
     return next(new ErrorHandler("Please enter all field", 400));
 
   let user = await User.findOne({ email });
@@ -17,6 +17,7 @@ export const register = catchAsyncError(async (req, res, next) => {
   user = await User.create({
     name,
     email,
+    phone,
     password,
   });
 
@@ -57,4 +58,13 @@ export const logout = catchAsyncError(async (req, res, next) => {
       success: true,
       message: "Logged Out Successfully ",
     });
+});
+
+export const getMyProfile = catchAsyncError(async (req, res, next) => {
+  const user = await User.findById(req.user._id);
+
+  res.status(200).json({
+    success: true,
+    user,
+  });
 });

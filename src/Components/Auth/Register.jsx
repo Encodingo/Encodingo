@@ -12,7 +12,9 @@ const Register = ({ onLogin, onShowPassword, onTogglePassword }) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmpassword, setConfirmPassword] = useState("");
 
   const dispatch = useDispatch();
 
@@ -22,7 +24,7 @@ const Register = ({ onLogin, onShowPassword, onTogglePassword }) => {
     // myForm.append("name", name);
     // myForm.append("email", email);
     // myForm.append("password", password);
-    dispatch(register(name, email, password));
+    dispatch(register(name, email, phone, password));
     navigate("/register");
   };
 
@@ -35,7 +37,8 @@ const Register = ({ onLogin, onShowPassword, onTogglePassword }) => {
   const [passNumber, setPassNumber] = useState(false);
   const [passChar, setPassChar] = useState(false);
   const [passLength, setPassLength] = useState(false);
-
+  const [passMatch, setPassMatch] = useState(false);
+  const [phoneMatch, setPhoneMatch] = useState(false);
   const [passComplete, setPassComplete] = useState(false);
 
   // const dispatch = useDispatch();
@@ -50,6 +53,13 @@ const Register = ({ onLogin, onShowPassword, onTogglePassword }) => {
   // };
 
   useEffect(() => {
+    // check for phone number
+    if (phone.toString().trim().length === 10) {
+      setPhoneMatch(true);
+    } else {
+      setPhoneMatch(false);
+    }
+
     // check Lower and Uppercase
     if (password.match(/([a-z].*[A-Z])|([A-Z].*[a-z])/)) {
       setPassLetter(true);
@@ -78,12 +88,35 @@ const Register = ({ onLogin, onShowPassword, onTogglePassword }) => {
       setPassLength(false);
     }
 
-    if (passLetter && passNumber && passChar && passLength) {
+    if (password.length > 0 && password.trim() === confirmpassword.trim()) {
+      setPassMatch(true);
+    } else {
+      setPassMatch(false);
+    }
+
+    if (
+      passLetter &&
+      passNumber &&
+      passChar &&
+      passLength &&
+      passMatch &&
+      phoneMatch
+    ) {
       setPassComplete(true);
     } else {
       setPassComplete(false);
     }
-  }, [password, passLetter, passNumber, passChar, passLength]);
+  }, [
+    password,
+    phone,
+    confirmpassword,
+    passLetter,
+    passNumber,
+    passChar,
+    passLength,
+    passMatch,
+    phoneMatch,
+  ]);
 
   // const submitHandler = (e) => {
   //   e.preventDefault();
@@ -119,6 +152,16 @@ const Register = ({ onLogin, onShowPassword, onTogglePassword }) => {
             className="--width-100"
             placeholder="Email"
           />
+          <input
+            type="number"
+            htmlFor="number"
+            required
+            id="number"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            className="--width-100"
+            placeholder="Phone"
+          />
           {/* PASSWORD FIELD */}
           <div className="password">
             <input
@@ -130,6 +173,25 @@ const Register = ({ onLogin, onShowPassword, onTogglePassword }) => {
               type={onShowPassword ? "text" : "password"}
               className="--width-100"
               placeholder="Password"
+              onFocus={handleShowIndicator}
+              // value={pass}
+              // onChange={handlePasswordChange}
+            />
+            <span className="icon" onClick={onTogglePassword}>
+              {onShowPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
+            </span>
+          </div>
+
+          <div className="password">
+            <input
+              htmlFor="confirmpassword"
+              required
+              id="confirmpassword"
+              value={confirmpassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              type={onShowPassword ? "text" : "password"}
+              className="--width-100"
+              placeholder="Confirm Password"
               onFocus={handleShowIndicator}
               // value={pass}
               // onChange={handlePasswordChange}
@@ -190,6 +252,19 @@ const Register = ({ onLogin, onShowPassword, onTogglePassword }) => {
                 <span className="--align-center">
                   {passLength ? <FaCheck /> : <GoPrimitiveDot />}
                   &nbsp; At least 8 Character
+                </span>
+              </li>
+              <li className={passMatch ? "pass-green" : "pass-red"}>
+                <span className="--align-center">
+                  {passMatch ? <FaCheck /> : <GoPrimitiveDot />}
+                  &nbsp; Pass & Confirm Pass{" "}
+                  {passMatch ? `Matched` : `Not matched`}
+                </span>
+              </li>
+              <li className={phoneMatch ? "pass-green" : "pass-red"}>
+                <span className="--align-center">
+                  {phoneMatch ? <FaCheck /> : <GoPrimitiveDot />}
+                  &nbsp; {phoneMatch ? `Valid PhoneNumber` : `Invalid PhoneNumber`}
                 </span>
               </li>
             </ul>

@@ -3,13 +3,16 @@ import "../assets/css/style.css";
 import "../assets/css/authentication_styles.css";
 import "./Auth/AuthContainer.css";
 import logo from "../assets/images/logonew.svg";
-import { NavLink , Link, useNavigate } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import AuthContainer from "./Auth/AuthContainer";
 import { IonIcon } from "@ionic/react";
 import { menuOutline, closeOutline } from "ionicons/icons";
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 // import SearchBar from "./SearchBar/SearchBar";
 const Header = () => {
+  const { isAuthenticated } = useSelector((state) => state.user);
+
   const navigate = useNavigate();
   const [isFixed, setIsFixed] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -19,11 +22,12 @@ const Header = () => {
     // console.log("clicked");
     setShowModal(!showModal);
     // if(!showModal){
-    //   navigate("/login");
+    //   navigate("/loginregister");
     // }
     // else{
     //   navigate("/");
     // }
+    // navigate("/");
   };
 
   useEffect(() => {
@@ -53,12 +57,19 @@ const Header = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-    
   }, []);
-
 
   return (
     <>
+      {showModal && (
+        <div className="modal">
+          <button className="close-btn" onClick={handleModal}>
+            <IonIcon icon={closeOutline} aria-hidden="true" />
+          </button>
+          <AuthContainer />
+        </div>
+      )}
+
       <header className={`header ${isFixed ? "active" : ""}`} data-header>
         <div className="container">
           <div className="header-box">
@@ -102,11 +113,9 @@ const Header = () => {
               <img src={logo} width="162" height="50" alt="EduWeb logo" />
             </Link>
           </div>
-
           {/* <a href="/" className="logo">
             <img src={logo} width="162" height="50" alt="EduWeb logo" />
           </a> */}
-
           <nav className={`navbar ${isMenuOpen ? "active" : ""}`} data-navbar>
             <div className="wrapper">
               <Link onClick={handleMenuClick} to={"/"} className="logo">
@@ -193,11 +202,20 @@ const Header = () => {
               </li>
             </ul>
           </nav>
-          <button className="btn has-before" onClick={handleModal}>
-            <Link to={"#"}>
-              <span className="span">Book A Session</span>
-            </Link>
-          </button>
+          {isAuthenticated ? (
+            <button className="btn has-before" onClick={handleModal}>
+              <Link to={"/user_dashboard"}>
+                <span className="span">Dashboard</span>
+              </Link>
+            </button>
+          ) : (
+            <button className="btn has-before" onClick={handleModal}>
+              <Link to={"#"}>
+                <span className="span">Book A Session</span>
+              </Link>
+            </button>
+          )}
+          {/* console.log() */}
           {/* <a onClick={handleModal} href="/" className="btn has-before">
             <span className="span">Book A Session</span>
             <ion-icon name="arrow-forward-outline" aria-hidden="true"></ion-icon>
@@ -205,15 +223,6 @@ const Header = () => {
           <div className="overlay" data-nav-toggler data-overlay></div>
         </div>
       </header>
-
-      {showModal && (
-        <div className="modal">
-          <button className="close-btn"  onClick={handleModal}>
-            <IonIcon icon={closeOutline} aria-hidden="true" />
-          </button>
-          <AuthContainer />
-        </div>
-      )}
     </>
   );
 };

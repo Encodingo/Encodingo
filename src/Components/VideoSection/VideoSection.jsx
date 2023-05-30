@@ -1,5 +1,5 @@
 import React from "react";
-import "../../assets/css/style.css";
+ import "../../assets/css/style.css";
 import videobg from "../../assets/images/video-bg.png";
 import videobanner from "../../assets/images/video-banner.jpg";
 import videoshape1 from "../../assets/images/video-shape-1.png";

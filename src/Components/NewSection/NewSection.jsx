@@ -1,5 +1,5 @@
 import React from "react";
-import "../../assets/css/style.css";
+ import "../../assets/css/style.css";
 import category1 from "../../assets/images/category-1.svg";
 import category2 from "../../assets/images/category-2.svg";
 import category3 from "../../assets/images/category-3.svg";

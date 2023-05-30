@@ -1,5 +1,5 @@
 import React from "react";
-import "../../assets/css/style.css";
+ import "../../assets/css/style.css";
 import aboutshape2 from "../../assets/images/about-shape-2.svg";
 import aboutshape3 from "../../assets/images/about-shape-3.png";
 import aboutshape4 from "../../assets/images/about-shape-4.svg";
@@ -15,8 +15,9 @@ const AboutSection = ({ data }) => {
         className="section about"
         id="about"
         aria-label="about"
-        style={{ marginBottom: "-150px", marginTop: "150px" }}
+        style={{ marginBottom: "-150px", marginTop: "70px" }}
       >
+    
         <div className="container">
           <figure className="about-banner">
             <div className="img-holder" style={{ width: "520", height: "370" }}>
@@ -50,7 +51,7 @@ const AboutSection = ({ data }) => {
               />
             </div>
           </figure>
-
+          
           <div className="about-content">
             <p className="section-subtitle">About Us</p>
 

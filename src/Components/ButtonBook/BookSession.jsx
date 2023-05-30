@@ -6,6 +6,7 @@ import "../Auth/AuthContainer.css";
 import AuthContainer from "../Auth/AuthContainer";
 import { IonIcon } from "@ionic/react";
 import { closeOutline } from "ionicons/icons";
+import { useSelector } from "react-redux";
 
 const BookSession = () => {
   const [showModal, setShowModal] = useState(false);
@@ -23,13 +24,22 @@ const BookSession = () => {
     }
   }, [showModal]);
 
+   const {isAuthenticated} = useSelector((state)=>state.user);
   return (
     <>
-      <button className="btn has-before" onClick={handleModal}>
-        <Link to={"/"}>
-          <span className="span">Book A Demo Session</span>
-        </Link>
-      </button>
+      {isAuthenticated ? (
+        <button className="btn has-before">
+          <Link to={"/user_dashboard"}>
+            <span className="span">Dashboard</span>
+          </Link>
+        </button>
+      ) : (
+        <button className="btn has-before" onClick={handleModal}>
+          <Link to={"#"}>
+            <span className="span">Book A Session</span>
+          </Link>
+        </button>
+      )}
 
       {showModal && (
         <div className="modal">

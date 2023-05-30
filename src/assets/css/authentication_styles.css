@@ -13,7 +13,7 @@
   z-index: 999;
 }
 
-/* section{
+section{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -21,7 +21,7 @@
     width: 100%;
     background-position: center;
     background-size: cover;
-} */
+}
 
 .close-btn {
   position: fixed;

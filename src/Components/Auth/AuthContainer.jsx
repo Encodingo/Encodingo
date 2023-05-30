@@ -1,13 +1,15 @@
 import { useState } from "react";
+import './Authindex.css'
 import "./AuthContainer.css";
 import Login from "./Login";
 import Register from "./Register";
 import Reset from "./Reset";
+import { useNavigate } from "react-router-dom";
 
 
 
 const AuthContainer = () => {
-  
+  const navigate = useNavigate();
   const [auth, setAuth] = useState({
     login: true,
     register: false,
@@ -22,10 +24,12 @@ const AuthContainer = () => {
 
   const handleLogin = () => {
     setAuth({ reset: false, register: false, login: true });
+    // navigate("/loginregister");
   };
 
   const handleRegister = () => {
     setAuth({ ...auth, login: false, register: true });
+    // navigate("/loginregister");
   };
 
   const handleReset = () => {

@@ -20,8 +20,10 @@ import { closeOutline } from "ionicons/icons";
 import { Link } from "react-router-dom";
 import Header from "../Header";
 import Footer from "../Footer";
+import { useSelector } from "react-redux";
 
 const Courses = () => {
+  const { isAuthenticated } = useSelector((state) => state.user);
   const [showModal, setShowModal] = useState(false);
   const handleModal = () => {
     // console.log("clicked");
@@ -87,8 +89,7 @@ const Courses = () => {
 
   return (
     <>
-
-    <Header/>
+      <Header />
       {/* <!--- /COURSE --> */}
 
       <section className="section course" id="courses" aria-label="course">
@@ -99,11 +100,19 @@ const Courses = () => {
             {card && card.map((card) => <CourseCard card={card} />)}
           </ul>
 
-          <button className="btn has-before" onClick={handleModal}>
-            <Link to={"/courses"}>
-              <span className="span">Book A Demo Session</span>
-            </Link>
-          </button>
+          {isAuthenticated ? (
+            <button className="btn has-before">
+              <Link to={"/user_dashboard"}>
+                <span className="span">Dashboard</span>
+              </Link>
+            </button>
+          ) : (
+            <button className="btn has-before" onClick={handleModal}>
+              <Link to={"#"}>
+                <span className="span">Book A Session</span>
+              </Link>
+            </button>
+          )}
 
           {/* <a href="/" className="btn has-before" onClick={handleModal}>
             <span className="span">Book A Demo Session</span>
@@ -160,7 +169,7 @@ const Courses = () => {
         </div>
       )}
 
-      <Footer/>
+      <Footer />
     </>
   );
 };

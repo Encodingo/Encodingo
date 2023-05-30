@@ -14,7 +14,7 @@ const Login = ({ onRegister, onReset, onTogglePassword, onShowPassword }) => {
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(login(loginEmail, loginPassword));
-    navigate("/profile");
+    navigate("/user_dashboard");
   };
 
   

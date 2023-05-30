@@ -2,9 +2,14 @@
 // import { useEffect } from "react";
 // import Footer from "./Components/Footer";
 // import Header from "./Components/Header";
-import "./assets/css/style.css";
+// import "./assets/css/style.css";
 // import './assets/js/script.js'
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
 // import { useSelector } from "react-redux";
 // import store from "./store";
 // import { loadUser } from "./actions/userAction";
@@ -17,9 +22,13 @@ import About from "./Components/About/About";
 import Bootcamp from "./Components/Bootcamp/Bootcamp";
 import Blog from "./Components/Blog/Blog";
 import BackToTop from "./Components/BackToTop/BackToTop";
-import Dashboard from "./Components/Dashboard/Dashboard";
+// import Dashboard from "./Components/Dashboard/UserDash";
 import { useEffect } from "react";
 import { ProtectedRoute } from "protected-route-react";
+import UserDashboard from "./UserDashboard/UserDashboard";
+import Bottombar from "./UserDashboard/Bottombar/Bottombar";
+import { loadUser } from "./actions/userAction";
+// import UserDash from "./Components/Dashboard/UserDash";
 
 // import AuthContainer from "./Components/Auth/AuthContainer";
 
@@ -29,7 +38,6 @@ function App() {
   );
 
   const dispatch = useDispatch();
-
   useEffect(() => {
     if (error) {
       toast.error(error);
@@ -41,30 +49,54 @@ function App() {
     }
   }, [dispatch, error, message]);
 
-  // useEffect(() => {
-  //   dispatch(loadUser());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(loadUser());
+  }, [dispatch]);
 
   return (
     <Router>
       {/* <Header /> */}
       <BackToTop />
       <Routes>
-        <Route path="/" element={<Home/>} />
-        <Route  path="/courses" element={<Courses/>} />
-        <Route  path="/bootcamp" element={<Bootcamp/>} />
-        <Route  path="/about" element={<About/>} />
-        <Route  path="/blog" element={<Blog/>} />
-        
+        <Route path="/" element={<Home />} />
+        <Route path="/courses" element={<Courses />} />
+        <Route path="/bootcamp" element={<Bootcamp />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/blog" element={<Blog />} />
+        {/* <Route path="/user_dashboard" element={<UserDashboard />} /> */}
+        <Route path="/bottom" element={<Bottombar />} />
+
+        {/* <Route  path="/loginregister" element={<Home/>} /> */}
         {/* <Route exact path="/login" component={AuthContainer} /> */}
+
+        <Route
+          path="/user_dashboard"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated}>
+              <UserDashboard />
+            </ProtectedRoute>
+          }
+        />
+
         <Route
           path="/login"
           element={
             <ProtectedRoute
               isAuthenticated={!isAuthenticated}
-              redirect="/profile"
+              redirect="/user_dashboard"
             >
-             <Home/>
+              <Home />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/user_dashboard"
+          element={
+            <ProtectedRoute
+              isAuthenticated={!isAuthenticated}
+              redirect="/user_dashboard"
+            >
+              <Home />
             </ProtectedRoute>
           }
         />
@@ -73,20 +105,20 @@ function App() {
           element={
             <ProtectedRoute
               isAuthenticated={!isAuthenticated}
-              redirect="/profile"
+              redirect="/user_dashboard"
             >
-             <Home/>
+              <Home />
             </ProtectedRoute>
           }
         />
-         <Route
+        {/* <Route
           path="/profile"
           element={
             <ProtectedRoute isAuthenticated={isAuthenticated}>
                  <Dashboard/>
             </ProtectedRoute>
           }
-        />
+        /> */}
       </Routes>
       {/* <Footer /> */}
       <Toaster

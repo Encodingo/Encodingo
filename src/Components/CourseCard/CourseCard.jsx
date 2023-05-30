@@ -7,6 +7,7 @@ import {
   starOutline,
   timeOutline,
 } from "ionicons/icons";
+import { Button } from "@material-ui/core";
 
 const CourseCard = ({ card }) => {
   return (
@@ -70,6 +71,15 @@ const CourseCard = ({ card }) => {
               <span className="span">{`${card.students}+`} Students</span>
             </li>
           </ul>
+
+          <div className="card-buttons">
+            <Button variant="contained" color="secondary">
+               View Details
+            </Button>
+            <Button variant="contained" color="primary">
+              1999 ₹ /-
+            </Button>
+          </div>
         </div>
       </div>
     </>

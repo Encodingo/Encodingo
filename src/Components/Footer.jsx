@@ -1,5 +1,5 @@
 import React from "react";
-import "../assets/css/style.css";
+ import "../assets/css/style.css";
 import logo from "../assets/images/logonewnew (2).svg";
 import footerbg from "../assets/images/footer-bg.png";
 import { IonIcon } from "@ionic/react";
