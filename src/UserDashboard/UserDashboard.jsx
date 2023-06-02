@@ -1,6 +1,5 @@
 import React from "react";
 import Sidebar from "./Sidebar/Sidebar";
-import Card from "./Cards/Card";
 import CourseCard from "../Components/CourseCard/CourseCard";
 import course1 from "../assets/images/course-1.jpg";
 import "./UserDashboard.css";

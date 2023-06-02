@@ -37,10 +37,10 @@ const CourseCard = ({ card }) => {
         <div className="card-content">
           <span className="badge">{card.level}</span>
 
-          <h3 className="h3">
-            <a href="/" className="card-title">
+          <h3 className="h3 card-title">
+            
               {card.title}
-            </a>
+           
           </h3>
 
           <div className="wrapper">
@@ -74,7 +74,7 @@ const CourseCard = ({ card }) => {
 
           <div className="card-buttons">
             <Button variant="contained" color="secondary">
-               View Details
+               Details
             </Button>
             <Button variant="contained" color="primary">
               1999 ₹ /-

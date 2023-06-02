@@ -62,6 +62,7 @@
   --shadow-1: 0 6px 15px 0 hsla(0, 0%, 0%, 0.05);
   --shadow-2: 0 10px 30px hsla(0, 0%, 0%, 0.06);
   --shadow-3: 0 10px 50px 0 hsla(220, 53%, 22%, 0.1);
+  --shadow-4: 0 10px 50px 0 hsla(196, 39%, 35%, 0.603);
 
   /**
    * radius
@@ -689,7 +690,7 @@ section.user {
 }
 
 .course-card .card-content {
-  padding: 25px;
+  padding: 15px;
 }
 
 .course-card .badge {
@@ -886,13 +887,13 @@ section.user {
 
 .blog-card .card-content {
   position: relative;
-  margin-inline: 15px;
+  /* margin-inline: 15px; */
   /* background-color: var(--white); */
   text-align: center;
   padding: 20px;
   border-radius: var(--radius-10);
-  box-shadow: var(--shadow-3);
-  margin-block-start: -100px;
+  box-shadow: var(--shadow-4);
+  margin-block-start: -2px;
   z-index: 1;
 }
 
@@ -928,11 +929,11 @@ section.user {
 }
 
 .blog-card .card-title {
-  margin-block: 10px 15px;
+  margin-block: 50px 30px;
   transition: var(--transition-1);
-  font-weight: bolder;
-  color: whitesmoke;
-  font-size: 36px;
+  /* font-weight: bolder; */
+  color: black;
+  font-size: 26px;
 }
 
 /* .blog-card .card-title:is(:hover, :focus) {
@@ -1330,7 +1331,7 @@ section.user {
   }
 
   .grid-list {
-    /* grid-template-columns: repeat(4, 1fr); */
+    grid-template-columns: repeat(3, 1fr);
   }
 
   :is(.course, .blog) .grid-list {

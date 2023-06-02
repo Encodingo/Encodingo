@@ -29,7 +29,7 @@ const StateSection = () => {
               </div>
             </li>
 
-            <li>
+            {/* <li>
               <div
                 className="stats-card stats-card3"
                 style={{ color: "hsl(260, 100%, 67%)" }}
@@ -38,7 +38,7 @@ const StateSection = () => {
 
                 <p className="card-text">Satisfaction Rate</p>
               </div>
-            </li>
+            </li> */}
 
             <li>
               <div

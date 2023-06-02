@@ -52,7 +52,7 @@ const CategorySection = () => {
               </div>
             </li>
 
-            <li>
+            {/* <li>
               <div
                 className="category-card category-card2"
                 style={{ backgroundColor: "/EE4962" }}
@@ -79,9 +79,9 @@ const CategorySection = () => {
                   learning style.
                 </p>
 
-                {/* <!-- <span class="card-badge">4 Courses</span> --> */}
+                
               </div>
-            </li>
+            </li> */}
 
             <li>
               <div

@@ -8,7 +8,7 @@ import { logout } from "../../actions/userAction";
 const Sidebar = () => {
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.user);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -63,15 +63,15 @@ const Sidebar = () => {
           </li>
 
           <li>
-            <Link href="#">
+            <Link to={'/book_session'}>
               <i className="bx bx-time"></i>
-              <span className="links_name">My Session</span>
+              <span className="links_name">Book Session</span>
             </Link>
-            <span className="tooltip">My Session</span>
+            <span className="tooltip">Book Session</span>
           </li>
 
           <li>
-            <Link href="#">
+            <Link to={'/user_dashboard'} >
               <i className="bx bx-user"></i>
               <span className="links_name">Profile</span>
             </Link>

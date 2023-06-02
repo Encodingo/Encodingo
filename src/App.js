@@ -28,6 +28,7 @@ import { ProtectedRoute } from "protected-route-react";
 import UserDashboard from "./UserDashboard/UserDashboard";
 import Bottombar from "./UserDashboard/Bottombar/Bottombar";
 import { loadUser } from "./actions/userAction";
+import BookSession from "./UserDashboard/BookSession/BookSession";
 // import UserDash from "./Components/Dashboard/UserDash";
 
 // import AuthContainer from "./Components/Auth/AuthContainer";
@@ -63,7 +64,7 @@ function App() {
         <Route path="/bootcamp" element={<Bootcamp />} />
         <Route path="/about" element={<About />} />
         <Route path="/blog" element={<Blog />} />
-        {/* <Route path="/user_dashboard" element={<UserDashboard />} /> */}
+        {/* <Route path="/book_session" element={<BookSession />} /> */}
         <Route path="/bottom" element={<Bottombar />} />
 
         {/* <Route  path="/loginregister" element={<Home/>} /> */}
@@ -74,6 +75,15 @@ function App() {
           element={
             <ProtectedRoute isAuthenticated={isAuthenticated}>
               <UserDashboard />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/book_session"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated}>
+              <BookSession/>
             </ProtectedRoute>
           }
         />
