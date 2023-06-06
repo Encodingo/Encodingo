@@ -3,7 +3,7 @@ import suresh from "../assets/images/suresh.jpg";
 import "./UserDashboard.css";
 import Bottombar from "./Bottombar/Bottombar";
 import BlogCard from "../Components/BlogCard/BlogCard";
-
+import { useDispatch, useSelector } from "react-redux";
 import { React, useState, useEffect } from "react";
 // import { college } from "../utils/APIRoutes";
 import axios from "axios";
@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
+  const { user } = useSelector((state) => state.user);
   useEffect(() => {
     // Update window width when the window is resized
     const handleResize = () => {
@@ -110,92 +110,103 @@ const Profile = () => {
 
   return (
     <>
+      {/* <h1>{user.name}</h1>
+      <h1>{user.email}</h1>
+      <h1>{user.phone}</h1> */}
       {windowWidth < 767 ? <Bottombar /> : <Sidebar />}
-      <div className="forcollege">
-        <div className="mainContainer">
-          <h1>Profile</h1>
-          {/* <collegeForm> */}
-          {/* <form onSubmit={(event) => handleSubmit(event)}> */}
-          <form>
-            <div className="form-item">
-              <label htmlFor="Name">Name</label>
-              <input
-                type="text"
-                name="name"
-                id="name"
-                placeholder="Name"
-                value={FormValues.name}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div className="form-item">
-              <label htmlFor="email">Email</label>
-              <input
-                type="email"
-                name="email"
-                id="email"
-                placeholder="Email"
-                value={FormValues.email}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div className="form-item">
-              <label htmlFor="phone">Phone</label>
-              <input
-                type="text"
-                name="phone"
-                id="phone"
-                placeholder="Phone"
-                value={FormValues.phone}
-                required
-                onChange={handleChange}
-              />
-            </div>
-            <div className="form-item">
-              <label htmlFor="phone">DOB</label>
-              <input
-                type="date"
-                name="dob"
-                id="dob"
-                placeholder="dob"
-                required
-                onChange={handleChange}
-              />
-            </div>
-            <div className="form-item">
-              <label htmlFor="phone">Grade</label>
-              <div className="gradeOptions">
-                <select id="grade" name="grade">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
-                  <option value="8">8</option>
-                  <option value="9">9</option>
-                  <option value="10">10</option>
-                  <option value="11">11</option>
-                  <option value="12">12</option>
-                  <option value="other">Other</option>
-                </select>
-                <input type="text" name="" id="" placeholder="Enter your grade" />
+
+      <section className="home-section">
+        <div className="profile">
+          <div className="mainContainer">
+            {/* <h1>Profile</h1> */}
+            {/* <collegeForm> */}
+            {/* <form onSubmit={(event) => handleSubmit(event)}> */}
+            <form>
+              <div className="form-item">
+                <label htmlFor="Name">Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  id="name"
+                  placeholder="Name"
+                  value={user.name}
+                  onChange={handleChange}
+                  required
+                />
               </div>
-            </div>
-            <div className="form-item">
-              <label htmlFor="phone">Address</label>
-              <input
-                type="text"
-                name="address"
-                id="address"
-                placeholder="address"
-                onChange={handleChange}
-              />
-            </div>
-            {/* <div className="form-item">
+              <div className="form-item">
+                <label htmlFor="email">Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  placeholder="Email"
+                  value={user.email}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="form-item">
+                <label htmlFor="phone">Phone</label>
+                <input
+                  type="text"
+                  name="phone"
+                  id="phone"
+                  placeholder="Phone"
+                  value={user.phone}
+                  required
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="form-item">
+                <label htmlFor="phone">DOB</label>
+                <input
+                  type="date"
+                  name="dob"
+                  id="dob"
+                  placeholder="dob"
+                  required
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="form-item">
+                <label htmlFor="phone">Grade</label>
+                <div className="gradeOptions">
+                  <select id="grade" name="grade">
+                    <option value="">Select Grade</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="other">Other</option>
+                  </select>
+                  <input
+                    type="text"
+                    name=""
+                    id=""
+                    placeholder="Enter your grade"
+                  />
+                </div>
+              </div>
+              <div className="form-item">
+                <label htmlFor="phone">Address</label>
+                <input
+                  type="text"
+                  name="address"
+                  id="address"
+                  placeholder="address"
+                  onChange={handleChange}
+                />
+              </div>
+              {/* <div className="form-item">
               <label htmlFor="designation">Designation</label>
               <input
                 type="text"
@@ -234,13 +245,14 @@ const Profile = () => {
               />
             </div> */}
 
-            {/* <input type="submit" onClick={handleSubmit} value="Submit" /> */}
-            {/* <button onClick={handleSubmit}>Submit</button> */}
-            <button>Submit</button>
-          </form>
-          {/* </collegeForm> */}
+              {/* <input type="submit" onClick={handleSubmit} value="Submit" /> */}
+              {/* <button onClick={handleSubmit}>Submit</button> */}
+              <button>Submit</button>
+            </form>
+            {/* </collegeForm> */}
+          </div>
         </div>
-      </div>
+      </section>
     </>
   );
 };

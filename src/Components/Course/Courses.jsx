@@ -89,7 +89,7 @@ const Courses = () => {
 
   return (
     <>
-      {/* <Header /> */}
+      <Header />
       {/* <!--- /COURSE --> */}
 
       <section className="section course" id="courses" aria-label="course">
@@ -168,7 +168,7 @@ const Courses = () => {
         </div>
       )}
 
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 };

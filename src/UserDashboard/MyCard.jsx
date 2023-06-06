@@ -1,5 +1,5 @@
 import React from "react";
-import "../../assets/css/style.css";
+import "../assets/css/style.css";
 import { IonIcon } from "@ionic/react";
 import {
   people,
@@ -9,7 +9,7 @@ import {
 } from "ionicons/icons";
 import { Button } from "@material-ui/core";
 
-const BookSessionCard = ({ card }) => {
+const MyCard = ({ card }) => {
   return (
     <>
       {/* <!--- /COURSE --> */}
@@ -27,22 +27,18 @@ const BookSessionCard = ({ card }) => {
           />
         </figure>
 
-        {/* <div className="abs-badge">
+        <div className="abs-badge">
           <IonIcon icon={timeOutline} aria-hidden="true" />
 
           <span className="span">{card.duration} Weeks</span>
-        </div> */}
+        </div>
 
         <div className="card-content">
-          <div className="bagesBox">
-            <span className="badge">{card.category}</span>
-            <span className="badge" id="badge2">
-              {card.level}
-            </span>
-          </div>
-          <h3 className="h3 card-title">{card.teacher_name}</h3>
+          <span className="badge">{card.level}</span>
 
-          <div className="wrapper" id="wrapperBox">
+          <h3 className="h3 card-title">{card.title}</h3>
+
+          <div className="wrapper">
             <div className="rating-wrapper">
               <IonIcon icon={starOutline} aria-hidden="true" />
               <IonIcon icon={starOutline} aria-hidden="true" />
@@ -55,32 +51,34 @@ const BookSessionCard = ({ card }) => {
           </div>
 
           {/* <card className="price" value="6000">
-            {card.price}
-          </card> */}
+                {card.price}
+              </card> */}
 
           <ul className="card-meta-list">
+            <li className="card-meta-item">
+              <IonIcon icon={libraryOutline} aria-hidden="true" />
+
+              <span className="span">{card.lesson} Lessons</span>
+            </li>
+
             <li className="card-meta-item">
               <IonIcon icon={people} aria-hidden="true" />
               <span className="span">{`${card.students}+`} Students</span>
             </li>
-
-            <li className="card-meta-item">
-              <IonIcon icon={libraryOutline} aria-hidden="true" />
-              <span className="span">{card.lesson}+ Sessions</span>
-            </li>
           </ul>
 
           <div className="card-buttons">
-            <Button variant="contained" color="primary">
-              Details
+            <Button variant="contained" color="secondary" className="card_btn">
+              Start Learning
             </Button>
-            <Button variant="contained" color="secondary">
-              Book
-            </Button>
+            {/* <Button variant="contained" color="primary">
+              {card.price}₹ /-
+            </Button> */}
           </div>
         </div>
       </div>
     </>
   );
 };
-export default BookSessionCard;
+
+export default MyCard;

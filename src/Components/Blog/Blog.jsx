@@ -29,7 +29,7 @@ const Blog = () => {
 
   return (
     <>
-      {/* <Header /> */}
+      <Header />
       {/* <!--- /VIDEO--> */}
 
       <VideoSection />
@@ -65,7 +65,7 @@ const Blog = () => {
           />
         </div>
       </section>
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 };

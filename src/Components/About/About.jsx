@@ -100,7 +100,7 @@ const About = () => {
 
   return (
     <>
-      {/* <Header/> */}
+      <Header />
 
       {/* About */}
 
@@ -177,7 +177,7 @@ const About = () => {
         </div>
       )}
 
-      {/* <Footer/> */}
+      <Footer />
     </>
   );
 };

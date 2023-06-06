@@ -84,7 +84,7 @@ const Home = () => {
   return (
     <>
       {/* Header */}
-      {/* <Header/> */}
+      <Header />
 
       {/* FrontPageBanner */}
       <FrontPageBanner />
@@ -157,7 +157,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* <Footer/> */}
+      <Footer />
     </>
   );
 };

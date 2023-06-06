@@ -1082,9 +1082,19 @@ section.user {
   pointer-events: all;
 }
 
+@media (max-width: 0px) {
+  .mygrid {
+    grid: none !important;
+  }
+}
+
 @media (max-width: 415px) {
   .logo1 {
     display: none;
+  }
+
+  .mygrid {
+    grid: none !important
   }
 
 }
@@ -1106,6 +1116,10 @@ section.user {
     max-width: 520px;
     width: 100%;
     margin-inline: auto;
+  }
+
+  .mygrid {
+    grid-template-columns: repeat(2, 1fr) !important;
   }
 
   .grid-list {
@@ -1182,10 +1196,37 @@ section.user {
  * responsive for large than 768px screen
  */
 
+@media (max-width: 750px) {
+  .tutor .mainSection {
+    flex-wrap: wrap;
+    justify-content: center;
+    display: block;
+    margin: auto;
+  }
+
+  .mygrid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+
+  .tutor .mainSection .text {
+    width: auto;
+  }
+
+  .tutor .mainSection .image {
+    width: auto;
+  }
+
+}
+
 @media (min-width: 768px) {
   /**
    * CUSTOM PROPERTY
    */
+
+
+
+
+
 
   :root {
     /**
@@ -1194,6 +1235,11 @@ section.user {
 
     --fs-1: 4.6rem;
     --fs-2: 3.8rem;
+  }
+
+
+  .mygrid {
+    grid-template-columns: repeat(3, 1fr) !important;
   }
 
   /**
@@ -1308,6 +1354,8 @@ section.user {
  * responsive for large than 992px screen
  */
 
+
+
 @media (min-width: 992px) {
   /**
    * CUSTOM PROPERTY
@@ -1322,9 +1370,17 @@ section.user {
     --fs-2: 4.5rem;
   }
 
+  .mygrid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+
   /**
    * REUSED STYLE
    */
+
+  /* .mygrid {
+    grid-template-columns: repeat(3, 1fr);
+  } */
 
   .container {
     max-width: 960px;
@@ -1389,9 +1445,13 @@ section.user {
  */
 
 @media (min-width: 1200px) {
+
   /**
    * CUSTOM PROPERTY
    */
+  .mygrid {
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
 
   :root {
     /**
@@ -1557,38 +1617,38 @@ section.user {
 
 
 /* For Colllege */
-.forcollege {
-  margin-top: 140px;
+.profile {
+  /* margin-top: 140px; */
   display: flex;
   justify-content: center;
+  width: 82vw;
 }
 
-.forcollege .mainContainer {
-  padding: 10px 15px;
+.profile .mainContainer {
+  /* padding: 10px 15px; */
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 20px 10px;
   justify-content: center;
-  width: 800px;
+  width: 100%;
   background: white;
 }
 
-.forcollege h1 {
+.profile h1 {
   text-align: center;
   margin-bottom: 50px;
 }
 
-.forcollege .mainContainer form {
+.profile form {
   width: 100%;
   padding: 17px;
   border-radius: 3px;
-  box-shadow: 3px 3px 21px gray;
 }
 
 
 
-.forcollege .mainContainer form input, textarea, select {
+.profile form input, textarea, select {
   width: 100%;
   padding: 7px 13px;
   border-radius: inherit;
@@ -1596,7 +1656,7 @@ section.user {
   border: 1px solid black;
 }
 
-.forcollege .mainContainer form input[type=submit] {
+.profile form input[type=submit] {
   width: auto;
 }
 
@@ -1679,11 +1739,11 @@ span#badge2 {
 }
 
 .mainSection .text {
-  width: 50vw;
+  width: 48vw;
 }
 
 .mainSection .image {
-  width: 50vw;
+  width: 48vw;
 }
 
 .image img {
@@ -1775,4 +1835,109 @@ span#badge2 {
 .gradeOptions {
   display: flex;
   gap: 10px;
+}
+
+.sidebar {
+  top: auto !important;
+}
+
+/* .sidebar.open~.home-section {
+  margin-top: 90px;
+} */
+
+
+
+.tobbar {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  right: 0;
+  border: 2px solid black;
+  width: fit-content;
+  /* display: flex; */
+}
+
+
+
+
+
+/* Top Bar   */
+
+/* Enrolled Courses */
+.coursesState {
+  position: absolute !important;
+  top: 10px;
+  left: 0px;
+  right: 0px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 13px;
+  justify-content: center;
+  position: relative;
+  margin-top: 10px;
+  margin-bottom: 50px;
+
+
+}
+
+/* 
+.coursesState p {
+  padding: 0px 10px;
+}
+
+.coursesState p a {
+  color: white;
+  font-weight: bold;
+}
+
+.coursesState p.active {
+  border-bottom: 3px solid white;
+} */
+
+.coursesState p {
+  padding: 5px 10px;
+  background: #298cff;
+  border-radius: 5px;
+  border: 2px solid white;
+}
+
+.coursesState p a {
+  color: white;
+  font-weight: bold;
+}
+
+.coursesState p.active {
+  background: #52c852;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.course-container {
+  max-width: fit-content !important;
+  justify-items: center;
+}
+
+
+.course-grid {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+
+
+
+
+
+
+
+.card_btn {
+  width: auto !important;
 }

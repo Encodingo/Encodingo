@@ -16,8 +16,7 @@ const CourseCard = ({ card }) => {
       <div className="course-card">
         <figure
           className="card-banner img-holder"
-          style={{ width: "370", height: "220" }}
-        >
+          style={{ width: "370", height: "220" }}>
           <img
             src={card.img}
             width="370"
@@ -37,11 +36,7 @@ const CourseCard = ({ card }) => {
         <div className="card-content">
           <span className="badge">{card.level}</span>
 
-          <h3 className="h3 card-title">
-            
-              {card.title}
-           
-          </h3>
+          <h3 className="h3 card-title">{card.title}</h3>
 
           <div className="wrapper">
             <div className="rating-wrapper">
@@ -55,9 +50,9 @@ const CourseCard = ({ card }) => {
             <p className="rating-text">({`${card.rating}+`} Rating)</p>
           </div>
 
-          <card className="price" value="6000">
+          {/* <card className="price" value="6000">
             {card.price}
-          </card>
+          </card> */}
 
           <ul className="card-meta-list">
             <li className="card-meta-item">
@@ -74,11 +69,9 @@ const CourseCard = ({ card }) => {
 
           <div className="card-buttons">
             <Button variant="contained" color="secondary">
-               Details
+              Details
             </Button>
-            <Button variant="contained" color="primary">
-              1999 ₹ /-
-            </Button>
+            <Button variant="contained" color="primary">{card.price}₹ /-</Button>
           </div>
         </div>
       </div>

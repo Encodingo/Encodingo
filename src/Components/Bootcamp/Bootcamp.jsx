@@ -101,7 +101,7 @@ const Bootcamp = () => {
   };
   return (
     <>
-      {/* <Header /> */}
+      <Header />
       {/* About */}
 
       <AboutSection data={data} />
@@ -186,7 +186,7 @@ const Bootcamp = () => {
         </div>
       )}
 
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 };

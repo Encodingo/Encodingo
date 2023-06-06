@@ -1,11 +1,13 @@
 import React from "react";
 import Sidebar from "./Sidebar/Sidebar";
-import CourseCard from "../Components/CourseCard/CourseCard";
+// import CourseCard from "../Components/CourseCard/CourseCard";
+// import myCourseCard from "./myCourseCard";
 import course1 from "../assets/images/course-1.jpg";
 import "./UserDashboard.css";
 import Bottombar from "./Bottombar/Bottombar";
 import { useState } from "react";
 import { useEffect } from "react";
+import MyCard from "./MyCard";
 
 const MyCourses = () => {
   const card = [
@@ -72,7 +74,6 @@ const MyCourses = () => {
   ];
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
   useEffect(() => {
     // Update window width when the window is resized
     const handleResize = () => {
@@ -93,26 +94,11 @@ const MyCourses = () => {
 
       <section className="home-section">
         <div>
-          <div className="container">
-            {/* <!-- <p class="section-subtitle">Popular Courses</p> --> */}
-            <h2
-              className="h2 section-title"
-              style={{ color: "white", marginBottom: "5rem" }}>
-              My Courses
-            </h2>
-            <ul className="grid-list">
-              {card && card.map((card) => <CourseCard card={card} />)}
+          <div className="container course-container">
+            <ul className="grid-list course-grid">
+              {/* {card && card.map((card) => <CourseCard card={card} />)} */}
+              {card && card.map((card) => <MyCard card={card} />)}
             </ul>
-
-            {/* <button className="btn has-before" onClick={handleModal}>
-                  <Link to={"/courses"}>
-                    <span className="span">Book A Demo Session</span>
-                  </Link>
-                </button> */}
-
-            {/* <a href="/" className="btn has-before" onClick={handleModal}>
-                <span className="span">Book A Demo Session</span>
-              </a> */}
           </div>
         </div>
       </section>

@@ -1,0 +1,7 @@
+.myContainer {
+    max-width: fit-content;
+}
+
+.mygrid {
+    grid-template-columns: repeat(4, 1fr);
+}

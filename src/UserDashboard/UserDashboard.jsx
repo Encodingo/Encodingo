@@ -92,14 +92,14 @@ const UserDashboard = () => {
 
       <section className="home-section">
         <div>
-          <div className="container">
+          <div className="container course-container">
             {/* <!-- <p class="section-subtitle">Popular Courses</p> --> */}
-            <h2
+            {/* <h2
               className="h2 section-title"
               style={{ color: "white", marginBottom: "5rem" }}>
               All Courses
-            </h2>
-            <ul className="grid-list">
+            </h2> */}
+            <ul className="grid-list course-grid">
               {card && card.map((card) => <CourseCard card={card} />)}
             </ul>
 

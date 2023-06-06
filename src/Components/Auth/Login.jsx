@@ -1,4 +1,4 @@
-import {useState } from "react";
+import { useState } from "react";
 import loginImg from "../../assets/login.svg";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
@@ -16,8 +16,6 @@ const Login = ({ onRegister, onReset, onTogglePassword, onShowPassword }) => {
     dispatch(login(loginEmail, loginPassword));
     navigate("/user_dashboard");
   };
-
-  
 
   return (
     <div className="main-container --flex-center">
@@ -50,8 +48,7 @@ const Login = ({ onRegister, onReset, onTogglePassword, onShowPassword }) => {
           </div>
           <button
             className="--btn --btn-primary --btn-block"
-            onClick={submitHandler}
-          >
+            onClick={submitHandler}>
             Login
           </button>
 

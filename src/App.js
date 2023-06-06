@@ -35,6 +35,8 @@ import Header from "./Components/Header"
 import Profile from "./UserDashboard/Profile";
 import MyCourses from "./UserDashboard/MyCourses";
 import Tutor from "./UserDashboard/Tutor";
+import Coding from "./UserDashboard/BookSession/Coding";
+import English from "./UserDashboard/BookSession/English";
 // import AllCourses from "./UserDashboard/AllCourses";
 // import AuthContainer from "./Components/Auth/AuthContainer";
 
@@ -61,7 +63,7 @@ function App() {
 
   return (
     <Router>
-      <Header />
+      {/* <Header /> */}
       <BackToTop />
       {/* <Header /> */}
       <Routes>
@@ -90,6 +92,24 @@ function App() {
           element={
             <ProtectedRoute isAuthenticated={isAuthenticated}>
               <BookSession />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/book_session/coding"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated}>
+              <Coding />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/book_session/English"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated}>
+              <English />
             </ProtectedRoute>
           }
         />
@@ -159,7 +179,7 @@ function App() {
           duration: 5000,
         }}
       />
-      <Footer />
+      {/* <Footer /> */}
     </Router>
   );
 }

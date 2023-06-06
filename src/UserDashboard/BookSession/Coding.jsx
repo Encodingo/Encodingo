@@ -9,10 +9,7 @@ import { useEffect } from "react";
 import BookSessionCard from "./BookSessionCard";
 import teacherImg from "../../assets/images/suresh.jpg";
 import Topbar from "./Topbar";
-
-import "./BookSession.css";
-
-const BookSession = () => {
+const Coding = () => {
   const card = [
     {
       img: teacherImg,
@@ -21,7 +18,7 @@ const BookSession = () => {
       teacher_name: "Suresh Vidyarthi",
       price: 6000,
       lesson: 90,
-      students: 500,
+      students: 5000,
       category: "Coding",
     },
     {
@@ -92,6 +89,14 @@ const BookSession = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const activeItems = document.getElementsByClassName("active");
+    for (let i = 0; i < activeItems.length; i++) {
+      activeItems[i].classList.remove("active");
+    }
+    document.getElementById("coding").classList.add("active");
+  });
+
   return (
     <>
       {windowWidth < 767 ? <Bottombar /> : <Sidebar />}
@@ -109,7 +114,11 @@ const BookSession = () => {
             <ul className="grid-list mygrid">
               {card &&
                 card.map((card) => {
-                  return <BookSessionCard card={card} />;
+                  return (
+                    card.category === "Coding" && (
+                      <BookSessionCard card={card} />
+                    )
+                  );
                 })}
             </ul>
           </div>
@@ -119,4 +128,4 @@ const BookSession = () => {
   );
 };
 
-export default BookSession;
+export default Coding;
