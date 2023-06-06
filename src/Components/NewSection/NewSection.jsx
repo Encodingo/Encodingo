@@ -58,8 +58,8 @@ const NewSection = () => {
               </div>
             </li>
 
-            {/* <li>
-              style={{ backgroundColor:'/4461E4' }}
+            <li>
+              {/* style={{ backgroundColor:'/4461E4' }} */}
               <div className="category-card category-card3">
                 <div className="card-icon">
                   <img
@@ -78,7 +78,7 @@ const NewSection = () => {
                   </a>
                 </h3>
               </div>
-            </li> */}
+            </li>
 
             <li>
               {/* style={{ backgroundColor:'/F8B720'}} */}

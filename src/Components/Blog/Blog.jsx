@@ -1,5 +1,5 @@
 import React from "react";
- import "../../assets/css/style.css";
+import "../../assets/css/style.css";
 import suresh from "../../assets/images/suresh.jpg";
 // import manish from "../../assets/images/manish.jpg";
 //  import shubham from "../../assets/images/shubham.jpg";
@@ -44,8 +44,7 @@ const Blog = () => {
         className="section blog has-bg-image1"
         id="blog"
         aria-label="blog"
-        style={{ backgroundImage: { blogbg }, marginTop: "-100px" }}
-      >
+        style={{ backgroundImage: { blogbg }, marginTop: "-100px" }}>
         <div className="container">
           {/* <!-- <p class="section-subtitle">Our Top Educators</p> --> */}
 

@@ -28,7 +28,9 @@ app.use(
 
 // Importing & Using Routes
 import user from "./Routes/userRoute.js";
+import course from "./Routes/courseRoute.js";
 app.use("/api/v1", user);
+app.use("/api/v1", course);
 
 app.get("/", (req, res) =>
   res.send(
@@ -39,9 +41,6 @@ app.get("/", (req, res) =>
 app.use(ErrorMiddleware);
 
 export default app;
-
-
-
 
 // import express from "express";
 // import { config } from "dotenv";

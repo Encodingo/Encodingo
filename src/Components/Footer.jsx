@@ -1,5 +1,5 @@
 import React from "react";
- import "../assets/css/style.css";
+import "../assets/css/style.css";
 import logo from "../assets/images/logonewnew (2).svg";
 import footerbg from "../assets/images/footer-bg.png";
 import { IonIcon } from "@ionic/react";
@@ -138,7 +138,7 @@ const Footer = () => {
           <div className="footer-list">
             <p className="footer-list-title">Contacts</p>
 
-            <p className="footer-list-text" >
+            <p className="footer-list-text">
               Enter your email address to register to our newsletter
               subscription
             </p>
@@ -155,10 +155,9 @@ const Footer = () => {
               <button type="submit" className="btn has-before">
                 <span className="span">Subscribe</span>
 
-                <ion-icon
+                {/* <ion-icon
                   name="arrow-forward-outline"
-                  aria-hidden="true"
-                ></ion-icon>
+                  aria-hidden="true"></ion-icon> */}
               </button>
             </form>
 

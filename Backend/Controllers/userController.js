@@ -51,8 +51,8 @@ export const logout = catchAsyncError(async (req, res, next) => {
     .cookie("token", null, {
       expires: new Date(Date.now()),
       httpOnly: true,
-       secure: true,
-      sameSite: "none",
+      //  secure: true,
+      // sameSite: "none",
     })
     .json({
       success: true,
@@ -60,6 +60,7 @@ export const logout = catchAsyncError(async (req, res, next) => {
     });
 });
 
+// get user profile
 export const getMyProfile = catchAsyncError(async (req, res, next) => {
   const user = await User.findById(req.user._id);
 
@@ -68,3 +69,4 @@ export const getMyProfile = catchAsyncError(async (req, res, next) => {
     user,
   });
 });
+
