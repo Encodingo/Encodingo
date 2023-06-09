@@ -99,7 +99,7 @@ const UserDashboard = () => {
               style={{ color: "white", marginBottom: "5rem" }}>
               All Courses
             </h2> */}
-            <ul className="grid-list course-grid">
+            <ul className="grid-list course-grid mygrid">
               {card && card.map((card) => <CourseCard card={card} />)}
             </ul>
 

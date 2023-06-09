@@ -37,6 +37,7 @@ import MyCourses from "./UserDashboard/MyCourses";
 import Tutor from "./UserDashboard/Tutor";
 import Coding from "./UserDashboard/BookSession/Coding";
 import English from "./UserDashboard/BookSession/English";
+import Dashboard from "./pages/Dashboard";
 // import AllCourses from "./UserDashboard/AllCourses";
 // import AuthContainer from "./Components/Auth/AuthContainer";
 
@@ -74,6 +75,10 @@ function App() {
         <Route path="/tutor" element={<Tutor />} />
         {/* <Route path="/book_session" element={<BookSession />} /> */}
         <Route path="/bottom" element={<Bottombar />} />
+
+
+        <Route path='/dashboard/admin' element={<Dashboard />} />
+
 
         {/* <Route  path="/loginregister" element={<Home/>} /> */}
         {/* <Route exact path="/login" component={AuthContainer} /> */}

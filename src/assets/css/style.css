@@ -1082,20 +1082,78 @@ section.user {
   pointer-events: all;
 }
 
-@media (max-width: 0px) {
+@media (min-width: 0) {
   .mygrid {
     grid: none !important;
   }
+
+  .coursesState {
+    top: 75px !important;
+  }
+
+  .myContainer {
+    margin-top: 81px !important;
+  }
 }
+
+
+
+@media (min-width: 415px) {
+  .mygrid {
+    grid: none !important;
+  }
+
+  .coursesState {
+    position: absolute;
+    top: 85px !important;
+  }
+}
+
+@media (min-width: 750px) {
+  .mygrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .coursesState {
+    position: absolute;
+    top: 85px !important;
+  }
+}
+
+@media (min-width: 992px) {
+  .mygrid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+
+@media (min-width: 1200px) {
+  .mygrid {
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 @media (max-width: 415px) {
   .logo1 {
     display: none;
   }
 
-  .mygrid {
+  /* .mygrid {
     grid: none !important
-  }
+  } */
 
 }
 
@@ -1107,7 +1165,7 @@ section.user {
  * responsive for large than 575px screen
  */
 
-@media (min-width: 575px) {
+@media (max-width: 575px) {
   /**
    * REUSED STYLE
    */
@@ -1118,9 +1176,9 @@ section.user {
     margin-inline: auto;
   }
 
-  .mygrid {
+  /* .mygrid {
     grid-template-columns: repeat(2, 1fr) !important;
-  }
+  } */
 
   .grid-list {
     grid-template-columns: 1fr 1fr;
@@ -1204,9 +1262,9 @@ section.user {
     margin: auto;
   }
 
-  .mygrid {
+  /* .mygrid {
     grid-template-columns: repeat(3, 1fr) !important;
-  }
+  } */
 
   .tutor .mainSection .text {
     width: auto;
@@ -1238,9 +1296,9 @@ section.user {
   }
 
 
-  .mygrid {
+  /* .mygrid {
     grid-template-columns: repeat(3, 1fr) !important;
-  }
+  } */
 
   /**
    * REUSED STYLE
@@ -1370,9 +1428,9 @@ section.user {
     --fs-2: 4.5rem;
   }
 
-  .mygrid {
+  /* .mygrid {
     grid-template-columns: repeat(3, 1fr) !important;
-  }
+  } */
 
   /**
    * REUSED STYLE
@@ -1449,9 +1507,9 @@ section.user {
   /**
    * CUSTOM PROPERTY
    */
-  .mygrid {
+  /* .mygrid {
     grid-template-columns: repeat(4, 1fr) !important;
-  }
+  } */
 
   :root {
     /**

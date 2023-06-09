@@ -95,7 +95,7 @@ const MyCourses = () => {
       <section className="home-section">
         <div>
           <div className="container course-container">
-            <ul className="grid-list course-grid">
+            <ul className="grid-list course-grid mygrid">
               {/* {card && card.map((card) => <CourseCard card={card} />)} */}
               {card && card.map((card) => <MyCard card={card} />)}
             </ul>
