@@ -210,9 +210,7 @@ const Header = () => {
             </button>
           ) : (
             <button className="btn has-before" onClick={handleModal}>
-              <Link to={"#"}>
-                <span className="span">Book A Session</span>
-              </Link>
+              <span className="span">Book A Session</span>
             </button>
           )}
           {/* console.log() */}

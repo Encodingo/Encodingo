@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
- import "../../assets/css/style.css";
+import "../../assets/css/style.css";
 import bootcamp from "../../assets/images/bootcamp.jpg";
 // import about from "../../assets/images/about.jpg";
 import course1 from "../../assets/images/course-1.jpg";
@@ -24,10 +24,12 @@ import { closeOutline } from "ionicons/icons";
 import { Link } from "react-router-dom";
 import Header from "../Header";
 import Footer from "../Footer";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { gettopcourses } from "../../actions/course";
+import { toast } from "react-hot-toast";
 
 const Bootcamp = () => {
-  const {isAuthenticated} = useSelector((state)=>state.user);
+  const { isAuthenticated } = useSelector((state) => state.user);
   const [showModal, setShowModal] = useState(false);
   const handleModal = () => {
     console.log("clicked");
@@ -43,38 +45,23 @@ const Bootcamp = () => {
     }
   }, [showModal]);
 
-  const card = [
-    {
-      img: course1,
-      duration: 12,
-      level: "Biggnner",
-      rating: "4.8/500",
-      title: "Build Responsive Real- World Websites with HTML and CSS",
-      price: 6000,
-      lesson: 12,
-      students: 5000,
-    },
-    {
-      img: course2,
-      duration: 8,
-      level: "Intermediate",
-      rating: "4.5/500",
-      title: "Java Programming Masterclass for Software Developers",
-      price: 8000,
-      lesson: 15,
-      students: 6500,
-    },
-    {
-      img: course3,
-      duration: 12,
-      level: "Advanced",
-      rating: "4.8/500",
-      title: "The Complete Camtasia Course for Content Creators",
-      price: 12000,
-      lesson: 12,
-      students: 7000,
-    },
-  ];
+  const { loading, top3courses, error, message } = useSelector(
+    (state) => state.topcourse
+  );
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+      dispatch({ type: "clearError" });
+    }
+
+    if (message) {
+      toast.success(message);
+      dispatch({ type: "clearMessage" });
+    }
+    dispatch(gettopcourses());
+  }, [dispatch, error, message]);
 
   const data = {
     img: bootcamp,
@@ -117,7 +104,28 @@ const Bootcamp = () => {
           {/* <!-- <p class="section-subtitle">Popular Courses</p> --> */}
           <h2 className="h2 section-title">Our Coding Curriculum</h2>
           <ul className="grid-list">
-            {card && card.map((card) => <CourseCard card={card} />)}
+            {top3courses.length > 0 ? (
+              top3courses.map((item) => (
+                <CourseCard
+                  key={item._id}
+                  poster={item.poster}
+                  title={item.title}
+                  category={item.category}
+                  level={item.level}
+                  imageSrc={course1}
+                  id={item._id}
+                  duration={item.duration}
+                  rating={item.rating}
+                  users={item.users}
+                  price={item.price}
+                  details={item.details}
+                  numOfVideos={item.numOfVideos}
+                  loading={loading}
+                />
+              ))
+            ) : (
+              <h1>Course Not Found</h1>
+            )}
           </ul>
 
           {isAuthenticated ? (

@@ -20,9 +20,20 @@ const schema = mongoose.Schema({
     validate: validator.isEmail,
   },
 
-  phone:{
-      type: Number,
-      required: [true, "Please Enter Your Phone Number"],
+  phone: {
+    type: Number,
+    required: [true, "Please Enter Your Phone Number"],
+  },
+
+ 
+  // Address
+  address: {
+    type: String,
+  },
+
+  // grade
+  grade: {
+    type: String,
   },
   // Password type, required, minLength, select
   password: {
@@ -34,6 +45,7 @@ const schema = mongoose.Schema({
   // Role type default
   role: {
     type: String,
+    enum: ["admin", "user"],
     default: "user",
   },
 
@@ -42,8 +54,8 @@ const schema = mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  // resetPasswordToken: String,
-  // resetPasswordExpire: String
+  resetPasswordToken: String,
+  resetPasswordExpire: String
 });
 
 schema.pre("save", async function (next) {

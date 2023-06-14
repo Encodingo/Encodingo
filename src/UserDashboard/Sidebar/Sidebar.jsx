@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link,  useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import React from "react";
 import "./Sidebar.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -48,10 +48,10 @@ const Sidebar = () => {
             <span className="tooltip">Search</span>
           </li> */}
           <li>
-            <Link href="/user_dashboard">
+            <a href="/user_dashboard">
               <i className="bx bx-book-open"></i>
               <span className="links_name">All Courses</span>
-            </Link>
+            </a>
             <span className="tooltip">All Courses</span>
           </li>
           <li>
@@ -63,7 +63,7 @@ const Sidebar = () => {
           </li>
 
           <li>
-            <Link to={'/book_session'}>
+            <Link to={"/book_session"}>
               <i className="bx bx-time"></i>
               <span className="links_name">Book Session</span>
             </Link>
@@ -71,7 +71,7 @@ const Sidebar = () => {
           </li>
 
           <li>
-            <Link to={'/user_dashboard'} >
+            <Link to={"/user_profile"}>
               <i className="bx bx-user"></i>
               <span className="links_name">Profile</span>
             </Link>
@@ -79,12 +79,25 @@ const Sidebar = () => {
           </li>
 
           <li>
-            <Link to={'/'}>
+            <a href="/">
               <i class="bx bx-link-external visit-icon"></i>
               <span className="links_name">Explore</span>
-            </Link>
+            </a>
             <span className="tooltip">Explore</span>
           </li>
+
+          {
+            user && user.role === "admin" ? (
+            <li>
+              <Link to={'/admin/dashboard'}>
+                <i class="bx bx-link-external visit-icon"></i>
+                <span className="links_name">Admin</span>
+              </Link>
+              <span className="tooltip">Dashboard</span>
+            </li>
+          ) : (
+            <h2></h2>
+          )}
           {/* <li>
             <a href="#">
               <i className="bx bx-chat"></i>

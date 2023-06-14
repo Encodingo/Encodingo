@@ -29,6 +29,17 @@ import UserDashboard from "./UserDashboard/UserDashboard";
 import Bottombar from "./UserDashboard/Bottombar/Bottombar";
 import { loadUser } from "./actions/userAction";
 import BookSession from "./UserDashboard/BookSession/BookSession";
+import UserProfile from "./UserDashboard/UserProfile/UserProfile";
+import ChangePass from "./UserDashboard/Update/ChangePass";
+import UpdateProfile from "./UserDashboard/Update/UpdateProfile";
+import { gettopcourses } from "./actions/course";
+import AdminDashboard from "./Components/Admin/AdminDashboard";
+import CourseList from "./Components/Admin/CourseList";
+import CreateCourse from "./Components/Admin/CreateCourse";
+import UsersList from "./Components/Admin/UsersList";
+import TeacherList from "./Components/Admin/TeacherList";
+import CreateTeacher from "./Components/Admin/CreateTeacher";
+import ResetPass from "./UserDashboard/Update/ResetPass";
 // import UserDash from "./Components/Dashboard/UserDash";
 
 // import AuthContainer from "./Components/Auth/AuthContainer";
@@ -37,6 +48,10 @@ function App() {
   const { isAuthenticated, user, message, error, loading } = useSelector(
     (state) => state.user
   );
+
+  // const { courses } = useSelector(
+  //   (state) => state.course
+  // );
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -52,6 +67,7 @@ function App() {
 
   useEffect(() => {
     dispatch(loadUser());
+    // dispatch(gettopcourses());
   }, [dispatch]);
 
   return (
@@ -83,7 +99,7 @@ function App() {
           path="/book_session"
           element={
             <ProtectedRoute isAuthenticated={isAuthenticated}>
-              <BookSession/>
+              <BookSession />
             </ProtectedRoute>
           }
         />
@@ -99,7 +115,7 @@ function App() {
             </ProtectedRoute>
           }
         />
-        <Route
+        {/* <Route
           path="/user_dashboard"
           element={
             <ProtectedRoute
@@ -109,7 +125,35 @@ function App() {
               <Home />
             </ProtectedRoute>
           }
+        /> */}
+
+        <Route
+          path="/user_profile"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated}>
+              <UserProfile />
+            </ProtectedRoute>
+          }
         />
+
+        <Route
+          path="/user_changepass"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated}>
+              <ChangePass />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/user_updateprofile"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated}>
+              <UpdateProfile />
+            </ProtectedRoute>
+          }
+        />
+
         <Route
           path="/register"
           element={
@@ -129,7 +173,102 @@ function App() {
             </ProtectedRoute>
           }
         /> */}
+
+        {/* Admin  */}
+
+        {/* <Route path="/admin/dashboard" element={<AdminDashboard/>}/> */}
+
+        <Route
+          path="/admin/dashboard"
+          element={
+            <ProtectedRoute
+              adminRoute={true}
+              isAuthenticated={isAuthenticated}
+              isAdmin={user && user.role === "admin"}
+            >
+              <AdminDashboard />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin/courses"
+          element={
+            <ProtectedRoute
+              adminRoute={true}
+              isAuthenticated={isAuthenticated}
+              isAdmin={user && user.role === "admin"}
+            >
+              <CourseList />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin/createcourse"
+          element={
+            <ProtectedRoute
+              adminRoute={true}
+              isAuthenticated={isAuthenticated}
+              isAdmin={user && user.role === "admin"}
+            >
+              <CreateCourse />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin/createteacher"
+          element={
+            <ProtectedRoute
+              adminRoute={true}
+              isAuthenticated={isAuthenticated}
+              isAdmin={user && user.role === "admin"}
+            >
+              <CreateTeacher />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin/users"
+          element={
+            <ProtectedRoute
+              adminRoute={true}
+              isAuthenticated={isAuthenticated}
+              isAdmin={user && user.role === "admin"}
+            >
+              <UsersList />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin/teachers"
+          element={
+            <ProtectedRoute
+              adminRoute={true}
+              isAuthenticated={isAuthenticated}
+              isAdmin={user && user.role === "admin"}
+            >
+              <TeacherList />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/resetpassword/:token"
+          element={
+            <ProtectedRoute
+              isAuthenticated={!isAuthenticated}
+              redirect="/user_dashboard"
+            >
+              <ResetPass />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
+
       {/* <Footer /> */}
       <Toaster
         toastOptions={{

@@ -1,28 +1,58 @@
 import React from "react";
 import Sidebar from "../Sidebar/Sidebar";
-import suresh from "../../assets/images/suresh.jpg"
-import "../UserDashboard.css";
+
+// import "../UserDashboard.css";
+import "../../assets/css/style.css";
 import Bottombar from "../Bottombar/Bottombar";
 import { useState } from "react";
 import { useEffect } from "react";
-import BlogCard from "../../Components/BlogCard/BlogCard";
+import BookSessionCard from "./BookSessionCard";
+import { useNavigate } from "react-router-dom";
+import "./BookSession.css";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-hot-toast";
+import { getAllTeachers } from "../../actions/teacher";
+
 const BookSession = () => {
-  const sureshblog = {
-    img: suresh,
-    title: "Suresh Vidyarthi",
-  };
+  const { loading, error, message, teachers } = useSelector(
+    (state) => state.teacher
+  );
+  const dispatch = useDispatch();
+  const Navigate = useNavigate();
+  const [keyword, setKeyword] = useState("");
+  const [category, setCategory] = useState("");
 
-  const shubhamblog = {
-    img: suresh,
-    title: "Shubham Raj",
-  };
+  // const addToPlaylistHandler = async couseId => {
+  //   await dispatch(addToPlaylist(couseId));
+  //   dispatch(loadUser());
+  // };
 
-  const manishblog = {
-    img: suresh,
-    title: "Manish Mandan",
-  };
+  const categories = [
+    // "All",
+    "Coding",
+    "English",
+  ];
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+      dispatch({ type: "clearError" });
+    }
+
+    if (message) {
+      toast.success(message);
+      dispatch({ type: "clearMessage" });
+    }
+
+    dispatch(getAllTeachers(category, keyword));
+  }, [dispatch, error, message, category, keyword]);
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  const refresh = () => {
+    window.location.reload();
+    Navigate("/book_session");
+  };
 
   useEffect(() => {
     // Update window width when the window is resized
@@ -43,30 +73,63 @@ const BookSession = () => {
       {windowWidth < 767 ? <Bottombar /> : <Sidebar />}
 
       <section className="home-section">
+        {/* <Topbar /> */}
         <div>
           <div className="container">
+            {/* <!-- <p class="section-subtitle">Popular Courses</p> --> */}
+            {/* <h2
+              className="h2 section-title"
+              style={{ color: "white", marginBottom: "5rem" }}>
+              Book a Session
+            </h2> */}
             {/* <!-- <p class="section-subtitle">Popular Courses</p> --> */}
             <h2
               className="h2 section-title"
               style={{ color: "white", marginBottom: "5rem" }}
             >
-              We Have Best Mentors...
+              All Teachers
             </h2>
+            <div class="search-bar">
+              <input
+                type="text"
+                placeholder="Search..."
+                onChange={(e) => setKeyword(e.target.value)}
+              />
+              <button type="submit">Search</button>
+            </div>
+            <button className="Button" onClick={refresh}>
+              All
+            </button>
+            {categories.map((item, index) => (
+              <button
+                className="Button"
+                key={index}
+                onClick={() => setCategory(item)}
+                minW={"60"}
+              >
+                {item}
+              </button>
+            ))}
             <ul className="grid-list">
-              <BlogCard data={sureshblog} />
-              <BlogCard data={shubhamblog} />
-              <BlogCard data={manishblog} />
+              {teachers.length > 0 ? (
+                teachers.map((item) => (
+                  <BookSessionCard
+                    key={item._id}
+                    poster={item.poster}
+                    name={item.name}
+                    category={item.category}
+                    bio={item.bio}
+                    experience={item.experience}
+                    rating={item.rating}
+                    nos={item.nos}
+                    link={item.link}
+                    loading={loading}
+                  />
+                ))
+              ) : (
+                <h1>Teachers Not Found</h1>
+              )}
             </ul>
-
-            {/* <button className="btn has-before" onClick={handleModal}>
-              <Link to={"/courses"}>
-                <span className="span">Book A Demo Session</span>
-              </Link>
-            </button> */}
-
-            {/* <a href="/" className="btn has-before" onClick={handleModal}>
-            <span className="span">Book A Demo Session</span>
-          </a> */}
           </div>
         </div>
       </section>

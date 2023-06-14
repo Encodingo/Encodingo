@@ -1,9 +1,18 @@
 
 import {configureStore} from '@reduxjs/toolkit'
-import {userReducer } from './reducers/userReducer';
+import {profileReducer, userReducer } from './reducers/userReducer';
+import { courseReducer } from './reducers/courseReducer';
+import { adminReducer } from './reducers/adminReducer';
+import { teacherReducer } from './reducers/teacherReducer';
+import { top3courseReducer } from './reducers/top3courseReducer';
 const store = configureStore({
     reducer:{
-        user:userReducer
+        user:userReducer,
+        profile:profileReducer,
+        course:courseReducer,
+        admin: adminReducer,
+        teacher:teacherReducer,
+        topcourse:top3courseReducer,
     }
 });
 
