@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 
 const CreateTeacher = () => {
   const categories = ["Coding", "English"];
+  const levels = ["Bignner", "Medium" , "Advance"];
   const dispatch = useDispatch();
   const Navigate = useNavigate();
 
@@ -23,9 +24,10 @@ const CreateTeacher = () => {
   const [bio, setBio] = useState("");
   const [link, setLink] = useState("");
   const [rating, setRating] = useState("");
-  const [experience, setExperience] = useState("");
+  const [session, setSession] = useState("");
   const [category, setCategory] = useState("");
   const [nos, setNos] = useState("");
+  const [level, setLevel] = useState("");
   const [image, setImage] = useState('');
   const [imagePrev, setImagePrev] = useState('');
 
@@ -51,9 +53,10 @@ const CreateTeacher = () => {
     myForm.append('category', category);
     myForm.append('bio', bio);
     myForm.append('link', link);
-    myForm.append('experience', experience);
+    myForm.append('session', session);
     myForm.append('rating', rating);
     myForm.append('nos', nos);
+    myForm.append('level', level);
     myForm.append('file', image);
     dispatch(createTeacher(myForm));
   };
@@ -97,10 +100,10 @@ const CreateTeacher = () => {
               {/* <AttachMoneyIcon /> */}
               <input
                 type="number"
-                placeholder="Experience"
+                placeholder="Sessions Completed"
                 required
-                value={experience}
-                onChange={(e) => setExperience(e.target.value)}
+                value={session}
+                onChange={(e) => setSession(e.target.value)}
               />
             </div>
 
@@ -157,6 +160,18 @@ const CreateTeacher = () => {
                 {categories.map((cate) => (
                   <option key={cate} value={cate}>
                     {cate}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <AccountTreeIcon />
+              <select onChange={(e) => setLevel(e.target.value)}>
+                <option value="">Choose Level</option>
+                {levels.map((level) => (
+                  <option key={level} value={level}>
+                    {level}
                   </option>
                 ))}
               </select>

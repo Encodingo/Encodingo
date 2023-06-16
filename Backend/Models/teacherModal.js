@@ -19,13 +19,17 @@ const teacherSchema = mongoose.Schema({
      type: String,
      required: [true, "Please enter Category"],
   },
-  experience: {
+  session: {
     type: Number,
     required: [true, "Please enter duration"],
   },
   rating: {
     type: Number,
     required: [true, "Please enter rating"],
+  },
+  level:{
+    type: String,
+    required: [true, "Please enter Level"],
   },
   nos: {
     type: Number,

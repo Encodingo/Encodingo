@@ -25,7 +25,6 @@ const schema = mongoose.Schema({
     required: [true, "Please Enter Your Phone Number"],
   },
 
- 
   // Address
   address: {
     type: String,
@@ -54,8 +53,16 @@ const schema = mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  // verification of email
+  verified: {
+    type: Boolean,
+    default: false,
+  },
+
+  otp: Number,
+  otp_expiry: Date,
   resetPasswordToken: String,
-  resetPasswordExpire: String
+  resetPasswordExpire: String,
 });
 
 schema.pre("save", async function (next) {
@@ -86,5 +93,7 @@ schema.methods.getResetToken = function () {
 
   return resetToken;
 };
+
+schema.index({ otp_expiry: 1 }, { expireAfterSeconds: 0 });
 
 export const User = mongoose.model("User", schema);

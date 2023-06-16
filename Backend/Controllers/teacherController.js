@@ -5,7 +5,7 @@ import getDataUri from "../utils/dataUri.js";
 import cloudinary from "cloudinary"
 // get top 3 rated teachers
 export const getTopRatedTeachers = catchAsyncError(async (req, res, next) => {
-  const teachers = await Teacher.find().sort({ rating: -1 }).limit(3);
+  const teachers = await Teacher.find().sort({ rating: -1 }).limit(4);
 
   res.status(200).json({
     success: true,
@@ -46,10 +46,9 @@ export const getAllTeachersAdmin = catchAsyncError(async (req, res, next) => {
 
 // create a new Teacher only admin
 export const createTeacher = catchAsyncError(async (req, res, next) => {
-  const { name, bio, link, experience, rating, nos , category } = req.body;
+  const { name, bio, link, session, rating, nos , category, level } = req.body;
 
-  console.log(name, bio, link, experience, rating , category , nos);
-  if (!name || !bio || !link || !experience || !rating || !nos || !category) {
+  if (!name || !bio || !link || !session || !rating || !nos || !category || !level) {
     return next(new ErrorHandler("Please enter all fields", 400));
   }
 
@@ -66,10 +65,11 @@ export const createTeacher = catchAsyncError(async (req, res, next) => {
     name,
     bio,
     link,
-    experience,
+    session,
     rating,
     nos,
     category,
+    level,
     poster: {
       public_id: mycloud.public_id,
       url: mycloud.secure_url,

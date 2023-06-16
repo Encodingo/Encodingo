@@ -1,13 +1,6 @@
 import React, { useEffect } from "react";
 import "../../assets/css/style.css";
-// import herobg from "../../assets/images/hero-bg.svg";
 import about from "../../assets/images/about.jpg";
-import course1 from "../../assets/images/course-1.jpg";
-import course2 from "../../assets/images/course-2.jpg";
-import course3 from "../../assets/images/course-3.jpg";
-import suresh from "../../assets/images/suresh.jpg";
-// import manish from "../../assets/images/manish.jpg";
-// import shubham from "../../assets/images/shubham.jpg";
 import blogshape from "../../assets/images/blog-shape.png";
 import blogbg from "../../assets/images/blog-bg.svg";
 import AboutSection from "../AboutSection/AboutSection";
@@ -15,7 +8,6 @@ import NewSection from "../NewSection/NewSection";
 import CourseCard from "../CourseCard/CourseCard";
 import VideoSection from "../VideoSection/VideoSection";
 import StateSection from "../StateSection/StateSection";
-import BlogCard from "../BlogCard/BlogCard";
 import CategorySection from "../CategorySection/CategorySection";
 import FrontPageBanner from "../FrontPageBanner/FrontPageBanner";
 import BookSession from "../ButtonBook/BookSession";
@@ -24,18 +16,21 @@ import Footer from "../Footer";
 import { useDispatch, useSelector } from "react-redux";
 import { gettopcourses } from "../../actions/course";
 import { toast } from "react-hot-toast";
+import { gettopteachers } from "../../actions/teacher";
+import BookSessionCard from "../../UserDashboard/BookSession/BookSessionCard";
+import Loader from "../Loader/Loader";
+import BookSessionCard1 from "../../UserDashboard/BookSession/BookSessionCard1";
 
 // hii this is simple comment
 const Home = () => {
-  
   const { loading, top3courses, error, message } = useSelector(
     (state) => state.topcourse
   );
+
+  const { top3teachers } = useSelector((state) => state.topteacher);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    
-
     if (error) {
       toast.error(error);
       dispatch({ type: "clearError" });
@@ -46,23 +41,8 @@ const Home = () => {
       dispatch({ type: "clearMessage" });
     }
     dispatch(gettopcourses());
+    dispatch(gettopteachers());
   }, [dispatch, error, message]);
-
-  
-  const sureshblog = {
-    img: suresh,
-    title: "Suresh Vidyarthi",
-  };
-
-  const shubhamblog = {
-    img: suresh,
-    title: "Shubham Raj",
-  };
-
-  const manishblog = {
-    img: suresh,
-    title: "Manish Mandan",
-  };
 
   const data = {
     img: about,
@@ -100,27 +80,33 @@ const Home = () => {
           {/* <!-- <p class="section-subtitle">Popular Courses</p> --> */}
           <h2 className="h2 section-title">Our Coding Curriculum</h2>
           <ul className="grid-list">
-            {top3courses.length > 0 ? (
-              top3courses.map((item) => (
-                <CourseCard
-                  key={item._id}
-                  poster={item.poster}
-                  title={item.title}
-                  category={item.category}
-                  level={item.level}
-                  imageSrc={course1}
-                  id={item._id}
-                  duration={item.duration}
-                  rating={item.rating}
-                  users={item.users}
-                  price={item.price}
-                  details={item.details}
-                  numOfVideos={item.numOfVideos}
-                  loading={loading}
-                />
-              ))
+            {loading ? (
+              <Loader />
             ) : (
-              <h1>Course Not Found</h1>
+              <>
+                {top3courses.length > 0 ? (
+                  top3courses.map((item) => (
+                    <CourseCard
+                      key={item._id}
+                      poster={item.poster}
+                      title={item.title}
+                      category={item.category}
+                      level={item.level}
+                      // imageSrc={course1}
+                      id={item._id}
+                      duration={item.duration}
+                      rating={item.rating}
+                      users={item.users}
+                      price={item.price}
+                      details={item.details}
+                      numOfVideos={item.numOfVideos}
+                      loading={loading}
+                    />
+                  ))
+                ) : (
+                  <h1>Course Not Found</h1>
+                )}
+              </>
             )}
           </ul>
 
@@ -155,9 +141,31 @@ const Home = () => {
           <p className="section-subtitle"></p>
 
           <ul className="grid-list">
-            <BlogCard data={sureshblog} />
-            <BlogCard data={shubhamblog} />
-            <BlogCard data={manishblog} />
+            {loading ? (
+              <Loader />
+            ) : (
+              <>
+                {top3teachers.length > 0 ? (
+                  top3teachers.map((item) => (
+                    <BookSessionCard1
+                      key={item._id}
+                      poster={item.poster}
+                      name={item.name}
+                      category={item.category}
+                      link={item.link}
+                      level={item.level}
+                      bio={item.bio}
+                      session={item.session}
+                      rating={item.rating}
+                      nos={item.nos}
+                      loading={loading}
+                    />
+                  ))
+                ) : (
+                  <h1>Teacher Not Found</h1>
+                )}
+              </>
+            )}
           </ul>
 
           <img

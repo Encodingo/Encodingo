@@ -14,6 +14,8 @@ export const register = catchAsyncError(async (req, res, next) => {
 
   if (user) return next(new ErrorHandler("User Already Exist", 409));
 
+  const otp = Math.floor(Math.random() * 1000000);
+
   user = await User.create({
     name,
     email,
@@ -21,15 +23,52 @@ export const register = catchAsyncError(async (req, res, next) => {
     password,
     address,
     grade,
+    otp,
+    otp_expiry: new Date(Date.now() + process.env.OTP_EXPIRE * 60 * 1000),
   });
 
-  sendToken(
-    res,
-    user,
-    `Registered Successfully Encodingo Welcome's You ${user.name}`,
-    201
-  );
+  // send otp on  email for verification
+
+  const message = `Verify Your Account Your OTP is ${otp}`;
+
+  // Send token via email
+
+  try {
+    await sendEmail({
+      email: user.email,
+      subject: `Encodingo Verification Email`,
+      message,
+    });
+
+    sendToken(res, user, `OTP sent to ${user.email} successfully, Valid for 5 minutes.`, 201);
+  } catch (error) {
+    return next(new ErrorHandler(error.message, 500));
+  }
 });
+
+export const verify = async (req, res) => {
+  try {
+    const otp = Number(req.body.otp);
+    // console.log(otp);
+    const user = await User.findById(req.user._id);
+    
+    if (user.otp !== otp || user.otp_expiry < Date.now()) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Invalid OTP or has been Expired" });
+    }
+
+    user.verified = true;
+    user.otp = null;
+    user.otp_expiry = null;
+
+    await user.save();
+
+    sendToken(res, user, `Successfully Verified , Welcome ${user.name}`, 200);
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
 
 // Login User
 export const login = catchAsyncError(async (req, res, next) => {
@@ -157,7 +196,6 @@ export const deleteUser = catchAsyncError(async (req, res, next) => {
   });
 });
 
-
 export const forgetPassword = catchAsyncError(async (req, res, next) => {
   const { email } = req.body;
 
@@ -173,7 +211,7 @@ export const forgetPassword = catchAsyncError(async (req, res, next) => {
 
   // const message = `Click on the link to reset your password. ${url}. If you have not request then please ignore.`;
 
-   const resetPasswordUrl = `${process.env.FRONTEND_URL}/resetpassword/${resetToken}`;
+  const resetPasswordUrl = `${process.env.FRONTEND_URL}/resetpassword/${resetToken}`;
 
   // const resetPasswordUrl = `${req.protocol}://${req.get(
   //   "host"

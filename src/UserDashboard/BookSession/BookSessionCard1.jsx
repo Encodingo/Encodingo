@@ -11,26 +11,27 @@ import {
   timeOutline,
 } from "ionicons/icons";
 import { Button } from "@material-ui/core";
-import Loader from "../Loader/Loader";
+import Loader from "../../Components/Loader/Loader";
 
-const CourseCard = ({
+const BookSessionCard1 = ({
+  name,
   poster,
-  title,
   category,
-  level,
-  duration,
+  link,
+  bio,
   rating,
-  users,
-  price,
-  details,
-  numOfVideos,
+  nos,
+  level,
+  session,
   loading,
 }) => {
   const Navigate = useNavigate();
+
   const detailshandler = () => {
-    Navigate(details);
+    Navigate(bio);
   };
 
+  
   const options = {
     value: rating,
     readOnly: true,
@@ -58,11 +59,11 @@ const CourseCard = ({
               />
             </figure>
 
-            <div className="abs-badge">
+            {/* <div className="abs-badge">
               <IonIcon icon={timeOutline} aria-hidden="true" />
 
               <span className="span">{duration} Weeks</span>
-            </div>
+            </div> */}
 
             <div className="card-content">
               <div
@@ -76,7 +77,7 @@ const CourseCard = ({
                 <span className="badge">{level}</span>
                 <span className="badge">{category}</span>
               </div>
-              <h3 className="h3 card-title">{title}</h3>
+              <h3 className="h3 card-title">{name}</h3>
 
               <div className="wrapper">
                 <div className="rating-wrapper">
@@ -86,33 +87,38 @@ const CourseCard = ({
                 <p className="rating-text">({`${rating}+`} Rating out of 5)</p>
               </div>
 
-              <card className="price" value="6000">
+              {/* <card className="price" value="6000">
                 {price}
-              </card>
+              </card> */}
 
               <ul className="card-meta-list">
                 <li className="card-meta-item">
                   <IonIcon icon={libraryOutline} aria-hidden="true" />
 
-                  <span className="span">{numOfVideos} Lessons</span>
+                  <span className="span">{session}+ Sessions</span>
                 </li>
 
                 <li className="card-meta-item">
                   <IonIcon icon={people} aria-hidden="true" />
-                  <span className="span">{`${users}+`} Students</span>
+                  <span className="span">{`${nos}+`} Students</span>
                 </li>
               </ul>
 
               <div className="card-buttons">
                 <Button
-                  // onClick={detailshandler}
+                  //   onClick={detailshandler}
                   variant="contained"
                   color="secondary"
                 >
-                  <a href={details} target="_blank">Details</a>
+                  <a href={bio} target="_blank">
+                    BIO
+                  </a>
                 </Button>
-                <Button variant="contained" color="primary">
-                  {price} ₹
+                <Button 
+                variant="contained" 
+                color="primary"
+                >
+                  <a href={link} target="_blank">Book</a>
                 </Button>
               </div>
             </div>
@@ -123,4 +129,4 @@ const CourseCard = ({
   );
 };
 
-export default CourseCard;
+export default BookSessionCard1;

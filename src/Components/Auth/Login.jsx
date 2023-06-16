@@ -1,12 +1,15 @@
-import {useState } from "react";
+import { useState } from "react";
 import loginImg from "../../assets/login.svg";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 // import { useAlert } from "react-alert";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { login } from "../../actions/userAction";
+import { useNavigate } from "react-router-dom";
 const Login = ({ onRegister, onReset, onTogglePassword, onShowPassword }) => {
-  const navigate = useNavigate();
+  const { loading } = useSelector((state) => state.user);
+   const navigate = useNavigate();
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const dispatch = useDispatch();
@@ -14,10 +17,8 @@ const Login = ({ onRegister, onReset, onTogglePassword, onShowPassword }) => {
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(login(loginEmail, loginPassword));
-    navigate("/user_dashboard");
+    navigate('/login')
   };
-
-  
 
   return (
     <div className="main-container --flex-center">
@@ -51,8 +52,9 @@ const Login = ({ onRegister, onReset, onTogglePassword, onShowPassword }) => {
           <button
             className="--btn --btn-primary --btn-block"
             onClick={submitHandler}
+            disabled={loading}
           >
-            Login
+            {!loading ? "Login" : "Loading..."}
           </button>
 
           <button className="--text-sm" onClick={onReset}>
@@ -63,7 +65,10 @@ const Login = ({ onRegister, onReset, onTogglePassword, onShowPassword }) => {
           </a> */}
           <span className="--text-sm --block">
             Don't have an account?{" "}
-            <button className="--text-sm" onClick={onRegister}>
+            <button 
+            className="--text-sm" 
+            onClick={onRegister}
+            >
               Register
             </button>
             {/* <a href="#" className="--text-sm" onClick={onRegister}>

@@ -63,7 +63,6 @@ const UpdateProfile = () => {
                     </label>
                     <input
                       type="text"
-                      name="name"
                       value={name}
                       id="address"
                       class="formbold-form-input"
@@ -82,9 +81,8 @@ const UpdateProfile = () => {
                       </label>
                       <input
                         type="email"
-                        name="email"
-                        value={email}
                         id="email"
+                        value={email}
                         class="formbold-form-input"
                         onChange={(e)=>setEmail(e.target.value)}
                       />
@@ -96,7 +94,6 @@ const UpdateProfile = () => {
                       </label>
                       <input
                         type="number"
-                        name="phone"
                         id="phone"
                         value={phone}
                         class="formbold-form-input"
@@ -111,7 +108,6 @@ const UpdateProfile = () => {
                     </label>
                     <input
                       type="text"
-                      name="address"
                       id="address"
                       value={address}
                       class="formbold-form-input"
@@ -125,7 +121,6 @@ const UpdateProfile = () => {
                     </label>
                     <input
                       type="number"
-                      name="grade"
                       value={grade}
                       id="address"
                       class="formbold-form-input"

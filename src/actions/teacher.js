@@ -22,16 +22,16 @@ export const getAllTeachers =
 
 export const gettopteachers = () => async (dispatch) => {
   try {
-    dispatch({ type: "topteachersRequest" });
+    dispatch({ type: "topTeachersRequest" });
 
     const { data } = await axios.get(
       `/api/v1/gettopteachers`
     );
 
-    dispatch({ type: "topteachersSuccess", payload: data.teachers });
+    dispatch({ type: "topTeachersSuccess", payload: data.teachers });
   } catch (error) {
     dispatch({
-      type: "topteachersFail",
+      type: "topTeachersFail",
       payload: error.response.data.message,
     });
   }

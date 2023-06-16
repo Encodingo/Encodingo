@@ -13,9 +13,10 @@ const Reset = ({ onLogin }) => {
   const { loading, message, error } = useSelector((state) => state.profile);
 
   const dispatch = useDispatch();
-  const submitHandler = (e) => {
+  const submitHandler = async(e) => {
     e.preventDefault();
-    dispatch(forgetPassword(email));
+    await dispatch(forgetPassword(email));
+    await setEmail("");
   };
 
   useEffect(() => {
@@ -36,8 +37,14 @@ const Reset = ({ onLogin }) => {
 
           <input value={email} onChange={(e)=>setEmail(e.target.value)} type="email" className="--width-100" placeholder="Email" />
 
-          <button  onClick={submitHandler} className="--btn --btn-primary --btn-block">
-            Reset Password
+          <button  
+          onClick={submitHandler} 
+          className="--btn --btn-primary --btn-block"
+          disabled={loading}
+          >
+            {
+              !loading ? "Reset Password" : "Loading..."
+            }
           </button>
 
           <span className="--text-sm --block --text-center">

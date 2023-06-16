@@ -11,12 +11,16 @@ import {
   deleteUser,
   forgetPassword,
   resetPassword,
+  verify,
 } from "../Controllers/userController.js";
 import { authorizeAdmin, isAuthenticated } from "../middlewares/auth.js";
 const router = express.Router();
 
 // register
 router.route("/register").post(register);
+
+// verify
+router.route("/verify").post(isAuthenticated, verify);
 
 // login
 router.route("/login").post(login);

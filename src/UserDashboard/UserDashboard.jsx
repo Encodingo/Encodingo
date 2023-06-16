@@ -10,6 +10,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllCourses } from "../actions/course";
 import { toast } from "react-hot-toast";
 import { Button } from "@material-ui/core";
+import Loader from "../Components/Loader/Loader";
+import { getAllTeachers } from "../actions/teacher";
 const UserDashboard = () => {
   const [keyword, setKeyword] = useState("");
   const [category, setCategory] = useState("");
@@ -30,9 +32,9 @@ const UserDashboard = () => {
     (state) => state.course
   );
 
-  useEffect(() => {
-    dispatch(getAllCourses(category, keyword));
+  const { teachers } = useSelector((state) => state.teacher);
 
+  useEffect(() => {
     if (error) {
       toast.error(error);
       dispatch({ type: "clearError" });
@@ -42,9 +44,9 @@ const UserDashboard = () => {
       toast.success(message);
       dispatch({ type: "clearMessage" });
     }
+    dispatch(getAllCourses(category, keyword));
+    dispatch(getAllTeachers());
   }, [category, keyword, dispatch, error, message]);
-
-  
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
@@ -77,36 +79,51 @@ const UserDashboard = () => {
               All Courses
             </h2>
             <div class="search-bar">
-              <input type="text" placeholder="Search..."  onChange={(e) => setKeyword(e.target.value)}/>
+              <input
+                type="text"
+                placeholder="Search..."
+                onChange={(e) => setKeyword(e.target.value)}
+              />
               <button type="submit">Search</button>
             </div>
             {categories.map((item, index) => (
-              <button className="Button" key={index} onClick={() => setCategory(item)} minW={"60"}>
+              <button
+                className="Button"
+                key={index}
+                onClick={() => setCategory(item)}
+                minW={"60"}
+              >
                 {item}
               </button>
             ))}
             <ul className="grid-list">
-              {courses.length > 0 ? (
-                courses.map((item) => (
-                  <CourseCard
-                    key={item._id}
-                    poster={item.poster}
-                    title={item.title}
-                    category={item.category}
-                    level={item.level}
-                    imageSrc={course1}
-                    id={item._id}
-                    duration={item.duration}
-                    rating={item.rating}
-                    users={item.users}
-                    price={item.price}
-                    details={item.details}
-                    numOfVideos={item.numOfVideos}
-                    loading={loading}
-                  />
-                ))
+              {loading ? (
+                <Loader />
               ) : (
-                <h1>Course Not Found</h1>
+                <>
+                  {courses.length > 0 ? (
+                    courses.map((item) => (
+                      <CourseCard
+                        key={item._id}
+                        poster={item.poster}
+                        title={item.title}
+                        category={item.category}
+                        level={item.level}
+                        // imageSrc={course1}
+                        id={item._id}
+                        duration={item.duration}
+                        rating={item.rating}
+                        users={item.users}
+                        price={item.price}
+                        details={item.details}
+                        numOfVideos={item.numOfVideos}
+                        loading={loading}
+                      />
+                    ))
+                  ) : (
+                    <h1>Course Not Found</h1>
+                  )}
+                </>
               )}
             </ul>
 

@@ -79,10 +79,10 @@ const Sidebar = () => {
           </li>
 
           <li>
-            <a href="/">
+            <Link to={'/'}>
               <i class="bx bx-link-external visit-icon"></i>
               <span className="links_name">Explore</span>
-            </a>
+            </Link>
             <span className="tooltip">Explore</span>
           </li>
 

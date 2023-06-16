@@ -26,6 +26,9 @@ import Footer from "../Footer";
 import { useDispatch, useSelector } from "react-redux";
 import { gettopcourses } from "../../actions/course";
 import { toast } from "react-hot-toast";
+import BookSessionCard from "../../UserDashboard/BookSession/BookSessionCard";
+import { gettopteachers } from "../../actions/teacher";
+import BookSessionCard1 from "../../UserDashboard/BookSession/BookSessionCard1";
 
 const About = () => {
   const [showModal, setShowModal] = useState(false);
@@ -46,6 +49,7 @@ const About = () => {
   const { loading, top3courses, error, message } = useSelector(
     (state) => state.topcourse
   );
+  const { top3teachers } = useSelector((state) => state.topteacher);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -59,6 +63,7 @@ const About = () => {
       dispatch({ type: "clearMessage" });
     }
     dispatch(gettopcourses());
+    dispatch(gettopteachers());
   }, [dispatch, error, message]);
 
   const data = {
@@ -159,11 +164,27 @@ const About = () => {
           {/* <!-- <p class="section-subtitle">Our Top Educators</p> --> */}
 
           <h2 className="h2 section-title">Top 1% of educators</h2>
-          {/* <p className="section-subtitle"></p> */}
+          <p className="section-subtitle"></p>
           <ul className="grid-list">
-            <BlogCard data={sureshblog} />
-            <BlogCard data={shubhamblog} />
-            <BlogCard data={manishblog} />
+            {top3teachers.length > 0 ? (
+              top3teachers.map((item) => (
+                <BookSessionCard1
+                  key={item._id}
+                  poster={item.poster}
+                  name={item.name}
+                  category={item.category}
+                  link={item.link}
+                  level={item.level}
+                  bio={item.bio}
+                  session={item.session}
+                  rating={item.rating}
+                  nos={item.nos}
+                  loading={loading}
+                />
+              ))
+            ) : (
+              <h1>Teacher Not Found Refresh the site</h1>
+            )}
           </ul>
           <img
             src={blogshape}

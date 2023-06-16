@@ -8,27 +8,27 @@ import AuthContainer from "./Auth/AuthContainer";
 import { IonIcon } from "@ionic/react";
 import { menuOutline, closeOutline } from "ionicons/icons";
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import {useSelector } from "react-redux";
 // import SearchBar from "./SearchBar/SearchBar";
 const Header = () => {
   const { isAuthenticated } = useSelector((state) => state.user);
-
+  // const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isFixed, setIsFixed] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
   const handleModal = () => {
-    // console.log("clicked");
     setShowModal(!showModal);
-    // if(!showModal){
-    //   navigate("/loginregister");
-    // }
-    // else{
-    //   navigate("/");
-    // }
-    // navigate("/");
   };
+
+  // jese hi login hoga apne aap modal close hoga nhii tho error dega
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/user_dashboard");
+      setShowModal(false); // Close the modal when the user is logged in
+    }
+  }, [isAuthenticated, navigate]);
 
   useEffect(() => {
     const body = document.querySelector("body");

@@ -53,6 +53,34 @@ export const register = (name,email,phone,password) => async dispatch => {
   }
 };
 
+
+export const verify = (otp) => async (dispatch) => {
+  try {
+    dispatch({ type: "verificationRequest" });
+
+    const { data } = await axios.post(
+      `/api/v1/verify`,
+      { otp },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      }
+    );
+
+    dispatch({ type: "verificationSuccess", payload: data });
+  } catch (error) {
+    dispatch({
+      type: "verificationFailure",
+      payload: error.response.data.message,
+    });
+  }
+};
+
+
+
+
 export const logout = () => async dispatch => {
   try {
     dispatch({ type: 'logoutRequest' });

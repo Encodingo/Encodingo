@@ -2,10 +2,10 @@ import { useState, useEffect } from "react";
 import "../../assets/css/style.css";
 import bootcamp from "../../assets/images/bootcamp.jpg";
 // import about from "../../assets/images/about.jpg";
-import course1 from "../../assets/images/course-1.jpg";
-import course2 from "../../assets/images/course-2.jpg";
-import course3 from "../../assets/images/course-3.jpg";
-import suresh from "../../assets/images/suresh.jpg";
+// import course1 from "../../assets/images/course-1.jpg";
+// import course2 from "../../assets/images/course-2.jpg";
+// import course3 from "../../assets/images/course-3.jpg";
+// import suresh from "../../assets/images/suresh.jpg";
 // import manish from "../../assets/images/manish.jpg";
 // import shubham from "../../assets/images/shubham.jpg";
 import blogshape from "../../assets/images/blog-shape.png";
@@ -13,7 +13,7 @@ import blogbg from "../../assets/images/blog-bg.svg";
 import NewSection from "../NewSection/NewSection";
 import CourseCard from "../CourseCard/CourseCard";
 import AboutSection from "../AboutSection/AboutSection";
-import BlogCard from "../BlogCard/BlogCard";
+// import BlogCard from "../BlogCard/BlogCard";
 import VideoSection from "../VideoSection/VideoSection";
 import StateSection from "../StateSection/StateSection";
 import "../../assets/css/authentication_styles.css";
@@ -27,6 +27,9 @@ import Footer from "../Footer";
 import { useDispatch, useSelector } from "react-redux";
 import { gettopcourses } from "../../actions/course";
 import { toast } from "react-hot-toast";
+import BookSessionCard from "../../UserDashboard/BookSession/BookSessionCard";
+import { gettopteachers } from "../../actions/teacher";
+import BookSessionCard1 from "../../UserDashboard/BookSession/BookSessionCard1";
 
 const Bootcamp = () => {
   const { isAuthenticated } = useSelector((state) => state.user);
@@ -48,6 +51,7 @@ const Bootcamp = () => {
   const { loading, top3courses, error, message } = useSelector(
     (state) => state.topcourse
   );
+  const { top3teachers } = useSelector((state) => state.topteacher);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -61,6 +65,7 @@ const Bootcamp = () => {
       dispatch({ type: "clearMessage" });
     }
     dispatch(gettopcourses());
+    dispatch(gettopteachers());
   }, [dispatch, error, message]);
 
   const data = {
@@ -72,20 +77,6 @@ const Bootcamp = () => {
       "Our coding bootcamp for schools is designed to be flexible and adaptable to the needs of your students. We offer a range of programs and courses that can be customized to fit your schools unique needs and goals.",
   };
 
-  const sureshblog = {
-    img: suresh,
-    title: "Suresh Vidyarthi",
-  };
-
-  const shubhamblog = {
-    img: suresh,
-    title: "Shubham Raj",
-  };
-
-  const manishblog = {
-    img: suresh,
-    title: "Manish Mandan",
-  };
   return (
     <>
       <Header />
@@ -112,7 +103,7 @@ const Bootcamp = () => {
                   title={item.title}
                   category={item.category}
                   level={item.level}
-                  imageSrc={course1}
+                  // imageSrc={course1}
                   id={item._id}
                   duration={item.duration}
                   rating={item.rating}
@@ -124,7 +115,7 @@ const Bootcamp = () => {
                 />
               ))
             ) : (
-              <h1>Course Not Found</h1>
+              <h1>Course Not Found refresh the site</h1>
             )}
           </ul>
 
@@ -168,11 +159,27 @@ const Bootcamp = () => {
           {/* <!-- <p class="section-subtitle">Our Top Educators</p> --> */}
 
           <h2 className="h2 section-title">Top 1% of educators</h2>
-          {/* <p className="section-subtitle"></p> */}
+          <p className="section-subtitle"></p>
           <ul className="grid-list">
-            <BlogCard data={sureshblog} />
-            <BlogCard data={shubhamblog} />
-            <BlogCard data={manishblog} />
+            {top3teachers.length > 0 ? (
+              top3teachers.map((item) => (
+                <BookSessionCard1
+                  key={item._id}
+                  poster={item.poster}
+                  name={item.name}
+                  category={item.category}
+                  link={item.link}
+                  level={item.level}
+                  bio={item.bio}
+                  session={item.session}
+                  rating={item.rating}
+                  nos={item.nos}
+                  loading={loading}
+                />
+              ))
+            ) : (
+              <h1>Teacher Not Found Refresh the site</h1>
+            )}
           </ul>
           <img
             src={blogshape}

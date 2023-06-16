@@ -28,7 +28,7 @@ export const getAllCourses = catchAsyncError(async (req, res, next) => {
 export const getTopRatedCourses = catchAsyncError(async (req, res, next) => {
   const topcourses = await Course.find()
     .sort({ rating: -1 })
-    .limit(3)
+    .limit(4)
     .select("-lectures");
 
   res.status(200).json({

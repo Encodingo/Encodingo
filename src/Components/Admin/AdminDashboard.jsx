@@ -83,11 +83,11 @@ const AdminDashboard = () => {
             </p>
           </div>
           <div className="admin-dashboardSummaryBox2">
-            <Link to="/admin/products">
+            <Link to="/admin/courses">
               <p>Courses</p>
               <p>{courses && courses.length}</p>
             </Link>
-            <Link to="/admin/orders">
+            <Link to="/admin/teachers">
               <p>Teachers</p>
               <p>{teachers && teachers.length}</p>
             </Link>

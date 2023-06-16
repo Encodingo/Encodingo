@@ -6,12 +6,13 @@ import "../../assets/css/style.css";
 import Bottombar from "../Bottombar/Bottombar";
 import { useState } from "react";
 import { useEffect } from "react";
-import BookSessionCard from "./BookSessionCard";
+import BookSessionCard1 from "./BookSessionCard1"
 import { useNavigate } from "react-router-dom";
 import "./BookSession.css";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
 import { getAllTeachers } from "../../actions/teacher";
+import Loader from "../../Components/Loader/Loader";
 
 const BookSession = () => {
   const { loading, error, message, teachers } = useSelector(
@@ -111,23 +112,30 @@ const BookSession = () => {
               </button>
             ))}
             <ul className="grid-list">
-              {teachers.length > 0 ? (
-                teachers.map((item) => (
-                  <BookSessionCard
-                    key={item._id}
-                    poster={item.poster}
-                    name={item.name}
-                    category={item.category}
-                    bio={item.bio}
-                    experience={item.experience}
-                    rating={item.rating}
-                    nos={item.nos}
-                    link={item.link}
-                    loading={loading}
-                  />
-                ))
+              {loading ? (
+                <Loader />
               ) : (
-                <h1>Teachers Not Found</h1>
+                <>
+                  {teachers.length > 0 ? (
+                    teachers.map((item) => (
+                      <BookSessionCard1
+                        key={item._id}
+                        poster={item.poster}
+                        name={item.name}
+                        category={item.category}
+                        link={item.link}
+                        level={item.level}
+                        bio={item.bio}
+                        session={item.session}
+                        rating={item.rating}
+                        nos={item.nos}
+                        loading={loading}
+                      />
+                    ))
+                  ) : (
+                    <h1>Teachers Not Found</h1>
+                  )}
+                </>
               )}
             </ul>
           </div>

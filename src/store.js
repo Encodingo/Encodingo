@@ -5,6 +5,7 @@ import { courseReducer } from './reducers/courseReducer';
 import { adminReducer } from './reducers/adminReducer';
 import { teacherReducer } from './reducers/teacherReducer';
 import { top3courseReducer } from './reducers/top3courseReducer';
+import { top3teacherReducer } from './reducers/top3teacherReducer';
 const store = configureStore({
     reducer:{
         user:userReducer,
@@ -13,6 +14,7 @@ const store = configureStore({
         admin: adminReducer,
         teacher:teacherReducer,
         topcourse:top3courseReducer,
+        topteacher:top3teacherReducer
     }
 });
 
