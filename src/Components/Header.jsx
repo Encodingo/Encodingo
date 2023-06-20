@@ -8,7 +8,7 @@ import AuthContainer from "./Auth/AuthContainer";
 import { IonIcon } from "@ionic/react";
 import { menuOutline, closeOutline } from "ionicons/icons";
 import { useState, useEffect } from "react";
-import {useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 // import SearchBar from "./SearchBar/SearchBar";
 const Header = () => {
   const { isAuthenticated } = useSelector((state) => state.user);
@@ -22,10 +22,14 @@ const Header = () => {
     setShowModal(!showModal);
   };
 
+  const handleDashboard = () => {
+     navigate('/user_dashboard');
+  }
+
   // jese hi login hoga apne aap modal close hoga nhii tho error dega
   useEffect(() => {
     if (isAuthenticated) {
-      navigate("/user_dashboard");
+      // navigate("/user_dashboard");
       setShowModal(false); // Close the modal when the user is logged in
     }
   }, [isAuthenticated, navigate]);
@@ -203,10 +207,8 @@ const Header = () => {
             </ul>
           </nav>
           {isAuthenticated ? (
-            <button className="btn has-before" onClick={handleModal}>
-              <Link to={"/user_dashboard"}>
-                <span className="span">Dashboard</span>
-              </Link>
+            <button className="btn has-before" onClick={()=>navigate('/user_dashboard')}>
+              <span className="span">Dashboard</span>
             </button>
           ) : (
             <button className="btn has-before" onClick={handleModal}>

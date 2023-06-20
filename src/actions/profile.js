@@ -1,5 +1,5 @@
 import axios from "axios";
-import server from "../store.js";
+import {server} from "../store.js";
 
 export const updateProfile =
   (name, email, phone, address, grade) => async (dispatch) => {
@@ -7,7 +7,7 @@ export const updateProfile =
       dispatch({ type: "updateProfileRequest" });
 
       const { data } = await axios.put(
-        `api/v1/updateprofile`,
+        `${server}/updateprofile`,
         {
           name,
           email,
@@ -75,7 +75,7 @@ export const forgetPassword = (email) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      `/api/v1/forgetpassword`,
+      `${server}/forgetpassword`,
       {
         email,
       },
@@ -103,7 +103,7 @@ export const resetPassword = (token, password) => async (dispatch) => {
     };
 
     const { data } = await axios.put(
-      `/api/v1/resetpassword/${token}`,
+      `${server}/resetpassword/${token}`,
       {
         password,
       },

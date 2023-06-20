@@ -64,8 +64,9 @@ const Bootcamp = () => {
       toast.success(message);
       dispatch({ type: "clearMessage" });
     }
-    dispatch(gettopcourses());
-    dispatch(gettopteachers());
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // dispatch(gettopcourses());
+    // dispatch(gettopteachers());
   }, [dispatch, error, message]);
 
   const data = {

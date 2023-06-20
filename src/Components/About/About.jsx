@@ -20,7 +20,7 @@ import "../Auth/AuthContainer.css";
 import AuthContainer from "../Auth/AuthContainer";
 import { IonIcon } from "@ionic/react";
 import { closeOutline } from "ionicons/icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "../Header";
 import Footer from "../Footer";
 import { useDispatch, useSelector } from "react-redux";
@@ -31,6 +31,8 @@ import { gettopteachers } from "../../actions/teacher";
 import BookSessionCard1 from "../../UserDashboard/BookSession/BookSessionCard1";
 
 const About = () => {
+  const { isAuthenticated, user } = useSelector((state) => state.user);
+  const navigate = useNavigate()
   const [showModal, setShowModal] = useState(false);
   const handleModal = () => {
     console.log("clicked");
@@ -62,8 +64,9 @@ const About = () => {
       toast.success(message);
       dispatch({ type: "clearMessage" });
     }
-    dispatch(gettopcourses());
-    dispatch(gettopteachers());
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    // dispatch(gettopcourses());
+    // dispatch(gettopteachers());
   }, [dispatch, error, message]);
 
   const data = {
@@ -73,21 +76,6 @@ const About = () => {
     endline: "through coding",
     tagline:
       "At Encodingo, we are more than just a coding platform. We are a community of passionate educators and coders who are dedicated to making a positive impact on the lives of children. We believe that coding has the power to change the world, and we are excited to be a part of the journey.",
-  };
-
-  const sureshblog = {
-    img: suresh,
-    title: "Suresh Vidyarthi",
-  };
-
-  const shubhamblog = {
-    img: suresh,
-    title: "Shubham Raj",
-  };
-
-  const manishblog = {
-    img: suresh,
-    title: "Manish Mandan",
   };
 
   return (
@@ -132,11 +120,18 @@ const About = () => {
             )}
           </ul>
 
-          <button className="btn has-before" onClick={handleModal}>
-            <Link to={"/about"}>
+          {isAuthenticated ? (
+            <button
+              className="btn has-before"
+              onClick={() => navigate("/user_dashboard")}
+            >
+              <span className="span">Dashboard</span>
+            </button>
+          ) : (
+            <button className="btn has-before" onClick={handleModal}>
               <span className="span">Book A Demo Session</span>
-            </Link>
-          </button>
+            </button>
+          )}
 
           {/* <a href="course.html" className="btn has-before">
             <span className="span">Book A Demo Session</span>

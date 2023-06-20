@@ -1,27 +1,21 @@
 import React from "react";
-import Sidebar from "../Sidebar/Sidebar";
-
-// import "../UserDashboard.css";
-import "../../assets/css/style.css";
-import Bottombar from "../Bottombar/Bottombar";
+import Sidebar from "./Sidebar/Sidebar";
+import CourseCard from "../Components/CourseCard/CourseCard";
+import course1 from "../assets/images/course-1.jpg";
+import "./UserDashboard.css";
+import Bottombar from "./Bottombar/Bottombar";
 import { useState } from "react";
 import { useEffect } from "react";
-import BookSessionCard1 from "./BookSessionCard1";
-import { useNavigate } from "react-router-dom";
-import "./BookSession.css";
 import { useDispatch, useSelector } from "react-redux";
+import { getAllCourses } from "../actions/course";
 import { toast } from "react-hot-toast";
-import { getAllTeachers } from "../../actions/teacher";
-import Loader from "../../Components/Loader/Loader";
-
-const BookSession = () => {
-  const { loading, error, message, teachers } = useSelector(
-    (state) => state.teacher
-  );
-  const dispatch = useDispatch();
-  const Navigate = useNavigate();
+import { Button } from "@material-ui/core";
+import Loader from "../Components/Loader/Loader";
+import { getAllTeachers } from "../actions/teacher";
+const UserDashboard = () => {
   const [keyword, setKeyword] = useState("");
   const [category, setCategory] = useState("");
+  const dispatch = useDispatch();
 
   // const addToPlaylistHandler = async couseId => {
   //   await dispatch(addToPlaylist(couseId));
@@ -34,6 +28,16 @@ const BookSession = () => {
     "English",
   ];
 
+  const { loading, courses, error, message } = useSelector(
+    (state) => state.course
+  );
+
+  const { teachers } = useSelector((state) => state.teacher);
+  const {user}=useSelector((state)=>state.user);
+  const myCourses=user.myCourses;
+  const buycourses =courses.filter(item =>myCourses.some(myCourse=>item._id.includes(myCourse)));
+  // console.log(newcourses);
+
   useEffect(() => {
     if (error) {
       toast.error(error);
@@ -44,16 +48,12 @@ const BookSession = () => {
       toast.success(message);
       dispatch({ type: "clearMessage" });
     }
-
-    dispatch(getAllTeachers(category, keyword));
-  }, [dispatch, error, message, category, keyword]);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    dispatch(getAllCourses(category, keyword));
+    dispatch(getAllTeachers());
+  }, [category, keyword, dispatch, error, message]);
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  const refresh = () => {
-    window.location.reload();
-    Navigate("/book_session");
-  };
 
   useEffect(() => {
     // Update window width when the window is resized
@@ -74,12 +74,10 @@ const BookSession = () => {
       {windowWidth < 767 ? <Bottombar /> : <Sidebar />}
 
       <section
-        className="home-section section course" 
+        className="home-section section course"
         id="courses"
         aria-label="course"
-        
       >
-        {/* <Topbar /> */}
         <div>
           <div className="container" style={{ marginTop: "-10px" }}>
             {/* <!-- <p class="section-subtitle">Popular Courses</p> --> */}
@@ -96,7 +94,7 @@ const BookSession = () => {
                 className="h2 section-title"
                 // style={{ color: "white", marginBottom: "5rem" }}
               >
-                All Courses
+                My Courses
               </h2>
               <div class="search-bar">
                 <input
@@ -106,7 +104,6 @@ const BookSession = () => {
                 />
                 <button type="submit">Search</button>
               </div>
-              <button className="Button" minW={"60"} onClick={refresh}>All</button>
               {categories.map((item, index) => (
                 <button
                   className="Button"
@@ -118,33 +115,48 @@ const BookSession = () => {
                 </button>
               ))}
             </div>
+
             <ul className="grid-list">
               {loading ? (
                 <Loader />
               ) : (
                 <>
-                  {teachers.length > 0 ? (
-                    teachers.map((item) => (
-                      <BookSessionCard1
+                  {buycourses.length > 0 ? (
+                    buycourses.map((item) => (
+                      <CourseCard
                         key={item._id}
                         poster={item.poster}
-                        name={item.name}
+                        title={item.title}
+                        isUserCourse={true}
                         category={item.category}
-                        link={item.link}
                         level={item.level}
-                        bio={item.bio}
-                        session={item.session}
+                        // imageSrc={course1}
+                        id={item._id}
+                        duration={item.duration}
                         rating={item.rating}
-                        nos={item.nos}
+                        users={item.users}
+                        price={item.price}
+                        details={item.details}
+                        numOfVideos={item.numOfVideos}
                         loading={loading}
                       />
                     ))
                   ) : (
-                    <h1>Teachers Not Found</h1>
+                    <h1>Course Not Found</h1>
                   )}
                 </>
               )}
             </ul>
+
+            {/* <button className="btn has-before" onClick={handleModal}>
+              <Link to={"/courses"}>
+                <span className="span">Book A Demo Session</span>
+              </Link>
+            </button> */}
+
+            {/* <a href="/" className="btn has-before" onClick={handleModal}>
+            <span className="span">Book A Demo Session</span>
+          </a> */}
           </div>
         </div>
       </section>
@@ -152,4 +164,4 @@ const BookSession = () => {
   );
 };
 
-export default BookSession;
+export default UserDashboard;

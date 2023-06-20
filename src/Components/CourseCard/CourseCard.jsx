@@ -2,17 +2,13 @@ import React from "react";
 import "../../assets/css/style.css";
 import { IonIcon } from "@ionic/react";
 import { Rating } from "@material-ui/lab";
-import course1 from "../../assets/images/course-1.jpg";
 import { useNavigate } from "react-router-dom";
-import {
-  people,
-  libraryOutline,
-  starOutline,
-  timeOutline,
-} from "ionicons/icons";
+import { people, libraryOutline, timeOutline } from "ionicons/icons";
 import { Button } from "@material-ui/core";
 import Loader from "../Loader/Loader";
-
+import axios from "axios";
+import { useSelector } from "react-redux";
+import { server } from "../../store";
 const CourseCard = ({
   poster,
   title,
@@ -21,21 +17,68 @@ const CourseCard = ({
   duration,
   rating,
   users,
+  id,
   price,
   details,
   numOfVideos,
   loading,
+  isUserCourse,
 }) => {
-  const Navigate = useNavigate();
-  const detailshandler = () => {
-    Navigate(details);
-  };
+  const { isAuthenticated, user } = useSelector((state) => state.user);
 
   const options = {
     value: rating,
     readOnly: true,
     precision: 0.5,
   };
+
+  // handeling razor pay
+  const handlePay = async () => {
+    const {
+      data: { order },
+    } = await axios.post(`${server}/checkout`, {
+      price,
+    });
+
+    // console.log(order);
+    // console.log(price, id);
+    const {
+      data: { key },
+    } = await axios.post(`${server}/getkey`);
+    // console.log(key);
+
+    var options = {
+      key: key,
+      // Enter the Key ID generated from the Dashboard
+      amount: order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+      currency: "INR",
+      name: "Vidyayan Eduventure Pvt Ltd",
+      description: "Test Transaction",
+      image:
+        "https://media.licdn.com/dms/image/C4D0BAQFvqR2yqXYzsQ/company-logo_200_200/0/1680119587249?e=1693440000&v=beta&t=fiQMknfmCrszgJ9Z062TFdDes2iTU2g2-Fi-ArhVSss",
+      order_id: order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+      // "handler": function (response){
+      //   axios.post(`apipay/paymentVerification`,{
+      //     id,user
+      //   });
+      // },
+      callback_url: `${server}/paymentverification?id=${id}&&userName=${user.name}&&userEmail=${user.email}&&mobileNumber=${user.phone}`,
+      prefill: {
+        name: user.name,
+        email: user.email,
+        contact: user.phone,
+      },
+      notes: {
+        address: "Razorpay Corporate Office",
+      },
+      theme: {
+        color: "#121212",
+      },
+    };
+    const razor = new window.Razorpay(options);
+    razor.open();
+  };
+
   return (
     <>
       {loading ? (
@@ -86,9 +129,9 @@ const CourseCard = ({
                 <p className="rating-text">({`${rating}+`} Rating out of 5)</p>
               </div>
 
-              <card className="price" value="6000">
+              {/* <card className="price" value="6000">
                 {price}
-              </card>
+              </card> */}
 
               <ul className="card-meta-list">
                 <li className="card-meta-item">
@@ -103,18 +146,45 @@ const CourseCard = ({
                 </li>
               </ul>
 
-              <div className="card-buttons">
-                <Button
-                  // onClick={detailshandler}
-                  variant="contained"
-                  color="secondary"
-                >
-                  <a href={details} target="_blank">Details</a>
-                </Button>
-                <Button variant="contained" color="primary">
-                  {price} ₹
-                </Button>
-              </div>
+              {isUserCourse ? (
+                <div className="card-buttons">
+                  <Button
+                    style={{ width: "100%" }}
+                    variant="contained"
+                    onClick={() => console.log("start Learning")}
+                    color="primary"
+                  >
+                    Start Learning
+                  </Button>
+                </div>
+              ) : isAuthenticated ? (
+                <div className="card-buttons">
+                  <Button variant="contained" color="secondary">
+                    <a href={details} target="_blank" rel="noopener noreferrer">
+                      Details
+                    </a>
+                  </Button>
+                  <Button
+                    variant="contained"
+                    onClick={handlePay}
+                    color="primary"
+                  >
+                    {price} ₹
+                  </Button>
+                </div>
+              ) : (
+                <div className="card-buttons">
+                  <Button
+                    style={{ width: "100%" }}
+                    variant="contained"
+                    color="secondary"
+                  >
+                    <a href={details} target="_blank" rel="noopener noreferrer">
+                      Details
+                    </a>
+                  </Button>
+                </div>
+              )}
             </div>
           </div>
         </>

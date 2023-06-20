@@ -59,8 +59,19 @@ const schema = mongoose.Schema({
     default: false,
   },
 
-  otp: Number,
+  // User my Courses
+  myCourses: {
+    type: [String],
+    default: [],
+  },
+
+  otp: {
+    type: Number,
+    select: false,
+  },
+
   otp_expiry: Date,
+
   resetPasswordToken: String,
   resetPasswordExpire: String,
 });

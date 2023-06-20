@@ -42,7 +42,7 @@ import TeacherList from "./Components/Admin/TeacherList";
 import CreateTeacher from "./Components/Admin/CreateTeacher";
 import ResetPass from "./UserDashboard/Update/ResetPass";
 import { gettopteachers } from "./actions/teacher";
-
+import MyCourses from "./UserDashboard/MyCourses"
 import Loader from "./Components/Loader/Loader";
 import Verify from "./Components/Verify/Verify";
 // import UserDash from "./Components/Dashboard/UserDash";
@@ -59,6 +59,10 @@ function App() {
 
   const dispatch = useDispatch();
   useEffect(() => {
+    if (error === "Cannot read properties of null (reading '_id')") {
+      toast("Late to Verifying OTP!! Register Again");
+      dispatch({ type: "clearError" });
+    }
     if (error) {
       toast.error(error);
       dispatch({ type: "clearError" });
@@ -71,6 +75,9 @@ function App() {
 
   useEffect(() => {
     dispatch(loadUser());
+    dispatch(gettopcourses());
+    dispatch(gettopteachers());
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, [dispatch]);
 
   return (
@@ -116,6 +123,15 @@ function App() {
               element={
                 <ProtectedRoute isAuthenticated={isAuthenticated}>
                   <BookSession />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/user_mycourses"
+              element={
+                <ProtectedRoute isAuthenticated={isAuthenticated}>
+                  <MyCourses/>
                 </ProtectedRoute>
               }
             />

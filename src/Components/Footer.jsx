@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import "../assets/css/style.css";
 import logo from "../assets/images/logonewnew (2).svg";
 import footerbg from "../assets/images/footer-bg.png";
 import { IonIcon } from "@ionic/react";
+import { Link, useNavigate } from "react-router-dom";
 import {
   logoYoutube,
   logoFacebook,
@@ -10,7 +11,39 @@ import {
   logoInstagram,
   logoLinkedin,
 } from "ionicons/icons";
+import { toast } from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import { contactUs } from "../actions/other";
+import { useEffect } from "react";
 const Footer = () => {
+  const navigate = useNavigate();
+  const { isAuthenticated } = useSelector(
+    (state) => state.user
+  );
+  const { loading,  error, message } = useSelector(
+    (state) => state.other
+  );
+  const [email, setEmail] = useState("");
+  const dispatch = useDispatch();
+
+  const subscribe = async(e) => {
+    e.preventDefault();
+    await dispatch(contactUs(email));
+    await setEmail("");
+  };
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+      dispatch({ type: "clearError" });
+    }
+
+    if (message) {
+      toast.success(message);
+      dispatch({ type: "clearMessage" });
+    }
+  }, [dispatch , error , message]);
+
   return (
     <footer className="footer" style={{ backgroundImage: { footerbg } }}>
       <div className="footer-top section">
@@ -105,9 +138,9 @@ const Footer = () => {
             </li>
 
             <li>
-              <a href="/" className="footer-link">
+              <Link to={"/bootcamp"} className="footer-link">
                 Bootcamp
-              </a>
+              </Link>
             </li>
 
             <li>
@@ -117,16 +150,33 @@ const Footer = () => {
             </li>
 
             <li>
-              <a href="/" className="footer-link">
+              <Link to={"/"} className="footer-link">
                 FAQ's
-              </a>
+              </Link>
             </li>
 
-            <li>
-              <a href="/" className="footer-link">
-                Sign In/Registration
-              </a>
-            </li>
+            {isAuthenticated ? (
+              <li>
+                <Link
+                  onClick={() => navigate("/user_dashboard")}
+                  className="footer-link"
+                >
+                  Dashboard
+                </Link>
+              </li>
+            ) : (
+              <li>
+                <Link
+                  onClick={() => {
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                    toast("Click on Book Session to Login/Signup");
+                  }}
+                  className="footer-link"
+                >
+                  Sign In/Registration
+                </Link>
+              </li>
+            )}
 
             <li>
               <a href="/" className="footer-link">
@@ -143,18 +193,25 @@ const Footer = () => {
               subscription
             </p>
 
-            <form action="" className="newsletter-form">
+            <form className="newsletter-form">
               <input
+                onChange={(e) => setEmail(e.target.value)}
                 type="email"
                 name="email_address"
                 placeholder="Your email"
                 required
+                value={email}
                 className="input-field"
               />
 
-              <button type="submit" className="btn has-before">
-                <span className="span">Subscribe</span>
-
+              <button
+                type="submit"
+                className="btn has-before"
+                onClick={subscribe}
+              >
+              {
+                !loading ? (<span className="span">Subscribe</span>) :(<span className="span">Loading...</span>)
+              }
                 {/* <ion-icon
                   name="arrow-forward-outline"
                   aria-hidden="true"></ion-icon> */}

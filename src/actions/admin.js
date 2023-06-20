@@ -1,6 +1,6 @@
-// import { server } from '../store';
+ import { server } from '../store';
 import axios from "axios";
-const server = "api/v1";
+
 export const createCourse = (formData) => async (dispatch) => {
   try {
     const config = {
@@ -9,7 +9,7 @@ export const createCourse = (formData) => async (dispatch) => {
     };
     dispatch({ type: "createCourseRequest" });
 
-    const { data } = await axios.post(`/api/v1/createcourse`, formData, config);
+    const { data } = await axios.post(`${server}/createcourse`, formData, config);
 
     dispatch({ type: "createCourseSuccess", payload: data.message });
   } catch (error) {
@@ -28,7 +28,7 @@ export const createTeacher = (formData) => async (dispatch) => {
     };
     dispatch({ type: "createTeacherRequest" });
 
-    const { data } = await axios.post(`/api/v1/createteacher`,formData,config);
+    const { data } = await axios.post(`${server}/createteacher`,formData,config);
 
     dispatch({ type: "createTeacherSuccess", payload: data.message });
   } catch (error) {
@@ -46,7 +46,7 @@ export const deleteCourse = (id) => async (dispatch) => {
     };
     dispatch({ type: "deleteCourseRequest" });
 
-    const { data } = await axios.delete(`/api/v1/course/${id}`, config);
+    const { data } = await axios.delete(`${server}/course/${id}`, config);
 
     dispatch({ type: "deleteCourseSuccess", payload: data.message });
   } catch (error) {
@@ -64,7 +64,7 @@ export const deleteTeacher = (id) => async (dispatch) => {
     };
     dispatch({ type: "deleteTeacherRequest" });
 
-    const { data } = await axios.delete(`/api/v1/teacher/${id}`, config);
+    const { data } = await axios.delete(`${server}/teacher/${id}`, config);
 
     dispatch({ type: "deleteTeacherSuccess", payload: data.message });
   } catch (error) {
@@ -128,7 +128,7 @@ export const getAllUsers = () => async (dispatch) => {
     };
     dispatch({ type: "getAllUsersRequest" });
 
-    const { data } = await axios.get(`/api/v1/admin/users`, config);
+    const { data } = await axios.get(`${server}/admin/users`, config);
 
     dispatch({ type: "getAllUsersSuccess", payload: data.users });
   } catch (error) {
@@ -146,7 +146,7 @@ export const getAllCoursesAdmin = () => async (dispatch) => {
     };
     dispatch({ type: "getAdminCoursesRequest" });
 
-    const { data } = await axios.get(`/api/v1/admin/courses`, config);
+    const { data } = await axios.get(`${server}/admin/courses`, config);
 
     dispatch({ type: "getAdminCoursesSuccess", payload: data.courses });
   } catch (error) {
@@ -164,7 +164,7 @@ export const getAllTeachersAdmin = () => async (dispatch) => {
     };
     dispatch({ type: "getAdminTeachersRequest" });
 
-    const { data } = await axios.get(`/api/v1/admin/teachers`, config);
+    const { data } = await axios.get(`${server}/admin/teachers`, config);
 
     dispatch({ type: "getAdminTeachersSuccess", payload: data.teachers });
   } catch (error) {
@@ -182,7 +182,7 @@ export const updateUserRole = (id) => async (dispatch) => {
     };
     dispatch({ type: "updateUserRoleRequest" });
 
-    const { data } = await axios.put(`/api/v1/admin/user/${id}`, {}, config);
+    const { data } = await axios.put(`${server}/admin/user/${id}`, {}, config);
 
     dispatch({ type: "updateUserRoleSuccess", payload: data.message });
   } catch (error) {
@@ -200,7 +200,7 @@ export const deleteUser = (id) => async (dispatch) => {
     };
     dispatch({ type: "deleteUserRequest" });
 
-    const { data } = await axios.delete(`/api/v1/admin/user/${id}`, config);
+    const { data } = await axios.delete(`${server}/admin/user/${id}`, config);
 
     dispatch({ type: "deleteUserSuccess", payload: data.message });
   } catch (error) {

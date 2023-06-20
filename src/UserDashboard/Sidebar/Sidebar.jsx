@@ -8,7 +8,7 @@ import { logout } from "../../actions/userAction";
 const Sidebar = () => {
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.user);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -35,11 +35,11 @@ const Sidebar = () => {
           {/* <i className="bx bxl-c-plus-plus icon"></i> */}
           {/* <img src={logo} alt="logo" /> */}
           <div className="logo_name">Encodingo</div>
-          <i
+          {/* <i
             className={`bx ${menuBtnChange()}`}
             id="btn"
             onClick={toggleSidebar}
-          ></i>
+          ></i> */}
         </div>
         <ul className="nav-list">
           {/* <li>
@@ -48,14 +48,14 @@ const Sidebar = () => {
             <span className="tooltip">Search</span>
           </li> */}
           <li>
-            <a href="/user_dashboard">
+            <Link to={'/user_dashboard'}>
               <i className="bx bx-book-open"></i>
               <span className="links_name">All Courses</span>
-            </a>
+            </Link>
             <span className="tooltip">All Courses</span>
           </li>
           <li>
-            <Link href="#">
+            <Link to={'/user_mycourses'}>
               <i className="bx bx-book"></i>
               <span className="links_name">My Courses</span>
             </Link>

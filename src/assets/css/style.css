@@ -1109,7 +1109,7 @@ section.user {
   }
 
   .grid-list {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr ;
   }
 
   :is(.course, .blog) .grid-list {
@@ -1335,7 +1335,7 @@ section.user {
   }
 
   :is(.course, .blog) .grid-list {
-    /* grid-template-columns: repeat(3, 1fr); */
+    grid-template-columns: repeat(4, 1fr);
   }
 
   /**
@@ -1412,7 +1412,8 @@ section.user {
    */
 
   .container {
-    max-width: 1185px;
+    /* max-width: 1185px; */
+    max-width: 90vw;
   }
 
   .shape {

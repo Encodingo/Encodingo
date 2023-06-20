@@ -29,9 +29,9 @@ const NewSection = () => {
                 </div>
 
                 <h3 className="h3">
-                  <a href="/" className="card-title">
+                  <span  className="card-title">
                     Logic
-                  </a>
+                  </span>
                 </h3>
               </div>
             </li>
@@ -51,9 +51,9 @@ const NewSection = () => {
                 </div>
 
                 <h3 className="h3">
-                  <a href="/" class="card-title">
+                  <span class="card-title">
                     Creative Thinking
-                  </a>
+                  </span>
                 </h3>
               </div>
             </li>
@@ -73,9 +73,9 @@ const NewSection = () => {
                 </div>
 
                 <h3 className="h3">
-                  <a href="/" className="card-title">
+                  <span className="card-title">
                     Algorithmic Thinking
-                  </a>
+                  </span>
                 </h3>
               </div>
             </li>
@@ -95,9 +95,9 @@ const NewSection = () => {
                 </div>
 
                 <h3 className="h3">
-                  <a href="/" className="card-title">
+                  <span className="card-title">
                     Structure
-                  </a>
+                  </span>
                 </h3>
               </div>
             </li>

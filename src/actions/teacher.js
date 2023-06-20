@@ -8,7 +8,7 @@ export const getAllTeachers =
       dispatch({ type: "allTeachersRequest" });
 
       const { data } = await axios.get(
-        `api/v1/teachers?keyword=${keyword}&category=${category}`
+        `${server}/teachers?keyword=${keyword}&category=${category}`
       );
 
       dispatch({ type: "allTeachersSuccess", payload: data.teachers });
@@ -25,7 +25,7 @@ export const gettopteachers = () => async (dispatch) => {
     dispatch({ type: "topTeachersRequest" });
 
     const { data } = await axios.get(
-      `/api/v1/gettopteachers`
+      `${server}/gettopteachers`
     );
 
     dispatch({ type: "topTeachersSuccess", payload: data.teachers });
@@ -41,7 +41,7 @@ export const getCourseLectures = (id) => async (dispatch) => {
   try {
     dispatch({ type: "getCourseRequest" });
 
-    const { data } = await axios.get(`/api/v1/course/${id}`, {
+    const { data } = await axios.get(`${server}/course/${id}`, {
       withCredentials: true,
     });
 

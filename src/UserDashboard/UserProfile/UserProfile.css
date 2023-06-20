@@ -3,7 +3,7 @@
     margin-inline: -12px;
     background-color: rgba(255, 255, 255, 0.3);
     text-align: center;
-    padding: 4vmax;
+    /* padding: 4vmax; */
     border-radius: var(--radius-10);
     box-shadow: var(--shadow-4);
     margin-block-start: -2px;

@@ -8,7 +8,7 @@ export const getAllCourses =
       dispatch({ type: "allCoursesRequest" });
 
       const { data } = await axios.get(
-        `api/v1/courses?keyword=${keyword}&category=${category}`
+        `${server}/courses?keyword=${keyword}&category=${category}`
       );
 
       dispatch({ type: "allCoursesSuccess", payload: data.courses });
@@ -25,7 +25,7 @@ export const gettopcourses = () => async (dispatch) => {
     dispatch({ type: "topCoursesRequest" });
 
     const { data } = await axios.get(
-      `/api/v1/gettopcourses`
+      `${server}/gettopcourses`
     );
 
     dispatch({ type: "topCoursesSuccess", payload: data.topcourses });
@@ -41,7 +41,7 @@ export const getCourseLectures = (id) => async (dispatch) => {
   try {
     dispatch({ type: "getCourseRequest" });
 
-    const { data } = await axios.get(`api/v1/course/${id}`, {
+    const { data } = await axios.get(`${server}/course/${id}`, {
       withCredentials: true,
     });
 

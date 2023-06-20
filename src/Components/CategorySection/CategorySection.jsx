@@ -38,9 +38,9 @@ const CategorySection = () => {
                 </div>
 
                 <h3 className="h3">
-                  <a href="/" className="card-title">
+                  <span  className="card-title">
                     Quality Tutors
-                  </a>
+                  </span>
                 </h3>
 
                 <p className="card-text">
@@ -69,13 +69,13 @@ const CategorySection = () => {
                 </div>
 
                 <h3 className="h3">
-                  <a href="/" className="card-title">
+                  <span className="card-title">
                     Personalized Learning
-                  </a>
+                  </span>
                 </h3>
 
                 <p className="card-text">
-                  Personalized learning based on your individual needs and
+                  We provide personalized learning based on your individual needs and
                   learning style.
                 </p>
 
@@ -100,9 +100,9 @@ const CategorySection = () => {
                 </div>
 
                 <h3 className="h3">
-                  <a href="/" className="card-title">
+                  <span  className="card-title">
                     Flexibility
-                  </a>
+                  </span>
                 </h3>
 
                 <p className="card-text">
@@ -131,9 +131,9 @@ const CategorySection = () => {
                 </div>
 
                 <h3 className="h3">
-                  <a href="/" className="card-title">
+                  <span className="card-title">
                     Learning Resources
-                  </a>
+                  </span>
                 </h3>
 
                 <p className="card-text">

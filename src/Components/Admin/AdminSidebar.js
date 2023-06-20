@@ -27,8 +27,9 @@ const AdminSidebar = () => {
         <TreeView
           defaultCollapseIcon={<ExpandMoreIcon />}
           defaultExpandIcon={<ImportExportIcon />}
+          style={{fontSize:"30px"}}
         >
-          <TreeItem nodeId="1" label="Courses" className="custom-tree-item">
+          <TreeItem  nodeId="1" label="Courses" className="custom-tree-item">
             <Link to="/admin/Courses">
               <TreeItem nodeId="2" label="All" icon={<PostAddIcon />} className="custom-subtree-item"/>
             </Link>
@@ -61,11 +62,11 @@ const AdminSidebar = () => {
           <PeopleIcon /> Teachers
         </p>
       </Link>
-      <a href="/user_dashboard">
-        <p>
-           Back
-        </p>
-      </a>
+      <Link style={
+        {
+          fontSize: '30px',
+        }
+      } to={'/user_dashboard'}>Back</Link> 
     </div>
   );
 };

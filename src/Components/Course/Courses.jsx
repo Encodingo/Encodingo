@@ -11,7 +11,7 @@ import "../Auth/AuthContainer.css";
 import AuthContainer from "../Auth/AuthContainer";
 import { IonIcon } from "@ionic/react";
 import { closeOutline } from "ionicons/icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "../Header";
 import Footer from "../Footer";
 import { useDispatch, useSelector } from "react-redux";
@@ -25,7 +25,7 @@ const Courses = () => {
   const { loading, top3courses, error, message } = useSelector(
     (state) => state.topcourse
   );
-
+  const navigate = useNavigate();
   const { top3teachers } = useSelector((state) => state.topteacher);
   const dispatch = useDispatch();
 
@@ -39,8 +39,9 @@ const Courses = () => {
       toast.success(message);
       dispatch({ type: "clearMessage" });
     }
-    dispatch(gettopcourses());
-    dispatch(gettopteachers());
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // dispatch(gettopcourses());
+    // dispatch(gettopteachers());
   }, [dispatch, error, message]);
 
   const { isAuthenticated } = useSelector((state) => state.user);
@@ -94,10 +95,8 @@ const Courses = () => {
           </ul>
 
           {isAuthenticated ? (
-            <button className="btn has-before">
-              <Link to={"/user_dashboard"}>
-                <span className="span">Dashboard</span>
-              </Link>
+            <button className="btn has-before" onClick={()=>navigate('/user_dashboard')}>
+              <span className="span">Dashboard</span>
             </button>
           ) : (
             <button className="btn has-before" onClick={handleModal}>

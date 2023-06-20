@@ -40,7 +40,12 @@ export const register = catchAsyncError(async (req, res, next) => {
       message,
     });
 
-    sendToken(res, user, `OTP sent to ${user.email} successfully, Valid for 5 minutes.`, 201);
+    sendToken(
+      res,
+      user,
+      `OTP sent to ${user.email} successfully, Valid for 5 minutes.`,
+      201
+    );
   } catch (error) {
     return next(new ErrorHandler(error.message, 500));
   }
@@ -50,8 +55,10 @@ export const verify = async (req, res) => {
   try {
     const otp = Number(req.body.otp);
     // console.log(otp);
-    const user = await User.findById(req.user._id);
-    
+    const user = await User.findById(req.user._id).select("+otp");
+
+    if (!user) return next(new ErrorHandler("User not found in database", 401));
+
     if (user.otp !== otp || user.otp_expiry < Date.now()) {
       return res
         .status(400)
@@ -96,8 +103,8 @@ export const logout = catchAsyncError(async (req, res, next) => {
     .cookie("token", null, {
       expires: new Date(Date.now()),
       httpOnly: true,
-      //  secure: true,
-      // sameSite: "none",
+      secure: true,
+      sameSite: "none",
     })
     .json({
       success: true,

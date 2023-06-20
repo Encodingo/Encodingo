@@ -32,7 +32,12 @@ const UserDashboard = () => {
     (state) => state.course
   );
 
+ 
   const { teachers } = useSelector((state) => state.teacher);
+  const {user}=useSelector((state)=>state.user);
+  const myCourses=user.myCourses;
+  const newcourses =courses.filter(item =>!myCourses.some(myCourse=>item._id.includes(myCourse)));
+  // console.log(newcourses);
 
   useEffect(() => {
     if (error) {
@@ -44,6 +49,7 @@ const UserDashboard = () => {
       toast.success(message);
       dispatch({ type: "clearMessage" });
     }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     dispatch(getAllCourses(category, keyword));
     dispatch(getAllTeachers());
   }, [category, keyword, dispatch, error, message]);
@@ -68,41 +74,57 @@ const UserDashboard = () => {
     <>
       {windowWidth < 767 ? <Bottombar /> : <Sidebar />}
 
-      <section className="home-section">
+      <section
+        className="home-section section course"
+        id="courses"
+        aria-label="course"
+        
+      >
         <div>
-          <div className="container">
+          <div className="container" style={{marginTop:"-10px"}}>
             {/* <!-- <p class="section-subtitle">Popular Courses</p> --> */}
-            <h2
-              className="h2 section-title"
-              style={{ color: "white", marginBottom: "5rem" }}
+
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                alignItems: "center",
+                justifyContent: "space-evenly",
+              }}
             >
-              All Courses
-            </h2>
-            <div class="search-bar">
-              <input
-                type="text"
-                placeholder="Search..."
-                onChange={(e) => setKeyword(e.target.value)}
-              />
-              <button type="submit">Search</button>
-            </div>
-            {categories.map((item, index) => (
-              <button
-                className="Button"
-                key={index}
-                onClick={() => setCategory(item)}
-                minW={"60"}
+              <h2
+                className="h2 section-title"
+                // style={{ color: "white", marginBottom: "5rem" }}
               >
-                {item}
-              </button>
-            ))}
+                All Courses
+              </h2>
+              <div class="search-bar">
+                <input
+                  type="text"
+                  placeholder="Search..."
+                  onChange={(e) => setKeyword(e.target.value)}
+                />
+                <button type="submit">Search</button>
+              </div>
+              {categories.map((item, index) => (
+                <button
+                  className="Button"
+                  key={index}
+                  onClick={() => setCategory(item)}
+                  minW={"60"}
+                >
+                  {item}
+                </button>
+              ))}
+            </div>
+
             <ul className="grid-list">
               {loading ? (
                 <Loader />
               ) : (
                 <>
-                  {courses.length > 0 ? (
-                    courses.map((item) => (
+                  {newcourses.length > 0 ? (
+                    newcourses.map((item) => (
                       <CourseCard
                         key={item._id}
                         poster={item.poster}

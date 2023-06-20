@@ -83,7 +83,8 @@ img {
 
 /*=============== LAYOUT ===============*/
 .container {
-  max-width: 968px;
+  /* max-width: 968px; */
+  max-width: 90vw;
   margin-left: 1rem;
   margin-right: 1rem;
 }
