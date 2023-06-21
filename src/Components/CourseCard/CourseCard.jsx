@@ -9,6 +9,7 @@ import Loader from "../Loader/Loader";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { server } from "../../store";
+import { toast } from "react-hot-toast";
 const CourseCard = ({
   poster,
   title,
@@ -175,13 +176,21 @@ const CourseCard = ({
               ) : (
                 <div className="card-buttons">
                   <Button
-                    style={{ width: "100%" }}
+                    // style={{ width: "100%" }}
                     variant="contained"
                     color="secondary"
                   >
                     <a href={details} target="_blank" rel="noopener noreferrer">
                       Details
                     </a>
+                  </Button>
+                  <Button
+                    // style={{ width: "100%" }}
+                    variant="contained"
+                    color="primary"
+                    onClick={()=> toast.error("Please Login!!") }
+                  >
+                    {price} ₹
                   </Button>
                 </div>
               )}

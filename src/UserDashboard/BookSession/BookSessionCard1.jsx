@@ -12,6 +12,8 @@ import {
 } from "ionicons/icons";
 import { Button } from "@material-ui/core";
 import Loader from "../../Components/Loader/Loader";
+import { useSelector } from "react-redux";
+import { toast } from "react-hot-toast";
 
 const BookSessionCard1 = ({
   name,
@@ -26,12 +28,11 @@ const BookSessionCard1 = ({
   loading,
 }) => {
   const Navigate = useNavigate();
-
+  const { isAuthenticated } = useSelector((state) => state.user);
   const detailshandler = () => {
     Navigate(bio);
   };
 
-  
   const options = {
     value: rating,
     readOnly: true,
@@ -104,23 +105,43 @@ const BookSessionCard1 = ({
                 </li>
               </ul>
 
-              <div className="card-buttons">
-                <Button
-                  //   onClick={detailshandler}
-                  variant="contained"
-                  color="secondary"
-                >
-                  <a href={bio} target="_blank">
-                    BIO
-                  </a>
-                </Button>
-                <Button 
-                variant="contained" 
-                color="primary"
-                >
-                  <a href={link} target="_blank">Book</a>
-                </Button>
-              </div>
+              {isAuthenticated ? (
+                <div className="card-buttons">
+                  <Button
+                    //   onClick={detailshandler}
+                    variant="contained"
+                    color="secondary"
+                  >
+                    <a href={bio} target="_blank">
+                      BIO
+                    </a>
+                  </Button>
+                  <Button variant="contained" color="primary">
+                    <a href={link} target="_blank">
+                      Book
+                    </a>
+                  </Button>
+                </div>
+              ) : (
+                <div className="card-buttons">
+                  <Button
+                    //   onClick={detailshandler}
+                    variant="contained"
+                    color="secondary"
+                  >
+                    <a href={bio} target="_blank">
+                      BIO
+                    </a>
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => toast.error("Please Login!!")}
+                  >
+                    Book
+                  </Button>
+                </div>
+              )}
             </div>
           </div>
         </>
