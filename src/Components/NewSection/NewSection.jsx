@@ -29,9 +29,9 @@ const NewSection = () => {
                 </div>
 
                 <h3 className="h3">
-                  <a href="/" className="card-title">
+                  <span  className="card-title">
                     Logic
-                  </a>
+                  </span>
                 </h3>
               </div>
             </li>
@@ -51,15 +51,15 @@ const NewSection = () => {
                 </div>
 
                 <h3 className="h3">
-                  <a href="/" class="card-title">
+                  <span class="card-title">
                     Creative Thinking
-                  </a>
+                  </span>
                 </h3>
               </div>
             </li>
 
-            {/* <li>
-              style={{ backgroundColor:'/4461E4' }}
+            <li>
+              {/* style={{ backgroundColor:'/4461E4' }} */}
               <div className="category-card category-card3">
                 <div className="card-icon">
                   <img
@@ -73,12 +73,12 @@ const NewSection = () => {
                 </div>
 
                 <h3 className="h3">
-                  <a href="/" className="card-title">
+                  <span className="card-title">
                     Algorithmic Thinking
-                  </a>
+                  </span>
                 </h3>
               </div>
-            </li> */}
+            </li>
 
             <li>
               {/* style={{ backgroundColor:'/F8B720'}} */}
@@ -95,9 +95,9 @@ const NewSection = () => {
                 </div>
 
                 <h3 className="h3">
-                  <a href="/" className="card-title">
+                  <span className="card-title">
                     Structure
-                  </a>
+                  </span>
                 </h3>
               </div>
             </li>

@@ -6,9 +6,10 @@ import { GoPrimitiveDot } from "react-icons/go";
 import { FaCheck } from "react-icons/fa";
 // import { Link } from "react-router-dom";
 import { register } from "../../actions/userAction";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const Register = ({ onLogin, onShowPassword, onTogglePassword }) => {
+  const{loading} = useSelector((state)=>state.user);
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -204,14 +205,16 @@ const Register = ({ onLogin, onShowPassword, onTogglePassword }) => {
           <button
             type="submit"
             onClick={submitHandler}
-            disabled={!passComplete}
+            disabled={!passComplete || loading}
             className={
               passComplete
                 ? "--btn --btn-primary --btn-block"
                 : "--btn --btn-primary --btn-block btn-disabled"
             }
           >
-            Register
+            {
+              !loading ? "Register" : "Loading..."
+            }
           </button>
 
           <span className="--text-sm --block">

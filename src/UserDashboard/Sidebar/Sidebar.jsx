@@ -8,7 +8,7 @@ import { logout } from "../../actions/userAction";
 const Sidebar = () => {
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.user);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -35,10 +35,11 @@ const Sidebar = () => {
           {/* <i className="bx bxl-c-plus-plus icon"></i> */}
           {/* <img src={logo} alt="logo" /> */}
           <div className="logo_name">Encodingo</div>
-          <i
+          {/* <i
             className={`bx ${menuBtnChange()}`}
             id="btn"
-            onClick={toggleSidebar}></i>
+            onClick={toggleSidebar}
+          ></i> */}
         </div>
         <ul className="nav-list">
           {/* <li>
@@ -47,14 +48,14 @@ const Sidebar = () => {
             <span className="tooltip">Search</span>
           </li> */}
           <li>
-            <Link to="/user_dashboard">
+            <Link to={'/user_dashboard'}>
               <i className="bx bx-book-open"></i>
               <span className="links_name">All Courses</span>
             </Link>
             <span className="tooltip">All Courses</span>
           </li>
           <li>
-            <Link to="/mycourses">
+            <Link to={'/user_mycourses'}>
               <i className="bx bx-book"></i>
               <span className="links_name">My Courses</span>
             </Link>
@@ -70,7 +71,7 @@ const Sidebar = () => {
           </li>
 
           <li>
-            <Link to={"/profile"}>
+            <Link to={"/user_profile"}>
               <i className="bx bx-user"></i>
               <span className="links_name">Profile</span>
             </Link>
@@ -78,12 +79,25 @@ const Sidebar = () => {
           </li>
 
           <li>
-            <Link to={"/"}>
+            <Link to={'/'}>
               <i class="bx bx-link-external visit-icon"></i>
               <span className="links_name">Explore</span>
             </Link>
             <span className="tooltip">Explore</span>
           </li>
+
+          {
+            user && user.role === "admin" ? (
+            <li>
+              <Link to={'/admin/dashboard'}>
+                <i class="bx bx-link-external visit-icon"></i>
+                <span className="links_name">Admin</span>
+              </Link>
+              <span className="tooltip">Dashboard</span>
+            </li>
+          ) : (
+            <h2></h2>
+          )}
           {/* <li>
             <a href="#">
               <i className="bx bx-chat"></i>
@@ -137,7 +151,8 @@ const Sidebar = () => {
             <i
               onClick={logoutHandler}
               className="bx bx-log-out"
-              id="log_out"></i>
+              id="log_out"
+            ></i>
             <span className="tooltip">Logout</span>
           </li>
         </ul>

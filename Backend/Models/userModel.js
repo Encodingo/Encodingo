@@ -20,9 +20,19 @@ const schema = mongoose.Schema({
     validate: validator.isEmail,
   },
 
-  phone:{
-      type: Number,
-      required: [true, "Please Enter Your Phone Number"],
+  phone: {
+    type: Number,
+    required: [true, "Please Enter Your Phone Number"],
+  },
+
+  // Address
+  address: {
+    type: String,
+  },
+
+  // grade
+  grade: {
+    type: String,
   },
   // Password type, required, minLength, select
   password: {
@@ -34,6 +44,7 @@ const schema = mongoose.Schema({
   // Role type default
   role: {
     type: String,
+    enum: ["admin", "user"],
     default: "user",
   },
 
@@ -42,8 +53,27 @@ const schema = mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  // resetPasswordToken: String,
-  // resetPasswordExpire: String
+  // verification of email
+  verified: {
+    type: Boolean,
+    default: false,
+  },
+
+  // User my Courses
+  myCourses: {
+    type: [String],
+    default: [],
+  },
+
+  otp: {
+    type: Number,
+    select: false,
+  },
+
+  otp_expiry: Date,
+
+  resetPasswordToken: String,
+  resetPasswordExpire: String,
 });
 
 schema.pre("save", async function (next) {
@@ -74,5 +104,7 @@ schema.methods.getResetToken = function () {
 
   return resetToken;
 };
+
+schema.index({ otp_expiry: 1 }, { expireAfterSeconds: 0 });
 
 export const User = mongoose.model("User", schema);

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../../assets/css/style.css";
 import "../../assets/css/authentication_styles.css";
 import "../Auth/AuthContainer.css";
@@ -9,6 +9,7 @@ import { closeOutline } from "ionicons/icons";
 import { useSelector } from "react-redux";
 
 const BookSession = () => {
+  const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const handleModal = () => {
     console.log("clicked");
@@ -24,20 +25,19 @@ const BookSession = () => {
     }
   }, [showModal]);
 
-   const {isAuthenticated} = useSelector((state)=>state.user);
+  const { isAuthenticated } = useSelector((state) => state.user);
   return (
     <>
       {isAuthenticated ? (
-        <button className="btn has-before">
-          <Link to={"/user_dashboard"}>
-            <span className="span">Dashboard</span>
-          </Link>
+        <button
+          className="btn has-before"
+          onClick={() => navigate("/user_dashboard")}
+        >
+          <span className="span">Dashboard</span>
         </button>
       ) : (
         <button className="btn has-before" onClick={handleModal}>
-          <Link to={"#"}>
-            <span className="span">Book A Session</span>
-          </Link>
+          <span className="span">Book A Session</span>
         </button>
       )}
 

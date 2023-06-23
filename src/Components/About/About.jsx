@@ -20,11 +20,19 @@ import "../Auth/AuthContainer.css";
 import AuthContainer from "../Auth/AuthContainer";
 import { IonIcon } from "@ionic/react";
 import { closeOutline } from "ionicons/icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "../Header";
 import Footer from "../Footer";
+import { useDispatch, useSelector } from "react-redux";
+import { gettopcourses } from "../../actions/course";
+import { toast } from "react-hot-toast";
+import BookSessionCard from "../../UserDashboard/BookSession/BookSessionCard";
+import { gettopteachers } from "../../actions/teacher";
+import BookSessionCard1 from "../../UserDashboard/BookSession/BookSessionCard1";
 
 const About = () => {
+  const { isAuthenticated, user } = useSelector((state) => state.user);
+  const navigate = useNavigate()
   const [showModal, setShowModal] = useState(false);
   const handleModal = () => {
     console.log("clicked");
@@ -40,39 +48,26 @@ const About = () => {
     }
   }, [showModal]);
 
-  // tomparary data
-  const card = [
-    {
-      img: course1,
-      duration: 12,
-      level: "Biggnner",
-      rating: "4.8/500",
-      title: "Build Responsive Real- World Websites with HTML and CSS",
-      price: 6000,
-      lesson: 12,
-      students: 5000,
-    },
-    {
-      img: course2,
-      duration: 8,
-      level: "Intermediate",
-      rating: "4.5/500",
-      title: "Java Programming Masterclass for Software Developers",
-      price: 8000,
-      lesson: 15,
-      students: 6500,
-    },
-    {
-      img: course3,
-      duration: 12,
-      level: "Advanced",
-      rating: "4.8/500",
-      title: "The Complete Camtasia Course for Content Creators",
-      price: 12000,
-      lesson: 12,
-      students: 7000,
-    },
-  ];
+  const { loading, top3courses, error, message } = useSelector(
+    (state) => state.topcourse
+  );
+  const { top3teachers } = useSelector((state) => state.topteacher);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+      dispatch({ type: "clearError" });
+    }
+
+    if (message) {
+      toast.success(message);
+      dispatch({ type: "clearMessage" });
+    }
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    // dispatch(gettopcourses());
+    // dispatch(gettopteachers());
+  }, [dispatch, error, message]);
 
   const data = {
     img: about,
@@ -81,21 +76,6 @@ const About = () => {
     endline: "through coding",
     tagline:
       "At Encodingo, we are more than just a coding platform. We are a community of passionate educators and coders who are dedicated to making a positive impact on the lives of children. We believe that coding has the power to change the world, and we are excited to be a part of the journey.",
-  };
-
-  const sureshblog = {
-    img: suresh,
-    title: "Suresh Vidyarthi",
-  };
-
-  const shubhamblog = {
-    img: suresh,
-    title: "Shubham Raj",
-  };
-
-  const manishblog = {
-    img: suresh,
-    title: "Manish Mandan",
   };
 
   return (
@@ -116,14 +96,42 @@ const About = () => {
           {/* <!-- <p class="section-subtitle">Popular Courses</p> --> */}
           <h2 className="h2 section-title">Our Coding Curriculum</h2>
           <ul className="grid-list">
-            {card && card.map((card) => <CourseCard card={card} />)}
+            {top3courses.length > 0 ? (
+              top3courses.map((item) => (
+                <CourseCard
+                  key={item._id}
+                  poster={item.poster}
+                  title={item.title}
+                  category={item.category}
+                  level={item.level}
+                  imageSrc={course1}
+                  id={item._id}
+                  duration={item.duration}
+                  rating={item.rating}
+                  users={item.users}
+                  price={item.price}
+                  details={item.details}
+                  numOfVideos={item.numOfVideos}
+                  loading={loading}
+                />
+              ))
+            ) : (
+              <h1>Course Not Found</h1>
+            )}
           </ul>
 
-          <button className="btn has-before" onClick={handleModal}>
-            <Link to={"/about"}>
+          {isAuthenticated ? (
+            <button
+              className="btn has-before"
+              onClick={() => navigate("/user_dashboard")}
+            >
+              <span className="span">Dashboard</span>
+            </button>
+          ) : (
+            <button className="btn has-before" onClick={handleModal}>
               <span className="span">Book A Demo Session</span>
-            </Link>
-          </button>
+            </button>
+          )}
 
           {/* <a href="course.html" className="btn has-before">
             <span className="span">Book A Demo Session</span>
@@ -145,16 +153,33 @@ const About = () => {
         className="section blog has-bg-image1"
         id="blog"
         aria-label="blog"
-        style={{ backgroundImage: { blogbg }, marginTop: "-100px" }}>
+        style={{ backgroundImage: { blogbg }, marginTop: "-100px" }}
+      >
         <div className="container">
           {/* <!-- <p class="section-subtitle">Our Top Educators</p> --> */}
 
           <h2 className="h2 section-title">Top 1% of educators</h2>
-          {/* <p className="section-subtitle"></p> */}
+          <p className="section-subtitle"></p>
           <ul className="grid-list">
-            <BlogCard data={sureshblog} />
-            <BlogCard data={shubhamblog} />
-            <BlogCard data={manishblog} />
+            {top3teachers.length > 0 ? (
+              top3teachers.map((item) => (
+                <BookSessionCard1
+                  key={item._id}
+                  poster={item.poster}
+                  name={item.name}
+                  category={item.category}
+                  link={item.link}
+                  level={item.level}
+                  bio={item.bio}
+                  session={item.session}
+                  rating={item.rating}
+                  nos={item.nos}
+                  loading={loading}
+                />
+              ))
+            ) : (
+              <h1>Teacher Not Found Refresh the site</h1>
+            )}
           </ul>
           <img
             src={blogshape}

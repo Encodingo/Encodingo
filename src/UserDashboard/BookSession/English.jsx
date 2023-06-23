@@ -91,11 +91,13 @@ const English = () => {
   }, []);
 
   useEffect(() => {
-    const activeItems = document.getElementsByClassName("active");
-    for (let i = 0; i < activeItems.length; i++) {
-      activeItems[i].classList.remove("active");
-    }
-    document.getElementById("english").classList.add("active");
+    document.getElementById("Coding").classList.remove("active");
+    document.getElementById("English").classList.add("active");
+    // const activeItems = document.getElementsByClassName("active");
+    // for (let i = 0; i < activeItems.length; i++) {
+    //   activeItems[i].classList.remove("active");
+    // }
+    // document.getElementById("english").classList.add("active");
   });
 
   return (

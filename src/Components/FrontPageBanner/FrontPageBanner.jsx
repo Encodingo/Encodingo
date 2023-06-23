@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
- import "../../assets/css/style.css";
+import { Link, useNavigate } from "react-router-dom";
+import "../../assets/css/style.css";
 import "../../assets/css/authentication_styles.css";
 import "../Auth/AuthContainer.css";
 import { IonIcon } from "@ionic/react";
@@ -17,6 +17,7 @@ import { useSelector } from "react-redux";
 // import shubham from "../../assets/images/shubham.jpg";
 
 const FrontPageBanner = () => {
+  const navigate = useNavigate();
   const { isAuthenticated } = useSelector((state) => state.user);
   const [showModal, setShowModal] = useState(false);
   const handleModal = () => {
@@ -58,18 +59,17 @@ const FrontPageBanner = () => {
             </p>
 
             {isAuthenticated ? (
-            <button className="btn has-before" onClick={handleModal}>
-              <Link to={"/user_dashboard"}>
+              <button
+                className="btn has-before"
+                onClick={() => navigate("/user_dashboard")}
+              >
                 <span className="span">Dashboard</span>
-              </Link>
-            </button>
-          ) : (
-            <button className="btn has-before" onClick={handleModal}>
-              <Link to={"#"}>
+              </button>
+            ) : (
+              <button className="btn has-before" onClick={handleModal}>
                 <span className="span">Book A Session</span>
-              </Link>
-            </button>
-          )}
+              </button>
+            )}
             {/* <a href="/" className="btn has-before">
               <span className="span">Book A Demo Session</span>
             </a> */}

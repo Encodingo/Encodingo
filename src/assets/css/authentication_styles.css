@@ -25,9 +25,9 @@ section{
 
 .close-btn {
   position: fixed;
-  right: 20px;
-  top: 20px;
-  color: white;
+  right: 40px;
+  top: 30px;
+  color: crimson;
   font-size: 40px;
   font-weight: bold;
 }

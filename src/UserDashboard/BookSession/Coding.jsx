@@ -76,6 +76,17 @@ const Coding = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
+    const coding = document.getElementById("Coding");
+    coding.classList.add("active");
+
+    // const activeItems = document.getElementsByClassName("active");
+    // for (let i = 0; i < activeItems.length; i++) {
+    //   activeItems[i].classList.remove("active");
+    // }
+    // document.getElementById("Coding").classList.add("active");
+  });
+
+  useEffect(() => {
     // Update window width when the window is resized
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
@@ -89,20 +100,12 @@ const Coding = () => {
     };
   }, []);
 
-  useEffect(() => {
-    const activeItems = document.getElementsByClassName("active");
-    for (let i = 0; i < activeItems.length; i++) {
-      activeItems[i].classList.remove("active");
-    }
-    document.getElementById("coding").classList.add("active");
-  });
-
   return (
     <>
       {windowWidth < 767 ? <Bottombar /> : <Sidebar />}
 
       <section className="home-section">
-        <Topbar />
+        {/* <Topbar /> */}
         <div>
           <div className="container myContainer">
             {/* <!-- <p class="section-subtitle">Popular Courses</p> --> */}

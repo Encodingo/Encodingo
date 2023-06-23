@@ -1,13 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../../assets/css/style.css";
-// import herobg from "../../assets/images/hero-bg.svg";
 import about from "../../assets/images/about.jpg";
-import course1 from "../../assets/images/course-1.jpg";
-import course2 from "../../assets/images/course-2.jpg";
-import course3 from "../../assets/images/course-3.jpg";
-import suresh from "../../assets/images/suresh.jpg";
-// import manish from "../../assets/images/manish.jpg";
-// import shubham from "../../assets/images/shubham.jpg";
 import blogshape from "../../assets/images/blog-shape.png";
 import blogbg from "../../assets/images/blog-bg.svg";
 import AboutSection from "../AboutSection/AboutSection";
@@ -15,62 +8,42 @@ import NewSection from "../NewSection/NewSection";
 import CourseCard from "../CourseCard/CourseCard";
 import VideoSection from "../VideoSection/VideoSection";
 import StateSection from "../StateSection/StateSection";
-import BlogCard from "../BlogCard/BlogCard";
 import CategorySection from "../CategorySection/CategorySection";
 import FrontPageBanner from "../FrontPageBanner/FrontPageBanner";
 import BookSession from "../ButtonBook/BookSession";
 import Header from "../Header";
 import Footer from "../Footer";
+import { useDispatch, useSelector } from "react-redux";
+import { gettopcourses } from "../../actions/course";
+import { toast } from "react-hot-toast";
+import { gettopteachers } from "../../actions/teacher";
+import BookSessionCard from "../../UserDashboard/BookSession/BookSessionCard";
+import Loader from "../Loader/Loader";
+import BookSessionCard1 from "../../UserDashboard/BookSession/BookSessionCard1";
 
 // hii this is simple comment
 const Home = () => {
-  const card = [
-    {
-      img: course1,
-      duration: 12,
-      level: "Biggnner",
-      rating: "4.8/500",
-      title: "Build Responsive Real- World Websites with HTML and CSS",
-      price: 6000,
-      lesson: 12,
-      students: 5000,
-    },
-    {
-      img: course2,
-      duration: 8,
-      level: "Intermediate",
-      rating: "4.5/500",
-      title: "Java Programming Masterclass for Software Developers",
-      price: 8000,
-      lesson: 15,
-      students: 6500,
-    },
-    {
-      img: course3,
-      duration: 12,
-      level: "Advanced",
-      rating: "4.8/500",
-      title: "The Complete Camtasia Course for Content Creators",
-      price: 12000,
-      lesson: 12,
-      students: 7000,
-    },
-  ];
+  const { loading, top3courses, error, message } = useSelector(
+    (state) => state.topcourse
+  );
 
-  const sureshblog = {
-    img: suresh,
-    title: "Suresh Vidyarthi",
-  };
+  const { top3teachers } = useSelector((state) => state.topteacher);
+  const dispatch = useDispatch();
 
-  const shubhamblog = {
-    img: suresh,
-    title: "Shubham Raj",
-  };
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+      dispatch({ type: "clearError" });
+    }
 
-  const manishblog = {
-    img: suresh,
-    title: "Manish Mandan",
-  };
+    if (message) {
+      toast.success(message);
+      dispatch({ type: "clearMessage" });
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // dispatch(gettopcourses());
+    // dispatch(gettopteachers());
+  }, [dispatch, error, message]);
 
   const data = {
     img: about,
@@ -108,7 +81,34 @@ const Home = () => {
           {/* <!-- <p class="section-subtitle">Popular Courses</p> --> */}
           <h2 className="h2 section-title">Our Coding Curriculum</h2>
           <ul className="grid-list">
-            {card && card.map((card) => <CourseCard card={card} />)}
+            {loading ? (
+              <Loader />
+            ) : (
+              <>
+                {top3courses.length > 0 ? (
+                  top3courses.map((item) => (
+                    <CourseCard
+                      key={item._id}
+                      poster={item.poster}
+                      title={item.title}
+                      category={item.category}
+                      level={item.level}
+                      // imageSrc={course1}
+                      id={item._id}
+                      duration={item.duration}
+                      rating={item.rating}
+                      users={item.users}
+                      price={item.price}
+                      details={item.details}
+                      numOfVideos={item.numOfVideos}
+                      loading={loading}
+                    />
+                  ))
+                ) : (
+                  <h1>Course Not Found</h1>
+                )}
+              </>
+            )}
           </ul>
 
           <BookSession />
@@ -133,7 +133,8 @@ const Home = () => {
         className="section blog has-bg-image1"
         id="blog"
         aria-label="blog"
-        style={{ backgroundImage: { blogbg }, marginTop: "-100px" }}>
+        style={{ backgroundImage: { blogbg }, marginTop: "-100px" }}
+      >
         <div className="container">
           {/* <!-- <p class="section-subtitle">Our Top Educators</p> --> */}
 
@@ -141,9 +142,31 @@ const Home = () => {
           <p className="section-subtitle"></p>
 
           <ul className="grid-list">
-            <BlogCard data={sureshblog} />
-            <BlogCard data={shubhamblog} />
-            <BlogCard data={manishblog} />
+            {loading ? (
+              <Loader />
+            ) : (
+              <>
+                {top3teachers.length > 0 ? (
+                  top3teachers.map((item) => (
+                    <BookSessionCard1
+                      key={item._id}
+                      poster={item.poster}
+                      name={item.name}
+                      category={item.category}
+                      link={item.link}
+                      level={item.level}
+                      bio={item.bio}
+                      session={item.session}
+                      rating={item.rating}
+                      nos={item.nos}
+                      loading={loading}
+                    />
+                  ))
+                ) : (
+                  <h1>Teacher Not Found</h1>
+                )}
+              </>
+            )}
           </ul>
 
           <img

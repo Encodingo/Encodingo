@@ -1,84 +1,65 @@
 import React from "react";
 import Sidebar from "../Sidebar/Sidebar";
-import CourseCard from "../../Components/CourseCard/CourseCard";
-import course from "../../assets/images/course-1.jpg";
-import "../UserDashboard.css";
+
+// import "../UserDashboard.css";
+import "../../assets/css/style.css";
 import Bottombar from "../Bottombar/Bottombar";
 import { useState } from "react";
 import { useEffect } from "react";
-import BookSessionCard from "./BookSessionCard";
-import teacherImg from "../../assets/images/suresh.jpg";
-import Topbar from "./Topbar";
-
+import BookSessionCard1 from "./BookSessionCard1";
+import { useNavigate } from "react-router-dom";
 import "./BookSession.css";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-hot-toast";
+import { getAllTeachers } from "../../actions/teacher";
+import Loader from "../../Components/Loader/Loader";
+
+import search from "../../assets/images/search.png";
 
 const BookSession = () => {
-  const card = [
-    {
-      img: teacherImg,
-      level: "Biggnner",
-      rating: "4.8/500",
-      teacher_name: "Suresh Vidyarthi",
-      price: 6000,
-      lesson: 90,
-      students: 500,
-      category: "Coding",
-    },
-    {
-      img: teacherImg,
-      level: "Intermediate",
-      rating: "4.5/500",
-      teacher_name: "Suresh Vidyarthi",
-      price: 8000,
-      lesson: 15,
-      students: 6500,
-      category: "English",
-    },
-    {
-      img: teacherImg,
-      level: "Advanced",
-      rating: "4.8/500",
-      teacher_name: "Suresh Vidyarthi",
-      price: 12000,
-      lesson: 12,
-      students: 7000,
-      category: "Coding",
-    },
-    {
-      img: teacherImg,
-      level: "Biggnner",
-      rating: "4.8/500",
-      teacher_name: "Suresh Vidyarthi",
-      price: 6000,
-      lesson: 12,
-      students: 5000,
-      category: "English",
-    },
-    {
-      img: teacherImg,
-      level: "Intermediate",
-      rating: "4.5/500",
-      teacher_name: "Suresh Vidyarthi",
-      price: 8000,
-      lesson: 15,
-      students: 6500,
-      category: "Coding",
-    },
-    {
-      img: teacherImg,
-      level: "Advanced",
-      rating: "4.8/500",
-      teacher_name: "Suresh Vidyarthi",
-      price: 12000,
-      lesson: 12,
-      students: 7000,
-      category: "English",
-    },
-  ];
+  const { loading, error, message, teachers } = useSelector(
+    (state) => state.teacher
+  );
+  const dispatch = useDispatch();
+  const Navigate = useNavigate();
+  const [keyword, setKeyword] = useState("");
+  const [category, setCategory] = useState("");
+
+  // const addToPlaylistHandler = async couseId => {
+  //   await dispatch(addToPlaylist(couseId));
+  //   dispatch(loadUser());
+  // };
+
+  const categories = ["Coding", "English"];
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+      dispatch({ type: "clearError" });
+    }
+
+    if (message) {
+      toast.success(message);
+      dispatch({ type: "clearMessage" });
+    }
+
+    dispatch(getAllTeachers(category, keyword));
+  }, [dispatch, error, message, category, keyword]);
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
+  const refresh = () => {
+    window.location.reload();
+    Navigate("/book_session");
+  };
+
   useEffect(() => {
+    // const cat = document.getElementById(category);
+    // cat.classList.add("active");
+    console.log(category);
+
+    // console.log(cat);
+
     // Update window width when the window is resized
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
@@ -96,21 +77,78 @@ const BookSession = () => {
     <>
       {windowWidth < 767 ? <Bottombar /> : <Sidebar />}
 
-      <section className="home-section">
-        <Topbar />
+      <section
+        className="home-section section course"
+        id="courses"
+        aria-label="course">
+        {/* <Topbar /> */}
         <div>
-          <div className="container myContainer">
+          <div className="container" style={{ marginTop: "-10px" }}>
             {/* <!-- <p class="section-subtitle">Popular Courses</p> --> */}
-            {/* <h2
-              className="h2 section-title"
-              style={{ color: "white", marginBottom: "5rem" }}>
-              Book a Session
-            </h2> */}
-            <ul className="grid-list mygrid">
-              {card &&
-                card.map((card) => {
-                  return <BookSessionCard card={card} />;
-                })}
+
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                alignItems: "center",
+                justifyContent: "space-evenly",
+              }}>
+              {/* <h2
+                className="h2 section-title"
+                // style={{ color: "white", marginBottom: "5rem" }}
+              >
+                All Courses
+              </h2> */}
+              <div class="search-bar">
+                <input
+                  type="text"
+                  placeholder="Search..."
+                  onChange={(e) => setKeyword(e.target.value)}
+                />
+                <button type="submit">
+                  <img src={search} width="25" alt="" />
+                </button>
+              </div>
+              {/* <button className="Button" minW={"60"} onClick={refresh}>
+                All
+              </button> */}
+              {categories.map((item, index) => (
+                <button
+                  className="Button sessionBtn"
+                  key={index}
+                  onClick={() => setCategory(item)}
+                  id={item}
+                  minW={"60"}>
+                  {item}
+                </button>
+              ))}
+            </div>
+            <ul className="grid-list">
+              {loading ? (
+                <Loader />
+              ) : (
+                <>
+                  {teachers.length > 0 ? (
+                    teachers.map((item) => (
+                      <BookSessionCard1
+                        key={item._id}
+                        poster={item.poster}
+                        name={item.name}
+                        category={item.category}
+                        link={item.link}
+                        level={item.level}
+                        bio={item.bio}
+                        session={item.session}
+                        rating={item.rating}
+                        nos={item.nos}
+                        loading={loading}
+                      />
+                    ))
+                  ) : (
+                    <h1>Teachers Not Found</h1>
+                  )}
+                </>
+              )}
             </ul>
           </div>
         </div>
