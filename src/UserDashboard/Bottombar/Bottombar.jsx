@@ -18,7 +18,7 @@ const Bottombar = () => {
   };
 
   const MyCourseHandler = () => {
-    navigate("/user_mycourse");
+    navigate("/user_mycourses");
   };
 
   const BookSessionHandler = () => {
@@ -39,28 +39,28 @@ const Bottombar = () => {
 
           <div className="nav__menu" id="nav-menu">
             <ul className="nav__list">
-              <li onClick={AllCourseHandler} className="nav__item" >
-                <a  className="nav__link">
+              <li onClick={AllCourseHandler} className="nav__item">
+                <a className="nav__link">
                   <i className="bx bx-book-open nav__icon"></i>
                   {/* <i className='bx bx-home-alt nav__icon'></i> */}
                   <span className="nav__name">All Courses</span>
                 </a>
               </li>
               <li onClick={MyCourseHandler} className="nav__item">
-                <a  className="nav__link">
+                <a className="nav__link">
                   <i className="bx bx-book nav__icon"></i>
                   <span className="nav__name">My Courses</span>
                 </a>
               </li>
 
               <li onClick={BookSessionHandler} className="nav__item">
-                <a  className="nav__link">
+                <a className="nav__link">
                   <i className="bx bx-time nav__icon"></i>
                   <span className="nav__name">Book Session</span>
                 </a>
               </li>
 
-              <li onClick={profileHandler}  className="nav__item">
+              <li onClick={profileHandler} className="nav__item">
                 <a className="nav__link">
                   <i className="bx bx-user nav__icon"></i>
                   <span className="nav__name">Profile</span>
@@ -70,9 +70,7 @@ const Bottombar = () => {
               <li onClick={logoutHandler} className="nav__item">
                 <Link href="#logout" className="nav__link">
                   <i className="bx bx-log-out nav__icon" id="log_out"></i>
-                  <span  className="nav__name">
-                    Logout
-                  </span>
+                  <span className="nav__name">Logout</span>
                 </Link>
               </li>
 
