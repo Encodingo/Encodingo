@@ -42,9 +42,10 @@ import TeacherList from "./Components/Admin/TeacherList";
 import CreateTeacher from "./Components/Admin/CreateTeacher";
 import ResetPass from "./UserDashboard/Update/ResetPass";
 import { gettopteachers } from "./actions/teacher";
-import MyCourses from "./UserDashboard/MyCourses"
+import MyCourses from "./UserDashboard/MyCourses";
 import Loader from "./Components/Loader/Loader";
 import Verify from "./Components/Verify/Verify";
+import PaymentList from "./Components/Admin/PaymentList";
 // import UserDash from "./Components/Dashboard/UserDash";
 
 // import AuthContainer from "./Components/Auth/AuthContainer";
@@ -131,7 +132,7 @@ function App() {
               path="/user_mycourses"
               element={
                 <ProtectedRoute isAuthenticated={isAuthenticated}>
-                  <MyCourses/>
+                  <MyCourses />
                 </ProtectedRoute>
               }
             />
@@ -306,6 +307,19 @@ function App() {
                   isAdmin={user && user.role === "admin"}
                 >
                   <TeacherList />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/admin/payments"
+              element={
+                <ProtectedRoute
+                  adminRoute={true}
+                  isAuthenticated={isAuthenticated}
+                  isAdmin={user && user.role === "admin"}
+                >
+                  <PaymentList />
                 </ProtectedRoute>
               }
             />

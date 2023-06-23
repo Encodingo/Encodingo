@@ -8,7 +8,7 @@ import { Chart }            from 'react-chartjs-2'
 import { Doughnut, Line } from "react-chartjs-2";
 import { useSelector, useDispatch } from "react-redux";
 import AdminSidebar from "./AdminSidebar.js";
-import { getAllCoursesAdmin, getAllTeachersAdmin, getAllUsers } from "../../actions/admin.js";
+import { getAllCoursesAdmin, getAllPayments, getAllTeachersAdmin, getAllUsers } from "../../actions/admin.js";
 // import { getAdminProduct } from "../../actions/productAction";
 // import { getAllOrders } from "../../actions/orderAction.js";
 // import { getAllUsers } from "../../actions/userAction.js";
@@ -19,7 +19,7 @@ const AdminDashboard = () => {
 
   
 
-  const {courses,teachers, users } = useSelector((state) => state.admin);
+  const {courses,teachers, users ,payments } = useSelector((state) => state.admin);
 
   let Codingnum = 0;
   let Englishnum=0;
@@ -33,13 +33,20 @@ const AdminDashboard = () => {
       }
     });
 
+    
+  let totalAmount = 0;
+    payments &&
+    payments.forEach((item) => {
+      totalAmount += item.amount;
+    });
+
   useEffect(() => {
     dispatch(getAllCoursesAdmin());
     dispatch(getAllTeachersAdmin());
     dispatch(getAllUsers());
+    dispatch(getAllPayments());
   }, [dispatch]);
 
-  let totalAmount = 0;
   // orders &&
   //   orders.forEach((item) => {
   //     totalAmount += item.totalPrice;
@@ -52,7 +59,7 @@ const AdminDashboard = () => {
         label: "TOTAL AMOUNT",
         backgroundColor: ["tomato"],
         hoverBackgroundColor: ["rgb(197, 72, 49)"],
-        data: [0, 1200],
+        data: [0, totalAmount],
       },
     ],
   };
@@ -79,7 +86,7 @@ const AdminDashboard = () => {
         <div className="admin-dashboardSummary">
           <div>
             <p>
-              Total Amount <br /> ₹{1200}
+              Total Amount <br /> ₹{totalAmount}
             </p>
           </div>
           <div className="admin-dashboardSummaryBox2">

@@ -12,6 +12,7 @@ import {
   forgetPassword,
   resetPassword,
   verify,
+  getAllPayments,
 } from "../Controllers/userController.js";
 import { authorizeAdmin, isAuthenticated } from "../middlewares/auth.js";
 const router = express.Router();
@@ -39,6 +40,9 @@ router.route("/updateprofile").put(isAuthenticated, updateProfile);
 
 // get all users --Admin
 router.route("/admin/users").get(isAuthenticated, authorizeAdmin, getAllUsers);
+
+// get All Payments --Admin
+router.route("/admin/payments").get(isAuthenticated, authorizeAdmin, getAllPayments);
 
 // update role --Admin
 router

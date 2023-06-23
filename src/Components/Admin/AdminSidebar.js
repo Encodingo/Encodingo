@@ -10,6 +10,7 @@ import ImportExportIcon from "@material-ui/icons/ImportExport";
 import ListAltIcon from "@material-ui/icons/ListAlt";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import PeopleIcon from "@material-ui/icons/People";
+import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 import RateReviewIcon from "@material-ui/icons/RateReview";
 
 const AdminSidebar = () => {
@@ -60,6 +61,11 @@ const AdminSidebar = () => {
       <Link to="/admin/teachers">
         <p>
           <PeopleIcon /> Teachers
+        </p>
+      </Link>
+      <Link to="/admin/payments">
+        <p>
+          <AttachMoneyIcon /> Payments
         </p>
       </Link>
       <Link style={

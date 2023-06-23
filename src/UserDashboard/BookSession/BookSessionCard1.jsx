@@ -1,15 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import "../../assets/css/style.css";
 import { IonIcon } from "@ionic/react";
 import { Rating } from "@material-ui/lab";
-import course1 from "../../assets/images/course-1.jpg";
-import { useNavigate } from "react-router-dom";
-import {
-  people,
-  libraryOutline,
-  starOutline,
-  timeOutline,
-} from "ionicons/icons";
+import { people, libraryOutline } from "ionicons/icons";
 import { Button } from "@material-ui/core";
 import Loader from "../../Components/Loader/Loader";
 import { useSelector } from "react-redux";
@@ -27,10 +20,15 @@ const BookSessionCard1 = ({
   session,
   loading,
 }) => {
-  const Navigate = useNavigate();
   const { isAuthenticated } = useSelector((state) => state.user);
-  const detailshandler = () => {
-    Navigate(bio);
+  const [showPopup, setShowPopup] = useState(false);
+
+  const openPopup = () => {
+    setShowPopup(true);
+  };
+
+  const closePopup = () => {
+    setShowPopup(false);
   };
 
   const options = {
@@ -111,10 +109,9 @@ const BookSessionCard1 = ({
                     //   onClick={detailshandler}
                     variant="contained"
                     color="secondary"
+                    onClick={openPopup}
                   >
-                    <a href={bio} target="_blank">
-                      BIO
-                    </a>
+                    BIO
                   </Button>
                   <Button variant="contained" color="primary">
                     <a href={link} target="_blank">
@@ -128,10 +125,9 @@ const BookSessionCard1 = ({
                     //   onClick={detailshandler}
                     variant="contained"
                     color="secondary"
+                    onClick={openPopup}
                   >
-                    <a href={bio} target="_blank">
-                      BIO
-                    </a>
+                    BIO
                   </Button>
                   <Button
                     variant="contained"
@@ -144,6 +140,24 @@ const BookSessionCard1 = ({
               )}
             </div>
           </div>
+
+          {showPopup && (
+            <div className="popup-overlay">
+              <button className="close-button-popup" onClick={closePopup}>
+                Close
+              </button>
+              <div className="popup-content">
+                <iframe
+                  title="YouTube Video"
+                  width="560"
+                  height="315"
+                  src="https://www.youtube.com/embed/R-dXS5TI_dQ"
+                  frameBorder="0"
+                  allowFullScreen
+                ></iframe>
+              </div>
+            </div>
+          )}
         </>
       )}
     </>

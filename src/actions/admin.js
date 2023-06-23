@@ -139,6 +139,25 @@ export const getAllUsers = () => async (dispatch) => {
   }
 };
 
+
+export const getAllPayments = () => async (dispatch) => {
+  try {
+    const config = {
+      withCredentials: true,
+    };
+    dispatch({ type: "getAllPaymentsRequest" });
+
+    const { data } = await axios.get(`${server}/admin/payments`, config);
+
+    dispatch({ type: "getAllPaymentsSuccess", payload: data.payments });
+  } catch (error) {
+    dispatch({
+      type: "getAllPaymentsFail",
+      payload: error.response.data.message,
+    });
+  }
+};
+
 export const getAllCoursesAdmin = () => async (dispatch) => {
   try {
     const config = {

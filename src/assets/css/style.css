@@ -27,9 +27,11 @@
    * gradient color
    */
 
-  --gradient: linear-gradient(-90deg,
-      hsl(151, 58%, 46%) 0%,
-      hsl(170, 75%, 41%) 100%);
+  --gradient: linear-gradient(
+    -90deg,
+    hsl(151, 58%, 46%) 0%,
+    hsl(170, 75%, 41%) 100%
+  );
 
   /**
    * typography
@@ -113,10 +115,11 @@ ion-icon {
 
 a {
   color: inherit;
-  text-decoration: none; 
+  text-decoration: none;
 }
 
-button,a:hover{
+button,
+a:hover {
   font-size: 1.9rem;
 }
 
@@ -242,7 +245,7 @@ section.user {
   font-weight: var(--fw-500);
 }
 
-.h3 a:hover{
+.h3 a:hover {
   font-size: 2.8rem;
 }
 
@@ -601,7 +604,6 @@ section.user {
 }
 
 @keyframes bounce {
-
   0%,
   20%,
   50%,
@@ -983,7 +985,7 @@ section.user {
   margin-block: 20px;
 }
 
-.footer-list-text{
+.footer-list-text {
   color: aliceblue;
   margin-block: 20px;
 }
@@ -1086,7 +1088,6 @@ section.user {
   .logo1 {
     display: none;
   }
-
 }
 
 /*-----------------------------------*\
@@ -1109,7 +1110,7 @@ section.user {
   }
 
   .grid-list {
-    grid-template-columns: 1fr 1fr ;
+    grid-template-columns: 1fr 1fr;
   }
 
   :is(.course, .blog) .grid-list {
@@ -1119,8 +1120,6 @@ section.user {
   /**
    * HEADER
    */
-
-
 
   .header .container {
     max-width: unset;
@@ -1545,3 +1544,71 @@ section.user {
   }
 }
 
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* Popup Content */
+.popup-content {
+  position: relative;
+  /* background-color: #fff; */
+  padding: 20px;
+  width: 50vw;
+  height: 50vh;
+  overflow: hidden;
+  border-radius: 5px;
+}
+
+/* Close Button */
+.close-button-popup {
+  position: absolute;
+  top: 5rem;
+  right: 5rem;
+  background-color: transparent;
+  border: none;
+  font-size: 25px;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.close-button-popup:hover {
+  color: #ff0000; /* Change color on hover */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  /* Adjust popup content width for smaller devices */
+  .popup-content {
+    max-width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Adjust popup content width and height for mobile devices */
+  .popup-content {
+    width: 84vw;
+    height: 33vh;
+  }
+
+  /* Adjust close button size for mobile devices */
+  .close-button-popup {
+    font-size: 20px;
+    top: 3rem;
+    right: 3rem;
+  }
+}
+
+/* Responsive YouTube Video */
+.popup-content iframe {
+  width: 100%;
+  height: 100%;
+}

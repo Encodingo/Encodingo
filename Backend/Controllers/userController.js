@@ -4,6 +4,7 @@ import { User } from "../Models/userModel.js";
 import { sendToken } from "../utils/sendToken.js";
 import { sendEmail } from "../utils/sendEmail.js";
 import crypto from "crypto";
+import { Payment } from "../Models/paymentModel.js";
 // Register User
 export const register = catchAsyncError(async (req, res, next) => {
   const { name, email, phone, password, address, grade } = req.body;
@@ -163,12 +164,23 @@ export const updateProfile = catchAsyncError(async (req, res, next) => {
   });
 });
 
+// All users --Admin
 export const getAllUsers = catchAsyncError(async (req, res, next) => {
   const users = await User.find({});
 
   res.status(200).json({
     success: true,
     users,
+  });
+});
+
+// All Payments Details -- Admin
+export const getAllPayments = catchAsyncError(async (req, res, next) => {
+  const payments = await Payment.find({});
+
+  res.status(200).json({
+    success: true,
+    payments,
   });
 });
 

@@ -2,7 +2,9 @@ import Razorpay from "razorpay";
 import crypto from "crypto";
 import { User } from "../Models/userModel.js";
 import dotenv from "dotenv";
+import { catchAsyncError } from "../middlewares/catchAsyncError.js";
 dotenv.config({ path: "./config/config.env" });
+
 
 const instance = new Razorpay({
   key_id: process.env.RAZORPAY_API_KEY,
@@ -101,3 +103,4 @@ export const paymentverification = async (req, res, next) => {
 export const getkey = (req, res) => {
   res.status(200).json({ key: process.env.RAZORPAY_API_KEY, status: true });
 };
+

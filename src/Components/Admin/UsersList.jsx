@@ -48,6 +48,13 @@ const UsersList = () => {
       minWidth: 200,
       flex: 1,
     },
+
+    {
+      field: "phone",
+      headerName: "Phone",
+      minWidth: 200,
+      flex: 0,
+    },
     {
       field: "name",
       headerName: "Name",
@@ -108,6 +115,7 @@ const UsersList = () => {
         role: item.role,
         email: item.email,
         name: item.name,
+        phone:item.phone,
       });
     });
 

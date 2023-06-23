@@ -52,6 +52,18 @@ export const adminReducer = createReducer(
       state.error = action.payload;
     },
 
+    getAllPaymentsRequest: (state) => {
+      state.loading = true;
+    },
+    getAllPaymentsSuccess: (state, action) => {
+      state.loading = false;
+      state.payments = action.payload;
+    },
+    getAllPaymentsFail: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+
     getAdminTeachersRequest: (state) => {
       state.loading = true;
     },

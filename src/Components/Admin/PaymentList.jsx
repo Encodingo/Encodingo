@@ -6,23 +6,27 @@ import { Button } from "@material-ui/core";
 // import MetaData from "../layout/MetaData";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
-import { deleteTeacher, getAllTeachersAdmin} from "../../actions/admin";
+import {
+  deleteTeacher,
+  getAllPayments,
+  getAllTeachersAdmin,
+} from "../../actions/admin";
 import { toast } from "react-hot-toast";
 import AdminSidebar from "./AdminSidebar";
 import { getAllTeachers } from "../../actions/teacher";
 
-const UsersList = () => {
-  const { teachers, loading, error, message } = useSelector(
+const PaymentList = () => {
+  const { payments, loading, error, message } = useSelector(
     (state) => state.admin
   );
   const { user } = useSelector((state) => state.user);
-  
+
   const dispatch = useDispatch();
 
-//   const updateHandler = (userId) => {
-//     console.log(userId);
-//     dispatch(updateUserRole(userId));
-//   };
+  //   const updateHandler = (userId) => {
+  //     console.log(userId);
+  //     dispatch(updateUserRole(userId));
+  //   };
   const deleteButtonHandler = (userId) => {
     dispatch(deleteTeacher(userId));
   };
@@ -38,78 +42,65 @@ const UsersList = () => {
       dispatch({ type: "clearMessage" });
     }
 
-    dispatch(getAllTeachersAdmin());
+    dispatch(getAllPayments());
   }, [dispatch, error, message]);
 
   const columns = [
-    { field: "id", headerName: "User ID", minWidth: 180, flex: 0.4 },
+    { field: "id", headerName: "User ID", minWidth: 180, flex: 4 },
 
     {
-        field: "name",
-        headerName: "Name",
-        minWidth: 150,
-        flex: 0.3,
-      },
-
-      {
-        field: "category",
-        headerName: "Category",
-        minWidth: 150,
-        flex: 0,
-      },
-
-      {
-        field: "session",
-        headerName: "Sessions",
-        minWidth: 150,
-        flex: 0,
-      },
-
-      {
-        field: "level",
-        headerName: "Level",
-        minWidth: 150,
-        flex: 0,
-      },
-    
-    
-
-   
+      field: "userEmail",
+      headerName: "Email",
+      minWidth: 200,
+      flex: 4,
+    },
 
     {
-      field: "actions",
-      flex: 0.3,
-      headerName: "Actions",
+      field: "userPhone",
+      headerName: "Phone",
+      minWidth: 200,
+      flex: 1,
+    },
+    {
+      field: "userName",
+      headerName: "Name",
       minWidth: 150,
-      type: "number",
-      sortable: false,
-      renderCell: (params) => {
-        return (
-          <Fragment>
-            <Button
-            onClick={() =>
-              deleteButtonHandler(params.getValue(params.id, "id"))
-            }
-            >
-              <DeleteIcon />
-            </Button>
-          </Fragment>
-        );
-      },
+      flex: 1,
+    },
+
+    {
+      field: "amount",
+      headerName: "Ammount",
+      minWidth: 150,
+      flex: 1,
+    },
+
+    {
+      field: "razorpayOrderId",
+      headerName: "Order Id",
+      minWidth: 250,
+      flex: 2,
+    },
+    {
+      field: "razorpayPaymentId",
+      headerName: "Payment Id",
+      minWidth: 180,
+      flex: 2,
     },
   ];
 
   const rows = [];
 
-  teachers &&
-    teachers.forEach((item) => {
+  payments &&
+    payments.forEach((item) => {
       rows.push({
         id: item._id,
-        rating: item.rating,
-        name: item.name,
-        category: item.category,
-        session: item.session,
-        level: item.level
+        userEmail: item.userEmail,
+        userName: item.userName,
+        userPhone:item.userPhone,
+        amount:item.ammount,
+        razorpayOrderId:item.razorpayOrderId,
+        razorpayPaymentId:item.razorpayPaymentId,
       });
     });
 
@@ -120,7 +111,7 @@ const UsersList = () => {
       <div className="admin-dashboard">
         <AdminSidebar />
         <div className="courseListContainer">
-          <h1 id="courseListHeading">ALL Teachers</h1>
+          <h1 id="courseListHeading">ALL PAYMENTS</h1>
 
           <DataGrid
             rows={rows}
@@ -136,4 +127,4 @@ const UsersList = () => {
   );
 };
 
-export default UsersList;
+export default PaymentList;
