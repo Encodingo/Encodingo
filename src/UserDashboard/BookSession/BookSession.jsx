@@ -1,6 +1,6 @@
 import React from "react";
 import Sidebar from "../Sidebar/Sidebar";
-
+import "./card.css";
 // import "../UserDashboard.css";
 import "../../assets/css/style.css";
 import Bottombar from "../Bottombar/Bottombar";
@@ -73,6 +73,14 @@ const BookSession = () => {
     };
   }, []);
 
+  // Function to close the modal and stop the video playback
+  // function closeModal() {
+  //   var modal = document.getElementById("myModal");
+  //   var videoPlayer = document.getElementById("videoPlayer");
+  //   videoPlayer.src = "";
+  //   modal.style.display = "none";
+  // }
+
   return (
     <>
       {windowWidth < 767 ? <Bottombar /> : <Sidebar />}
@@ -83,8 +91,22 @@ const BookSession = () => {
         aria-label="course">
         {/* <Topbar /> */}
         <div>
+          {/* <div id="myModal" className="modal">
+            <div className="modal-content">
+              <span className="close" onClick={closeModal()}>
+                &times;
+              </span>
+              <iframe
+                id="videoPlayer"
+                width="100%"
+                height="315"
+                src=""
+                frameborder="0"
+                allowfullscreen></iframe>
+            </div>
+          </div> */}
           <div className="container" style={{ marginTop: "-10px" }}>
-            {/* <!-- <p class="section-subtitle">Popular Courses</p> --> */}
+            {/* <!-- <p className="section-subtitle">Popular Courses</p> --> */}
 
             <div
               style={{
@@ -99,7 +121,7 @@ const BookSession = () => {
               >
                 All Courses
               </h2> */}
-              <div class="search-bar">
+              <div className="search-bar">
                 <input
                   type="text"
                   placeholder="Search..."

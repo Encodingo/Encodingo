@@ -4,6 +4,7 @@ import { IonIcon } from "@ionic/react";
 import { Rating } from "@material-ui/lab";
 import course1 from "../../assets/images/course-1.jpg";
 import { useNavigate } from "react-router-dom";
+import "./card.css"
 import {
   people,
   libraryOutline,
@@ -38,18 +39,57 @@ const BookSessionCard1 = ({
     readOnly: true,
     precision: 0.5,
   };
+
+  // Function to open the modal and set the YouTube video URL
+  const openModal = () => {
+    const modal = document.getElementById("modalx");
+    var videoPlayer = document.getElementById("videoPlayer");
+    var videoUrl = "https://www.youtube.com/embed/P1RGyzt2KPQ";
+    videoPlayer.src = videoUrl;
+    document.getElementById("modalx");
+    modal.style.display = "block";
+  };
+
+  // Function to close the modal and stop the video playback
+  const closeModal = () => {
+    var modal = document.getElementById("modalx");
+    var videoPlayer = document.getElementById("videoPlayer");
+    videoPlayer.src = "";
+    modal.style.display = "none";
+  }
+
+
   return (
     <>
       {loading ? (
         <Loader />
       ) : (
         <>
+          {/* <button className="button" onClick={openModal}>
+            Open Modal
+          </button> */}
+
+          {/* <!-- The modal --> */}
+          <div id="modalx" className="myModal">
+            <div className="modal-content">
+              <span className="close" onClick={closeModal}>
+                &times;
+              </span>
+              <iframe
+                id="videoPlayer"
+                width="90%"
+                height="355"
+                src=""
+                frameborder="0"
+                allowfullscreen></iframe>
+            </div>
+          </div>
+
           {/* <!--- /COURSE --> */}
           <div className="course-card">
             <figure
               className="card-banner img-holder"
-              style={{ width: "370", height: "220" }}
-            >
+              style={{ width: "370", height: "220" }}>
               <img
                 src={poster.url}
                 width="370"
@@ -73,8 +113,7 @@ const BookSessionCard1 = ({
                   flexDirection: "row",
                   justifyContent: "space-between",
                   alignItems: "start",
-                }}
-              >
+                }}>
                 <span className="badge">{level}</span>
                 <span className="badge">{category}</span>
               </div>
@@ -108,13 +147,10 @@ const BookSessionCard1 = ({
               {isAuthenticated ? (
                 <div className="card-buttons">
                   <Button
-                    //   onClick={detailshandler}
+                    onClick={openModal}
                     variant="contained"
-                    color="secondary"
-                  >
-                    <a href={bio} target="_blank">
-                      BIO
-                    </a>
+                    color="secondary">
+                    BIO
                   </Button>
                   <Button variant="contained" color="primary">
                     <a href={link} target="_blank">
@@ -125,19 +161,16 @@ const BookSessionCard1 = ({
               ) : (
                 <div className="card-buttons">
                   <Button
-                    //   onClick={detailshandler}
+                    onClick={openModal}
                     variant="contained"
-                    color="secondary"
-                  >
-                    <a href={bio} target="_blank">
-                      BIO
-                    </a>
+                    color="secondary">
+                    BIO
                   </Button>
+
                   <Button
                     variant="contained"
                     color="primary"
-                    onClick={() => toast.error("Please Login!!")}
-                  >
+                    onClick={() => toast.error("Please Login!!")}>
                     Book
                   </Button>
                 </div>
