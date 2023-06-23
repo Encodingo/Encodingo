@@ -46,7 +46,9 @@ import MyCourses from "./UserDashboard/MyCourses"
 import Loader from "./Components/Loader/Loader";
 import Verify from "./Components/Verify/Verify";
 // import UserDash from "./Components/Dashboard/UserDash";
-
+import PrivacyPolicy from "./Components/Essentials/pp";
+import Refund from "./Components/Essentials/Refund";
+import Tnc from "./Components/Essentials/Tnc";
 
 import Tutor from "./Components/Tutor/Tutor";
 
@@ -99,6 +101,12 @@ function App() {
             {/* <Route path="/blog" element={<Blog />} /> */}
             <Route path="/tutor" element={<Tutor />} />
             <Route path="/bottom" element={<Bottombar />} />
+
+            <Route path="/pp" element={<PrivacyPolicy />} />
+            <Route path="/refund" element={<Refund />} />
+            <Route path="/tnc" element={<Tnc />} />
+
+
 
             {/* <Route
               path="/user_dashboard"

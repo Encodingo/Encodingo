@@ -23,12 +23,14 @@ const Tutor = () => {
                 id=""
                 placeholder="What do You want to Teach"
               />
-              <a href="#">Apply</a>
+              <a href="https://forms.gle/Lt7UCoYDbdJzdWct6" target="_blank">
+                Apply
+              </a>
             </div>
           </div>
-          <div className="image">
+          {/* <div className="image">
             <img src={tutorImg} alt="" />
-          </div>
+          </div> */}
         </div>
         <div className="tutor_boxes">
           <div className="box" id="box1">
@@ -56,7 +58,9 @@ const Tutor = () => {
             <h3>Making a Difference</h3>
           </div>
         </div>
-        <a href="#">Apply</a>
+        <a href="https://forms.gle/Lt7UCoYDbdJzdWct6" target="_blank">
+          Apply
+        </a>
       </div>
       <Footer />
     </>

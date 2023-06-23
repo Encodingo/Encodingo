@@ -91,7 +91,7 @@ const UserDashboard = () => {
                 display: "flex",
                 flexWrap: "wrap",
                 alignItems: "center",
-                justifyContent: "space-evenly",
+                justifyContent: "space-between",
               }}>
               {/* <h2
                 className="h2 section-title"
@@ -99,6 +99,19 @@ const UserDashboard = () => {
               >
                 All Courses
               </h2> */}
+
+              <div className="myBtns">
+                {categories.map((item, index) => (
+                  <button
+                    className="Button"
+                    key={index}
+                    onClick={() => setCategory(item)}
+                    minW={"60"}>
+                    {item}
+                  </button>
+                ))}
+              </div>
+
               <div class="search-bar">
                 <input
                   type="text"
@@ -109,15 +122,6 @@ const UserDashboard = () => {
                   <img src={search} width="25" alt="" />
                 </button>
               </div>
-              {categories.map((item, index) => (
-                <button
-                  className="Button"
-                  key={index}
-                  onClick={() => setCategory(item)}
-                  minW={"60"}>
-                  {item}
-                </button>
-              ))}
             </div>
 
             <ul className="grid-list">

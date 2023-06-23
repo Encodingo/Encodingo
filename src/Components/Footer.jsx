@@ -86,30 +86,21 @@ const Footer = () => {
             </li>
 
             <li>
-              <a
-                href="https://encodingo.com/about.html"
-                target="_blank"
-                className="footer-link">
+              <Link to="/about" className="footer-link">
                 About
-              </a>
+              </Link>
             </li>
 
             <li>
-              <a
-                href="https://encodingo.com/course.html"
-                target="_blank"
-                className="footer-link">
+              <Link to="/courses" className="footer-link">
                 Courses
-              </a>
+              </Link>
             </li>
 
             <li>
-              <a
-                href="https://encodingo.com/bootcamp.html"
-                target="_blank"
-                className="footer-link">
+              <Link to="/bootcamp" className="footer-link">
                 Bootcamp
-              </a>
+              </Link>
             </li>
 
             {/* <li>
@@ -146,26 +137,17 @@ const Footer = () => {
             </li> */}
 
             <li>
-              <a
-                href="https://encodingo.com/tnc.html"
-                target="_blank"
-                className="footer-link">
+              <a href="/tnc" target="_blank" className="footer-link">
                 Terms & Conditions
               </a>
             </li>
             <li>
-              <a
-                href="https://encodingo.com/pp.html"
-                target="_blank"
-                className="footer-link">
+              <a href="/pp" target="_blank" className="footer-link">
                 Privacy Policy
               </a>
             </li>
             <li>
-              <a
-                href="https://encodingo.com/refund.html"
-                target="_blank"
-                className="footer-link">
+              <a href="/refund" target="_blank" className="footer-link">
                 Refund Policy
               </a>
             </li>

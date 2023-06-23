@@ -113,7 +113,7 @@ const BookSession = () => {
                 display: "flex",
                 flexWrap: "wrap",
                 alignItems: "center",
-                justifyContent: "space-evenly",
+                justifyContent: "space-between",
               }}>
               {/* <h2
                 className="h2 section-title"
@@ -121,6 +121,22 @@ const BookSession = () => {
               >
                 All Courses
               </h2> */}
+
+              {/* <button className="Button" minW={"60"} onClick={refresh}>
+                All
+              </button> */}
+              <div className="myBtns">
+                {categories.map((item, index) => (
+                  <button
+                    className="Button sessionBtn"
+                    key={index}
+                    onClick={() => setCategory(item)}
+                    id={item}
+                    minW={"60"}>
+                    {item}
+                  </button>
+                ))}
+              </div>
               <div className="search-bar">
                 <input
                   type="text"
@@ -131,19 +147,6 @@ const BookSession = () => {
                   <img src={search} width="25" alt="" />
                 </button>
               </div>
-              {/* <button className="Button" minW={"60"} onClick={refresh}>
-                All
-              </button> */}
-              {categories.map((item, index) => (
-                <button
-                  className="Button sessionBtn"
-                  key={index}
-                  onClick={() => setCategory(item)}
-                  id={item}
-                  minW={"60"}>
-                  {item}
-                </button>
-              ))}
             </div>
             <ul className="grid-list">
               {loading ? (

@@ -41,10 +41,10 @@ const BookSessionCard1 = ({
   };
 
   // Function to open the modal and set the YouTube video URL
-  const openModal = () => {
+  const openModal = (key) => {
     const modal = document.getElementById("modalx");
     var videoPlayer = document.getElementById("videoPlayer");
-    var videoUrl = "https://www.youtube.com/embed/P1RGyzt2KPQ";
+    var videoUrl = `https://www.youtube.com/embed/${key}`;
     videoPlayer.src = videoUrl;
     document.getElementById("modalx");
     modal.style.display = "block";
@@ -147,7 +147,7 @@ const BookSessionCard1 = ({
               {isAuthenticated ? (
                 <div className="card-buttons">
                   <Button
-                    onClick={openModal}
+                    onClick={() => openModal("P1RGyzt2KPQ")}
                     variant="contained"
                     color="secondary">
                     BIO
@@ -161,7 +161,7 @@ const BookSessionCard1 = ({
               ) : (
                 <div className="card-buttons">
                   <Button
-                    onClick={openModal}
+                    onClick={() => openModal("P1RGyzt2KPQ")}
                     variant="contained"
                     color="secondary">
                     BIO

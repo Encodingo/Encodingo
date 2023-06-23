@@ -12,7 +12,7 @@ import { toast } from "react-hot-toast";
 import { Button } from "@material-ui/core";
 import Loader from "../Components/Loader/Loader";
 import { getAllTeachers } from "../actions/teacher";
-
+import { Link, Navigate } from "react-router-dom";
 import search from "../assets/images/search.png";
 
 const UserDashboard = () => {
@@ -91,7 +91,7 @@ const UserDashboard = () => {
                 display: "flex",
                 flexWrap: "wrap",
                 alignItems: "center",
-                justifyContent: "space-evenly",
+                justifyContent: "space-between",
               }}>
               {/* <h2
                 className="h2 section-title"
@@ -99,6 +99,19 @@ const UserDashboard = () => {
               >
                 My Courses
               </h2> */}
+
+              <div className="myBtns">
+                {categories.map((item, index) => (
+                  <button
+                    className="Button"
+                    key={index}
+                    onClick={() => setCategory(item)}
+                    minW={"60"}>
+                    {item}
+                  </button>
+                ))}
+              </div>
+
               <div class="search-bar">
                 <input
                   type="text"
@@ -109,15 +122,6 @@ const UserDashboard = () => {
                   <img src={search} width="25" alt="" />
                 </button>
               </div>
-              {categories.map((item, index) => (
-                <button
-                  className="Button"
-                  key={index}
-                  onClick={() => setCategory(item)}
-                  minW={"60"}>
-                  {item}
-                </button>
-              ))}
             </div>
 
             <ul className="grid-list">
@@ -146,7 +150,18 @@ const UserDashboard = () => {
                       />
                     ))
                   ) : (
-                    <h1>Course Not Found</h1>
+                    <>
+                      <h1>Course Not Found</h1>
+                      <Link to="/user_dashboard">
+                        <button
+                          className="Button btnx"
+                          maxW={"60"}
+                          style={{ background: "#007bff", color: "white" }}>
+                          All Courses
+                        </button>
+                      </Link>
+                      {/* <Link to="/user_dashboard">All Courses</Link> */}
+                    </>
                   )}
                 </>
               )}
