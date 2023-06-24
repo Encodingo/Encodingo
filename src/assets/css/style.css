@@ -359,9 +359,6 @@ section.user {
   #HEADER
 \*-----------------------------------*/
 
-/* .header .btn {
-  display: none;
-} */
 
 .header {
   position: absolute;
@@ -1084,12 +1081,12 @@ section.user {
   pointer-events: all;
 }
 
-@media (max-width: 415px) {
+/* @media (max-width: 415px) {
   .logo1 {
     display: none;
   }
 
-}
+} */
 
 /*-----------------------------------*\
   #MEDIA QUERIES

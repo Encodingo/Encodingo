@@ -329,9 +329,7 @@ body {
   #HEADER
 \*-----------------------------------*/
 
-.header .btn {
-  display: none;
-}
+
 
 .header {
   position: absolute;
@@ -1680,4 +1678,11 @@ body {
   #top p {
     font-size: 14px;
   }
+}
+
+
+
+.header-box {
+  display: flex;
+  gap: 11px;
 }
