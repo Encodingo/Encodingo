@@ -1,5 +1,5 @@
 import React from "react";
-import "../Essentials/assets/css/style.css";
+import "../../assets/css/style.css";
 import Footer from "../Footer";
 
 const Tnc = () => {

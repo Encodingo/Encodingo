@@ -83,7 +83,7 @@ const UserDashboard = () => {
         id="courses"
         aria-label="course">
         <div>
-          <div className="container" style={{ marginTop: "-10px" }}>
+          <div className="container" id="containerx">
             {/* <!-- <p class="section-subtitle">Popular Courses</p> --> */}
 
             <div

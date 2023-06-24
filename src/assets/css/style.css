@@ -1081,12 +1081,28 @@ section.user {
   pointer-events: all;
 }
 
-/* @media (max-width: 415px) {
+
+
+@media (max-width: 770px) {
+  #containerx {
+    margin-top: -10px !important;
+  }
+
+}
+
+@media (max-width: 657px) {
+  .search-bar {
+    display: none !important;
+  }
+
+}
+
+@media (max-width: 415px) {
   .logo1 {
     display: none;
   }
 
-} */
+}
 
 /*-----------------------------------*\
   #MEDIA QUERIES
@@ -1712,4 +1728,133 @@ section.user {
 .sessionBtn.active {
   background-color: #3f51b5;
   color: white;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* for Footer Pages (pp, Tnc, Refund policies)  */
+
+
+/* Privacy & Policy  */
+
+/* body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+} */
+
+/* 
+#top header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+#top h1 {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+#top h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+#top h3 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+
+#top h1 {
+  color: gray;
+}
+
+#top h2 {
+  color: gray;
+}
+
+#top h3 {
+  color: gray;
+}
+
+#top h4 {
+  color: gray;
+}
+
+#top p {
+  color: gray;
+}
+
+#top h4 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+#top p {
+  margin-bottom: 15px;
+}
+
+#top ul {
+  margin-bottom: 15px;
+  padding-left: 20px;
+}
+
+#top li {
+  margin-bottom: 5px;
+}
+
+#top .contact-info {
+  margin-top: 30px;
+}
+
+#top .contact-info li {
+  margin-bottom: 5px;
+}
+
+@media screen and (max-width: 600px) {
+  #top h1 {
+    font-size: 24px;
+  }
+
+  #top h2 {
+    font-size: 20px;
+  }
+
+  #top h3 {
+    font-size: 18px;
+  }
+
+  #top h4 {
+    font-size: 16px;
+  }
+
+  #top p {
+    font-size: 14px;
+  }
+}
+
+
+
+.header-box {
+  display: flex;
+  gap: 11px;
+} */
+
+
+
+
+#containerx {
+  margin-top: -50px;
 }

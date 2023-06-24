@@ -105,7 +105,7 @@ const BookSession = () => {
                 allowfullscreen></iframe>
             </div>
           </div> */}
-          <div className="container" style={{ marginTop: "-10px" }}>
+          <div className="container" id="containerx">
             {/* <!-- <p className="section-subtitle">Popular Courses</p> --> */}
 
             <div
