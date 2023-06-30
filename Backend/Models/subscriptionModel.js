@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-const paymentSchema = new mongoose.Schema({
+const subscriptionSchema = new mongoose.Schema({
     userName:{
         type:String,
         required:true,
@@ -13,6 +13,10 @@ const paymentSchema = new mongoose.Schema({
         required:true,
     },
     paidAmount:{
+        type:Number,
+        required:true,
+    },
+    userSession:{
         type:Number,
         required:true,
     },
@@ -30,4 +34,4 @@ const paymentSchema = new mongoose.Schema({
     }
 
 });
-export const Payment=mongoose.model('Payment',paymentSchema);
+export const Subscriber=mongoose.model('Subscriber',subscriptionSchema);

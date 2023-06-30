@@ -63,7 +63,7 @@ const CourseCard = ({
       //     id,user
       //   });
       // },
-      callback_url: `${server}/paymentverification?id=${id}&&userName=${user.name}&&userEmail=${user.email}&&mobileNumber=${user.phone}`,
+      callback_url: `${server}/paymentverification?id=${id}&&userName=${user.name}&&userEmail=${user.email}&&mobileNumber=${user.phone}&&paidAmount=${price}&&isSubscriber=${false}`,
       prefill: {
         name: user.name,
         email: user.email,

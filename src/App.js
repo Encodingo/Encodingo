@@ -22,6 +22,7 @@ import Courses from "./Components/Course/Courses";
 import About from "./Components/About/About";
 import Bootcamp from "./Components/Bootcamp/Bootcamp";
 import Blog from "./Components/Blog/Blog";
+import Subscription from "./Components/Subscription/Subscription";
 import BackToTop from "./Components/BackToTop/BackToTop";
 // import Dashboard from "./Components/Dashboard/UserDash";
 import { useEffect } from "react";
@@ -99,6 +100,7 @@ function App() {
             <Route path="/bootcamp" element={<Bootcamp />} />
             <Route path="/about" element={<About />} />
             {/* <Route path="/blog" element={<Blog />} /> */}
+            <Route path="/subscription" element={<Subscription/>}/>
             <Route path="/tutor" element={<Tutor />} />
             <Route path="/bottom" element={<Bottombar />} />
 

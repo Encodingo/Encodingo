@@ -165,6 +165,17 @@ const Header = () => {
               <li className="navbar-item">
                 <Link
                   onClick={handleMenuClick}
+                  to={"/subscription"}
+                  className="navbar-link">
+                  Subscription
+                </Link>
+                {/* <a href="bootcamp" className="navbar-link" data-nav-link>
+                  Bootcamp
+                </a> */}
+              </li>
+              <li className="navbar-item">
+                <Link
+                  onClick={handleMenuClick}
                   to={"/bootcamp"}
                   className="navbar-link">
                   Bootcamp
